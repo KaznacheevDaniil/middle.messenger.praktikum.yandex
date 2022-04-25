@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel src/index.html --target default --dist-dir ./build",
     "build": "parcel build src/index.html",
-    "start": "node ./server.js"
+    "start": "npm run build && node ./server.js"
   },
   "repository": {
     "type": "git",
