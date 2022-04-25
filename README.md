@@ -12,5 +12,5 @@ npm run start - запуск express сервера
 ### Версия NodeJs
 v12.13.0
 
-### Домен Notify
-https://kaznacheykin.netlify.app/
+### Домен Netlify
+https://kaznacheev.netlify.app/
