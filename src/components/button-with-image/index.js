@@ -1,9 +1,9 @@
 import Handlebars from "handlebars";
-import tpl from './tpl.hbs';
-import './style.less';
+import tpl from "./tpl.hbs";
+import "./style.less";
 
-Handlebars.registerPartial('buttonWithImage', tpl);
+Handlebars.registerPartial("buttonWithImage", tpl);
 
-export default (value, type, klass) => {
-    return tpl({value, type, klass});
-}
+export default (value, type, className) => {
+  return tpl({ value, type, className });
+};

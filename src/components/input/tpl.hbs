@@ -1,8 +1,13 @@
 {{#each inputs}}
-    <div class="{{ klass }}">
-        {{#if label}}
-        <label>{{ label }}</label>
-        {{/if}}
-        <input type="{{ type }}" placeholder="{{ placeholder }}" name="{{ name }}" {{ required }}>
-    </div>
+  <div class="{{className}}">
+    {{#if label}}
+      <label>{{label}}</label>
+    {{/if}}
+    <input
+      type="{{type}}"
+      placeholder="{{placeholder}}"
+      name="{{name}}"
+      {{required}}
+    />
+  </div>
 {{/each}}

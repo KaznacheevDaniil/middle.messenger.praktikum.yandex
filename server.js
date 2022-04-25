@@ -4,12 +4,12 @@ const app = express();
 const PORT = 3000;
 
 
-app.use(express.static('./dist'));
+app.use(express.static(__dirname + '/dist'));
 
-app.get('/*', (req, res) => {
-    return res.sendFile(`${__dirname}/dist/index.html`);
+app.get('*', function(req, res){
+  res.sendfile(__dirname + '/dist/index.html');
 });
 
 app.listen(PORT, () => {
-    console.log(`server was started with port: ${PORT}`);
+  console.log(`Мой текст и порт: ${PORT}!`);
 });
