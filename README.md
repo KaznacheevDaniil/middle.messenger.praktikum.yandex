@@ -15,3 +15,21 @@ v12.13.0
 ### Домен Netlify
 
 https://kaznacheev.netlify.app/
+
+### Страницы:
+
+[Login](https://kaznacheev.netlify.app/)
+
+[Registration](https://kaznacheev.netlify.app/reg)
+
+[Chats](https://kaznacheev.netlify.app/chats)
+
+[Profile](https://kaznacheev.netlify.app/profile)
+
+[Profile edit](https://kaznacheev.netlify.app/profile/egit)
+
+[Profile change password](https://kaznacheev.netlify.app/profile/change-pwd)
+
+[404](https://kaznacheev.netlify.app/404)
+
+[500](https://kaznacheev.netlify.app/500)

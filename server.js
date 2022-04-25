@@ -1,8 +1,7 @@
 const express = require('express');
 
 const app = express();
-const PORT = 3000;
-
+process.env.PORT = '3000';
 
 app.use(express.static(__dirname + '/dist'));
 
@@ -10,6 +9,6 @@ app.get('*', function(req, res){
   res.sendfile(__dirname + '/dist/index.html');
 });
 
-app.listen(PORT, () => {
-  console.log(`Мой текст и порт: ${PORT}!`);
+app.listen(process.env.PORT, () => {
+  console.log(`Мой порт: ${ process.env.PORT }!`);
 });
