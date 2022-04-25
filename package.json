@@ -1,0 +1,30 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Yandex Practicum",
+  "scripts": {
+    "dev": "parcel src/index.html --target default --dist-dir ./build",
+    "build": "parcel build src/index.html",
+    "start": "node ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaznacheevDaniil/project.git"
+  },
+  "author": "Daniil Kaznacheev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaznacheevDaniil/project/issues"
+  },
+  "homepage": "https://github.com/KaznacheevDaniil/project#readme",
+  "devDependencies": {
+    "@parcel/transformer-inline-string": "^2.4.1",
+    "@parcel/transformer-less": "^2.5.0",
+    "express": "^4.17.3",
+    "parcel": "^2.5.0",
+    "parcel-transformer-hbs": "^1.0.4"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
+}
