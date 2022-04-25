@@ -6,8 +6,8 @@ const PORT = 3000;
 
 app.use(express.static(__dirname + '/dist'));
 
-app.get('*', function(req, res){
-    res.sendfile(__dirname + '/dist/index.html');
+app.get('/*', function(req, res){
+    res.render(`${__dirname}/dist/index.html`);
 });
 
 
