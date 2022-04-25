@@ -1,14 +1,15 @@
 <ul class="info-fields">
-{{#each profileFields}}
-        <li><span class="name">{{ this.name }}</span>
-            <input
-              class="value"
-              type = '{{ this.type }}'
-              name='{{ @key }}'
-              placeholder="{{ this.placeholder }}"
-              value="{{ this.value }}"
-                {{ disabled }}
-                {{ required }}/>
-        </li>
-{{/each}}
+  {{#each profileFields}}
+    <li><span class="name">{{this.name}}</span>
+      <input
+        class="value"
+        type="{{this.type}}"
+        name="{{@key}}"
+        placeholder="{{this.placeholder}}"
+        value="{{this.value}}"
+        {{disabled}}
+        {{required}}
+      />
+    </li>
+  {{/each}}
 </ul>

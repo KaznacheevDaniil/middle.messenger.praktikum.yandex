@@ -1,9 +1,9 @@
 import Handlebars from "handlebars";
-import tpl from './tpl.hbs';
-import './style.less';
+import tpl from "./tpl.hbs";
+import "./style.less";
 
-Handlebars.registerPartial('chatline', tpl);
+Handlebars.registerPartial("chatline", tpl);
 
 export default (chatlinePersons) => {
-    return tpl({chatlinePersons});
-}
+  return tpl({ chatlinePersons });
+};

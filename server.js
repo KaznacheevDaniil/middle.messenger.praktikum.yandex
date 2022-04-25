@@ -7,9 +7,9 @@ const PORT = 3000;
 app.use(express.static(__dirname + '/dist'));
 
 app.get('*', function(req, res){
-    res.sendfile(__dirname + '/dist/index.html');
+  res.sendfile(__dirname + '/dist/index.html');
 });
 
 app.listen(PORT, () => {
-    console.log(`Мой текст и порт: ${PORT}!`);
+  console.log(`Мой текст и порт: ${PORT}!`);
 });
