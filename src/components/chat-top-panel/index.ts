@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("chatTopPanel", tpl);
 
-export default (photoPerson, namePerson, button) => {
+export default (photoPerson : HTMLElement, namePerson : string, button : HTMLElement) => {
   return tpl({ photoPerson, namePerson, button });
 };

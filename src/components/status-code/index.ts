@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("statusCode", tpl);
 
-export default (statusCode) => {
+export default (statusCode : string) => {
   return tpl({ statusCode });
 };

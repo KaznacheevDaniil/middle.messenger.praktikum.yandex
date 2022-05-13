@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("conversation", tpl);
 
-export default (chatTopPanel, date, messages, chatBottomPanel) => {
+export default (chatTopPanel : HTMLElement, date : string, messages, chatBottomPanel) => {
   return tpl({ chatTopPanel, date, messages, chatBottomPanel });
 };

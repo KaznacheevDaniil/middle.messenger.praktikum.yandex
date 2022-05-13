@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("search", tpl);
 
-export default (className, placeholder) => {
+export default (className : string, placeholder : string) => {
   return tpl({ className, placeholder });
 };

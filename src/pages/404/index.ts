@@ -1,4 +1,4 @@
-import tmpl from "./tpl.hbs";
+import tmpl from './tpl.hbs';
 import "./style.less";
 import statusCodeComp from "../../components/status-code";
 import linkComp from "../../components/link";

@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("buttonWithImage", tpl);
 
-export default (value, type, className) => {
+export default (value : string, type : string, className : string) => {
   return tpl({ value, type, className });
 };

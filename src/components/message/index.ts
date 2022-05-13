@@ -8,6 +8,13 @@ Handlebars.registerHelper("isAuthor", function (value, Author) {
   return value == Author;
 });
 
-export default (messages) => {
+interface Message {
+  author: string,
+  message: string,
+  time: string,
+  status: string
+}
+
+export default (messages?: Array<Message>) => {
   return tpl({ messages });
 };

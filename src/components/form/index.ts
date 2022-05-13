@@ -3,6 +3,6 @@ import tpl from "./tpl.hbs";
 import "./style.less";
 Handlebars.registerPartial("form", tpl);
 
-export default (action, name, inputs, button) => {
+export default (action : string, name : string, inputs : HTMLElement, button : string) => {
   return tpl({ action, name, inputs, button });
 };

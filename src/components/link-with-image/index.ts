@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("linkWithImage", tpl);
 
-export default (className, link, urlImg) => {
+export default (className : string, link : string, urlImg : string) => {
   return tpl({ className, link, urlImg });
 };

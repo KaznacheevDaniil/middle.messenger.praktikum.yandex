@@ -2,8 +2,8 @@ import Handlebars from "handlebars";
 import tpl from "./tpl.hbs";
 import "./style.less";
 
-Handlebars.registerPartial("button", tpl);
+Handlebars.registerPartial("avatar", tpl);
 
-export default (photoPerson) => {
+export default (photoPerson : string) => {
   return tpl({ photoPerson });
 };

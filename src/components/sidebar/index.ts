@@ -4,6 +4,6 @@ import "./style.less";
 
 Handlebars.registerPartial("sidebar", tpl);
 
-export default (linkToProfile, search, chats) => {
+export default (linkToProfile: HTMLElement, search: HTMLElement, chats: HTMLElement) => {
   return tpl({ linkToProfile, search, chats });
 };

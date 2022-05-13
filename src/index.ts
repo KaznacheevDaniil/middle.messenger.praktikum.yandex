@@ -34,11 +34,11 @@ if (window.location.pathname == "/profile/change-pwd") {
   document.getElementById("root").innerHTML = pageProfileChangePwd;
 }
 
-document.getElementById("changeAvatar").addEventListener("click", () => {
-  document.getElementById("changeProfileModal").style.display = "flex";
-});
-document.getElementById("changeProfileModal").addEventListener("click", (e) => {
-  if (e.target.className === "modal-wrapper") {
-    document.getElementById("changeProfileModal").style.display = "none";
-  }
-});
+// document.getElementById("changeAvatar").addEventListener("click", () => {
+//   document.getElementById("changeProfileModal").style.display = "flex";
+// });
+// document.getElementById("changeProfileModal").addEventListener("click", (e) => {
+//   if (e.target.className === "modal-wrapper") {
+//     document.getElementById("changeProfileModal").style.display = "none";
+//   }
+// });
