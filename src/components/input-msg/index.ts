@@ -1,9 +1,14 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("inputMsg", tpl);
-
-export default (className : string, name : string, placeholder : string, required : string) => {
-  return tpl({ className, name, placeholder, required });
-};
+export default class InputMsg extends Block {
+  render() {
+    return this.compile(tpl, {
+      placeholder: this.props.placeholder,
+      name: this.props.name,
+      className: this.props.className,
+      required: this.props.required,
+    });
+  }
+}

@@ -1,9 +1,13 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("chatTopPanel", tpl);
-
-export default (photoPerson : HTMLElement, namePerson : string, button : HTMLElement) => {
-  return tpl({ photoPerson, namePerson, button });
-};
+export default class ChatTopPanel extends Block {
+  render() {
+    return this.compile(tpl, {
+      photoPerson: this.props.photoPerson,
+      namePerson: this.props.namePerson,
+      button: this.props.button,
+    });
+  }
+}

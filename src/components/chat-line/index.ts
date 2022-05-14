@@ -1,17 +1,11 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("chatline", tpl);
-
-interface ChatLine {
-  photoPerson: HTMLElement,
-  namePerson: string,
-  lastMessage: string,
-  timeLastMessage: string,
-  countUnread: string
+export default class ChatLines extends Block {
+  render() {
+    return this.compile(tpl, {
+      chatlinePersons: this.props.chatlinePersons
+    });
+  }
 }
-
-export default (chatlinePersons : Array<ChatLine>) => {
-  return tpl({ chatlinePersons });
-};

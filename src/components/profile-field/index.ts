@@ -13,6 +13,6 @@ Handlebars.registerPartial("profileFieldInfo", tpl);
 //   required: string
 // }
 
-export default (profileFields : object) => {
+export default (profileFields: object) => {
   return tpl({ profileFields });
 };

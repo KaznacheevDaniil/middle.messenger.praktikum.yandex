@@ -1,9 +1,13 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("chatBottomPanel", tpl);
-
-export default (addFileBtn, input, sendMsgBtn) => {
-  return tpl({ addFileBtn, input, sendMsgBtn });
-};
+export default class ChatBottomPanel extends Block {
+  render() {
+    return this.compile(tpl, {
+      addFileBtn: this.props.addFileBtn,
+      input: this.props.input,
+      sendMsgBtn: this.props.sendMsgBtn,
+    });
+  }
+}

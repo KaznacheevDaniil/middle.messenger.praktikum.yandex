@@ -4,6 +4,10 @@ import "./style.less";
 
 Handlebars.registerPartial("profileInfo", tpl);
 
-export default (avatarUrl : string, nickname : string, profileFieldsInfo : HTMLElement) => {
+export default (
+  avatarUrl: string,
+  nickname: string,
+  profileFieldsInfo: HTMLElement
+) => {
   return tpl({ avatarUrl, nickname, profileFieldsInfo });
 };

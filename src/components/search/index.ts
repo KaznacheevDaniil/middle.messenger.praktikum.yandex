@@ -1,9 +1,12 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("search", tpl);
-
-export default (className : string, placeholder : string) => {
-  return tpl({ className, placeholder });
-};
+export default class Search extends Block {
+  render() {
+    return this.compile(tpl, {
+      placeholder: this.props.placeholder,
+      className: this.props.className,
+    });
+  }
+}

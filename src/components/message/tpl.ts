@@ -1,4 +1,4 @@
-{{#each messages}}
+const tpl = `{{#each messages }}
     {{#if (isAuthor author 'Person')}}
     <div class="message person">
     {{else}}
@@ -7,4 +7,5 @@
         <p> {{ message }}</p>
         <div class="info-msg"><span class="time"> {{time}}</span><span class="status"> {{ status }}</span></div>
     </div>
-{{/each}}
+{{/each}}`;
+export default tpl;

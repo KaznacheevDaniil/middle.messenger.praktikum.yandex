@@ -1,9 +1,13 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("button", tpl);
-
-export default (id : string, value : string, type : string) => {
-  return tpl({ id, value, type });
-};
+export default class Form extends Block {
+  render() {
+    return this.compile(tpl, {
+      id: this.props.id,
+      type: this.props.type,
+      value: this.props.value,
+    });
+  }
+}

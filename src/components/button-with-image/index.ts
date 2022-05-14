@@ -1,9 +1,13 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("buttonWithImage", tpl);
-
-export default (value : string, type : string, className : string) => {
-  return tpl({ value, type, className });
-};
+export default class ButtonWithImage extends Block {
+  render() {
+    return this.compile(tpl, {
+      className: this.props.className,
+      type: this.props.type,
+      imgLink: this.props.imgLink,
+    });
+  }
+}

@@ -1,17 +1,11 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("input", tpl);
-
-interface Inputs {
-  className: string,
-  placeholder: string,
-  label?: string,
-  name: string,
-  required: string,
+export default class Input extends Block {
+  render() {
+    return this.compile(tpl, {
+      inputs: this.props.inputs,
+    });
+  }
 }
-
-export default (inputs : Array<Inputs>) => {
-  return tpl({ inputs });
-};

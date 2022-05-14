@@ -1,4 +1,4 @@
-{{#each inputs}}
+const tpl = `{{#each inputs}}
   <div class="{{className}}">
     {{#if label}}
       <label>{{label}}</label>
@@ -10,4 +10,5 @@
       {{required}}
     />
   </div>
-{{/each}}
+{{/each}}`;
+export default tpl;

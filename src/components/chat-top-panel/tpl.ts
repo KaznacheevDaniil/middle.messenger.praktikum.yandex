@@ -1,7 +1,8 @@
-<div class="top-panel">
+const tpl = `<div class="top-panel">
   <div class="info">
     {{{photoPerson}}}
     <div class="name"> {{namePerson}}</div>
   </div>
   {{{button}}}
-</div>
+</div>`;
+export default tpl;

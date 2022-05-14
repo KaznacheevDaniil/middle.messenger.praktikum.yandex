@@ -1,20 +1,16 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
-
-Handlebars.registerPartial("button", tpl);
+import tpl from "./tpl";
+import Handlebars from "handlebars";
 
 Handlebars.registerHelper("isAuthor", function (value, Author) {
   return value == Author;
 });
 
-interface Message {
-  author: string,
-  message: string,
-  time: string,
-  status: string
+export default class Messages extends Block {
+  render() {
+    return this.compile(tpl, {
+      messages: this.props.messages
+    });
+  }
 }
-
-export default (messages?: Array<Message>) => {
-  return tpl({ messages });
-};

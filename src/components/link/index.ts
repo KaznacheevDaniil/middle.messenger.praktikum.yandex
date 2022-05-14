@@ -1,15 +1,11 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("linkComp", tpl);
-
-interface Links {
-  className: string,
-  hrefLink: string,
-  content: string
+export default class Link extends Block {
+  render() {
+    return this.compile(tpl, {
+      links: this.props.links,
+    });
+  }
 }
-
-export default (links : Array<Links>) => {
-  return tpl({ links });
-};

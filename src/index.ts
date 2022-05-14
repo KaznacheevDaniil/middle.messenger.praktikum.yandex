@@ -1,38 +1,35 @@
 import "./style.less";
-
-import page404 from "./pages/404";
-import page500 from "./pages/500";
-import pageLogin from "./pages/login";
-import pageReg from "./pages/registration";
-import pageChats from "./pages/chats";
-import pageProfile from "./pages/profile";
-import pageProfileEdit from "./pages/profile/edit";
-import pageProfileChangePwd from "./pages/profile/change-pwd";
+import { render } from "../src/utils/renderDOM";
+import { page as Page404 } from "./pages/404";
+import { page as Page500 } from "./pages/500";
+import { page as PageLogin } from "./pages/login";
+import { page as PageReg } from "./pages/registration";
+import { page as PageChats } from "./pages/chats";
 
 if (window.location.pathname == "/404") {
-  document.getElementById("root").innerHTML = page404;
+  render(".app", Page404);
 }
 if (window.location.pathname == "/500") {
-  document.getElementById("root").innerHTML = page500;
+  render(".app", Page500);
 }
 if (window.location.pathname == "/") {
-  document.getElementById("root").innerHTML = pageLogin;
+  render(".app", PageLogin);
 }
 if (window.location.pathname == "/reg") {
-  document.getElementById("root").innerHTML = pageReg;
+  render(".app", PageReg);
 }
 if (window.location.pathname == "/chats") {
-  document.getElementById("root").innerHTML = pageChats;
+  render(".app", PageChats);
 }
-if (window.location.pathname == "/profile") {
-  document.getElementById("root").innerHTML = pageProfile;
-}
-if (window.location.pathname == "/profile/edit") {
-  document.getElementById("root").innerHTML = pageProfileEdit;
-}
-if (window.location.pathname == "/profile/change-pwd") {
-  document.getElementById("root").innerHTML = pageProfileChangePwd;
-}
+// if (window.location.pathname == "/profile") {
+//   document.getElementById("root").innerHTML = pageProfile;
+// }
+// if (window.location.pathname == "/profile/edit") {
+//   document.getElementById("root").innerHTML = pageProfileEdit;
+// }
+// if (window.location.pathname == "/profile/change-pwd") {
+//   document.getElementById("root").innerHTML = pageProfileChangePwd;
+// }
 
 // document.getElementById("changeAvatar").addEventListener("click", () => {
 //   document.getElementById("changeProfileModal").style.display = "flex";

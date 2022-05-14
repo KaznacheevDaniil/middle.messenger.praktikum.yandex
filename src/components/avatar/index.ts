@@ -1,9 +1,11 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("avatar", tpl);
-
-export default (photoPerson : string) => {
-  return tpl({ photoPerson });
-};
+export default class Avatar extends Block {
+  render() {
+    return this.compile(tpl, {
+      photoPerson: this.props.photoPerson,
+    });
+  }
+}

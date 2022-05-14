@@ -1,9 +1,10 @@
-import tmpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
-import formComp from "../../components/form";
-import inputComp from "../../components/input";
-import linkComp from "../../components/link";
-import buttonComp from "../../components/button";
+import tpl from "./tpl";
+import Link from "../../components/link";
+import Input from "../../components/input";
+import Button from "../../components/button";
+import Form from "../../components/form";
 
 const inputs = [
   {
@@ -37,12 +38,23 @@ const links = [
   },
 ];
 
-export default tmpl({
-  form: formComp(
-    "/login",
-    "Log in",
-    inputComp(inputs),
-    buttonComp("login", "Enter", "submit")
-  ),
-  link: linkComp(links),
+class PageLogin extends Block {
+  render() {
+    return this.compile(tpl, {
+      form: this.props.form,
+      link: this.props.link,
+    });
+  }
+}
+
+export const page = new PageLogin("div", {
+  form: new Form("div", {
+    name: "Log in",
+    action: "/login",
+    inputs: new Input("div", { inputs }),
+    button: new Button("div", { id: "login", type: "submit", value: "Enter" }),
+  }),
+  link: new Link("div", { links }),
 });
+
+export default { page };
