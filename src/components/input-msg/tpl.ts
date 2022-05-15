@@ -3,6 +3,5 @@ const tpl = `<textarea
   placeholder="{{placeholder}}"
   name="{{name}}"
   class="{{className}}"
-  {{required}}
 ></textarea>`;
 export default tpl;

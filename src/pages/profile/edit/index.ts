@@ -1,123 +1,85 @@
-import tmpl from "./tpl.hbs";
 import "./style.less";
-import profileFieldsComp from "../../../components/profile-field";
-import linkWithImageComp from "../../../components/link-with-image";
-import modalComp from "../../../components/modal";
-import buttonComp from "../../../components/button";
-import inputComp from "../../../components/input";
-import formComp from "../../../components/form";
+import Block from "../../../utils/block";
+import tpl from "./tpl";
+import LinkWithImage from "../../../components/link-with-image";
+import Form from "../../../components/form";
+import Button from "../../../components/button";
+import { Validation } from "../../../utils/validation";
+import ProfileFields from "../../../components/profile-field";
+import profileInfoHelper from "../../../utils/profileInfoHelper";
 
-let profileInfo = {
-  avatar:
-    "https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg",
-  email: "text@mail.ru",
-  login: "DKaznach",
-  first_name: "Daniil",
-  second_name: "Kaznacheev",
-  display_name: "Dan",
-  phone: "8 (800) 555 35 35",
-};
+let profileHelper = new profileInfoHelper();
 
-let profileInfoPrepared = {
-  avatar: {
-    placeholder: "",
-    type: "text",
-    name: "Avatar",
-    disabled: undefined,
-    required: undefined,
-  },
-  email: {
-    placeholder: "",
-    type: "email",
-    name: "Email",
-    disabled: undefined,
-    required: undefined,
-  },
-  login: {
-    placeholder: "",
-    type: "text",
-    name: "Login",
-    disabled: undefined,
-    required: undefined,
-  },
-  first_name: {
-    placeholder: "",
-    type: "text",
-    name: "Name",
-    disabled: undefined,
-    required: undefined,
-  },
-  second_name: {
-    placeholder: "",
-    type: "text",
-    name: "Surname",
-    disabled: undefined,
-    required: undefined,
-  },
-  display_name: {
-    placeholder: "",
-    type: "text",
-    name: "Nickname",
-    disabled: undefined,
-    required: undefined,
-  },
-  phone: {
-    placeholder: "",
-    type: "tel",
-    name: "Phone",
-    disabled: undefined,
-    required: undefined,
-  },
-};
+let profileFields = profileHelper.getFieldsWithoutAvatar();
 
-const inputAvatar = [
-  {
-    className: "field",
-    type: "file",
-    placeholder: "file",
-    name: "avatar",
-    required: "required",
-  },
-];
-
-let prepareInfoProfile = () => {
-  for (let key in profileInfo) {
-    profileInfoPrepared[key].placeholder = profileInfo[key];
+class PageEditProfile extends Block {
+  render() {
+    return this.compile(tpl, {
+      form: this.props.form,
+      backUrl: this.props.backUrl,
+      events: this.props.events,
+    });
   }
-};
-// copy values from profileInfo into profileInfoPrepared
-prepareInfoProfile();
+}
 
-let fieldsWithoutAvatar = (source) => {
-  let profileInfoWithOutAvatar = {};
-  for (let key in source) {
-    if (key === "avatar") continue;
-    profileInfoWithOutAvatar[key] = source[key];
-  }
-  return profileInfoWithOutAvatar;
-};
+const validationForFormInputs = new Validation();
 
-export default tmpl({
-  form: formComp(
-    "/edit",
-    "Edit profile",
-    profileFieldsComp(fieldsWithoutAvatar(profileInfoPrepared)),
-    buttonComp("save", "save", "submit")
-  ),
-  backUrl: linkWithImageComp(
-    "link-back_blue",
-    "/profile",
-    "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4="
-  ),
-  modal: modalComp(
-    "changeProfileModal",
-    "Input file",
-    formComp(
-      "/change-avatar",
-      undefined,
-      inputComp(inputAvatar),
-      buttonComp("saveImg", "save", "submit")
-    ),
-    undefined
-  ),
+export const page = new PageEditProfile("div", {
+  form: new Form("div", {
+    name: "Edit profile",
+    action: "/edit",
+    inputs: new ProfileFields("div", {
+      profileFields,
+      events: {
+        focus: (event) => {
+          validationForFormInputs.hideError(event.target);
+        },
+        blur: (event) => {
+          if (event.target.name === "phone") {
+            if (!validationForFormInputs.phone(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+          if (event.target.name === "email") {
+            if (!validationForFormInputs.email(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+          if (event.target.name === "login") {
+            if (!validationForFormInputs.login(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+          if (
+            event.target.name === "first_name" ||
+            event.target.name === "second_name"
+          ) {
+            if (!validationForFormInputs.names(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+        },
+      },
+    }),
+    button: new Button("div", { id: "save", type: "submit", value: "Save" }),
+    events: {
+      submit: (event) => {
+        event.preventDefault();
+        if (validationForFormInputs.check(event.target)) {
+          const inputs = event.target.querySelectorAll("input");
+          let data = {};
+          inputs.forEach((current) => {
+            data[current.name] = current.value;
+          });
+          console.log(data);
+        }
+      },
+    },
+  }),
+  backUrl: new LinkWithImage("div", {
+    className: "link-back_blue",
+    link: "/profile",
+    urlImg:
+      "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4=",
+  }),
 });

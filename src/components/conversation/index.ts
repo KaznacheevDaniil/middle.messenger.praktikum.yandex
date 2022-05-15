@@ -14,6 +14,7 @@ class Conversation extends Block {
       chatTopPanel: this.props.chatTopPanel,
       messages: this.props.messages,
       chatBottomPanel: this.props.chatBottomPanel,
+      attr: this.props.attr,
     });
   }
 }
@@ -53,5 +54,8 @@ let conversationComp = new Conversation("div", {
       className: "button-primary rounded-img",
     }),
   }),
-})
-export { conversationComp }
+  attr: {
+    class: "conversation",
+  },
+});
+export { conversationComp };

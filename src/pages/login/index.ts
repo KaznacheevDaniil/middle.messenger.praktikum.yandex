@@ -1,4 +1,5 @@
 import Block from "../../utils/block";
+import { Validation } from "../../utils/validation";
 import "./style.less";
 import tpl from "./tpl";
 import Link from "../../components/link";
@@ -13,7 +14,7 @@ const inputs = [
     type: "text",
     placeholder: "Your login",
     name: "login",
-    required: "required",
+    valid: true,
   },
   {
     className: "field",
@@ -21,7 +22,7 @@ const inputs = [
     type: "password",
     placeholder: "Your password",
     name: "password",
-    required: "required",
+    valid: true,
   },
 ];
 
@@ -43,29 +44,54 @@ class PageLogin extends Block {
     return this.compile(tpl, {
       form: this.props.form,
       link: this.props.link,
-      events: this.props.events
+      events: this.props.events,
     });
   }
 }
-
+const validationForFormInputs = new Validation();
 export const page = new PageLogin("div", {
   form: new Form("div", {
     name: "Log in",
     action: "/login",
-    inputs: new Input("div", { inputs }),
+    inputs: new Input("div", {
+      inputs,
+      events: {
+        focus: (event) => {
+          validationForFormInputs.hideError(event.target);
+        },
+        blur: (event) => {
+          if (event.target.name === "login") {
+            if (!validationForFormInputs.login(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+          if (event.target.name === "password") {
+            if (!validationForFormInputs.password(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+        },
+      },
+    }),
     button: new Button("div", { id: "login", type: "submit", value: "Enter" }),
+    events: {
+      submit: (event) => {
+        event.preventDefault();
+        if (validationForFormInputs.check(event.target)) {
+          const inputs = event.target.querySelectorAll("input");
+          let data = {};
+          inputs.forEach((current) => {
+            data[current.name] = current.value;
+          });
+          console.log(data);
+        }
+      },
+    },
   }),
-  link: new Link("div", { links }),
-  events: {
-    submit: event => {
-      event.preventDefault();
-      const inputs = event.target.querySelectorAll('input');
-      let data = {};
-
-      inputs.forEach((current)=>{
-        data[current.name] = current.value;
-      })
-      console.log(data);
-    }
-  }
+  link: new Link("div", {
+    links,
+    attr: {
+      class: "f-col ta-c m-pb-10",
+    },
+  }),
 });

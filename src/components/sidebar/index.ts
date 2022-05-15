@@ -10,13 +10,14 @@ export default class Sidebar extends Block {
     return this.compile(tpl, {
       linkToProfile: this.props.linkToProfile,
       search: this.props.search,
-      chats: this.props.chats
+      chats: this.props.chats,
+      attr: this.props.attr,
     });
   }
 }
 
 let links: { className: string; hrefLink: string; content: string }[] = [
-  { className: "link__profile", hrefLink: "/profile", content: "profile" }
+  { className: "link__profile", hrefLink: "/profile", content: "profile" },
 ];
 
 let sidebarComp = new Sidebar("div", {
@@ -25,6 +26,9 @@ let sidebarComp = new Sidebar("div", {
     placeholder: "Search...",
     className: "search",
   }),
-  chats: chatLineComp
-})
-export { sidebarComp }
+  chats: chatLineComp,
+  attr: {
+    class: "sidebar",
+  },
+});
+export { sidebarComp };

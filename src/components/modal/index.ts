@@ -1,14 +1,14 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("modal", tpl);
-
-export default (
-  id: string,
-  header: string,
-  content: HTMLElement,
-  button: HTMLElement
-) => {
-  return tpl({ id, header, content, button });
-};
+export default class ProfileField extends Block {
+  render() {
+    return this.compile(tpl, {
+      header: this.props.header,
+      content: this.props.content,
+      button: this.props.button,
+      attr: this.props.attr,
+    });
+  }
+}

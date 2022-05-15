@@ -11,7 +11,7 @@ class Messages extends Block {
   render() {
     return this.compile(tpl, {
       messages: this.props.messages,
-      date: this.props.date
+      date: this.props.date,
     });
   }
 }
@@ -29,5 +29,5 @@ let messages = [
   { author: "User", message: "Hi, man!", time: "12:32", status: "unread" },
 ];
 
-let messagesComp = new Messages("div", { messages, date: "25 september 2019" })
-export { messagesComp }
+let messagesComp = new Messages("div", { messages, date: "25 september 2019" });
+export { messagesComp };

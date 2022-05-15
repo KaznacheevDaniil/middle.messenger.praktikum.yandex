@@ -15,5 +15,5 @@ class PageChats extends Block {
 
 export const page = new PageChats("div", {
   sidebar: sidebarComp,
-  conversation: conversationComp
+  conversation: conversationComp,
 });

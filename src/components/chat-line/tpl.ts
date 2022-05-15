@@ -9,5 +9,5 @@ const tpl = `<ul class="chats">{{#each chatlinePersons}}
     </div>
   </li>
 {{/each}}
-</ul>`
+</ul>`;
 export default tpl;

@@ -1,6 +1,6 @@
-const tpl = `<div class="conversation">
+const tpl = `
   {{{chatTopPanel}}}
   {{{messages}}}
   {{{chatBottomPanel}}}
-</div>`;
+`;
 export default tpl;

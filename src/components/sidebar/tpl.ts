@@ -1,8 +1,8 @@
-const tpl = `<div class="sidebar">
+const tpl = `
   <div class="ta-r m-10">
     {{{linkToProfile}}}
   </div>
   {{{search}}}
   {{{chats}}}
-</div>`;
+`;
 export default tpl;

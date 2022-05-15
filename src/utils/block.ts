@@ -102,7 +102,22 @@ class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.addEventListener(eventName, events[eventName]);
+      if (eventName === "focus" || eventName === "blur") {
+        const elements = this._element.querySelectorAll("input");
+        elements.forEach((item) => {
+          item.addEventListener(eventName, events[eventName]);
+        });
+      } else {
+        this._element.addEventListener(eventName, events[eventName]);
+      }
+    });
+  }
+
+  _addAttributes() {
+    const { attr = {} } = this.props;
+
+    Object.keys(attr).forEach((attrName) => {
+      this._element.setAttribute(attrName, attr[attrName]);
     });
   }
 
@@ -110,7 +125,14 @@ class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.removeEventListener(eventName, events[eventName]);
+      if (eventName === "focus" || eventName === "blur") {
+        const elements = this._element.querySelectorAll("input");
+        elements.forEach((item) => {
+          item.removeEventListener(eventName, events[eventName]);
+        });
+      } else {
+        this._element.removeEventListener(eventName, events[eventName]);
+      }
     });
   }
 
@@ -132,6 +154,7 @@ class Block {
     this._element.innerHTML = "";
     this._element.appendChild(block);
 
+    this._addAttributes();
     this._addEvents();
   }
 
@@ -184,7 +207,9 @@ class Block {
 
   _createDocumentElement(tagName) {
     const element = document.createElement(tagName);
-    element.setAttribute("data-id", this._id);
+    if (this.props.settings?.withInternalID) {
+      element.setAttribute("data-id", this._id);
+    }
     return element;
   }
 

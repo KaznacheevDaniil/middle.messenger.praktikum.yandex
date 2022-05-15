@@ -1,4 +1,4 @@
-<div class="modal-wrapper" id="{{id}}">
+const tpl = `
   <div class="modal">
     <h3 class="modal-header">{{header}}</h3>
     <div class="modal-content">{{{content}}}</div>
@@ -7,5 +7,5 @@
         {{{button}}}
       {{/if}}
     </div>
-  </div>
-</div>
+  </div>`;
+export default tpl;

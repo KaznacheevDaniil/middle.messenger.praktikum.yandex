@@ -1,18 +1,11 @@
-import Handlebars from "handlebars";
-import tpl from "./tpl.hbs";
+import Block from "../../utils/block";
 import "./style.less";
+import tpl from "./tpl";
 
-Handlebars.registerPartial("profileFieldInfo", tpl);
-
-// interface ProfileFiels {
-//   name: string,
-//   type: string,
-//   placeholder: string,
-//   value: string,
-//   disabled: string,
-//   required: string
-// }
-
-export default (profileFields: object) => {
-  return tpl({ profileFields });
-};
+export default class ProfileFields extends Block {
+  render() {
+    return this.compile(tpl, {
+      profileFields: this.props.profileFields,
+    });
+  }
+}

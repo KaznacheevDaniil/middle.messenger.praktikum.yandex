@@ -1,5 +1,5 @@
 const tpl = `{{#each inputs}}
-  <div class="{{className}}">
+  <div class="{{className}} input-wrap">
     {{#if label}}
       <label>{{label}}</label>
     {{/if}}
@@ -7,8 +7,12 @@ const tpl = `{{#each inputs}}
       type="{{type}}"
       placeholder="{{placeholder}}"
       name="{{name}}"
-      {{required}}
+      {{#if valid}}
+        data-valid="{{valid}}"
+      {{/if}}
+      
     />
+    <span class="error"></span>
   </div>
 {{/each}}`;
 export default tpl;

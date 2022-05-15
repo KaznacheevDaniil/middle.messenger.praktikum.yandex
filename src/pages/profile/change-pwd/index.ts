@@ -1,56 +1,78 @@
-import tmpl from "./tpl.hbs";
+import tpl from "./tpl";
 import "./style.less";
-import profileFieldsComp from "../../../components/profile-field";
-import linkWithImageComp from "../../../components/link-with-image";
-import buttonComp from "../../../components/button";
-import formComp from "../../../components/form";
+import ProfileFields from "../../../components/profile-field";
+import LinkWithImage from "../../../components/link-with-image";
+import Button from "../../../components/button";
+import Form from "../../../components/form";
+import { Validation } from "../../../utils/validation";
+import Block from "../../../utils/block";
+import profileInfoHelper from "../../../utils/profileInfoHelper";
 
-let profileInfo = {
-  avatar:
-    "https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg",
-  email: "text@mail.ru",
-  login: "DKaznach",
-  first_name: "Daniil",
-  second_name: "Kaznacheev",
-  display_name: "Dan",
-  phone: "8 (800) 555 35 35",
-  password: "sadwqe214sczxASDwq3;[[[]",
-};
+let profileHelper = new profileInfoHelper();
 
-let profileInfoPrepared = {
-  oldPassword: {
-    placeholder: "asdasdasd",
-    type: "text",
-    name: "Current password",
-    disabled: undefined,
-    required: "required",
-  },
-  newPassword: {
-    placeholder: "asdasdasdsad",
-    type: "text",
-    name: "New password",
-    disabled: undefined,
-    required: "required",
-  },
-  confirmPassword: {
-    placeholder: "dasdasdadasd",
-    type: "password",
-    name: "Confirm password",
-    disabled: undefined,
-    required: "required",
-  },
-};
+let profileFields = profileHelper.getPasswordChangeInfo();
 
-export default tmpl({
-  form: formComp(
-    "/change-pwd",
-    "Edit profile",
-    profileFieldsComp(profileInfoPrepared),
-    buttonComp("save", "save", "submit")
-  ),
-  backUrl: linkWithImageComp(
-    "link-back_blue",
-    "/profile",
-    "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4="
-  ),
+class PageChangePassword extends Block {
+  render() {
+    return this.compile(tpl, {
+      form: this.props.form,
+      backUrl: this.props.backUrl,
+      events: this.props.events,
+    });
+  }
+}
+
+const validationForFormInputs = new Validation();
+
+export const page = new PageChangePassword("div", {
+  form: new Form("div", {
+    name: "Edit profile",
+    action: "/change-pwd",
+    inputs: new ProfileFields("div", {
+      profileFields,
+      events: {
+        focus: (event) => {
+          validationForFormInputs.hideError(event.target);
+        },
+        blur: (event) => {
+          if (event.target.name === "password") {
+            if (!validationForFormInputs.password(event.target.value)) {
+              validationForFormInputs.showError(event.target);
+            }
+          }
+          if (event.target.name === "сonfirm-password") {
+            if (
+              !validationForFormInputs.confirmPassword(
+                event.target,
+                event.target.value
+              )
+            ) {
+              validationForFormInputs.showError(
+                event.target,
+                "Passwords don't match!"
+              );
+            }
+          }
+        },
+      },
+    }),
+    button: new Button("div", { id: "save", type: "submit", value: "Save" }),
+    events: {
+      submit: (event) => {
+        event.preventDefault();
+        const inputs = event.target.querySelectorAll("input");
+        let data = {};
+        inputs.forEach((current) => {
+          data[current.name] = current.value;
+        });
+        console.log(data);
+      },
+    },
+  }),
+  backUrl: new LinkWithImage("div", {
+    className: "link-back_blue",
+    link: "/profile",
+    urlImg:
+      "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4=",
+  }),
 });

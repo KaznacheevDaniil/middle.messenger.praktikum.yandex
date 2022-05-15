@@ -1,11 +1,8 @@
 const tpl = `<div class="content flex-c">
 
-  <div class="form">
+  <div class="profile ta-c">
     {{{form}}}
-    {{{link}}}
-
-    
   </div>
-
+  {{{backUrl}}}
 </div>`;
 export default tpl;
