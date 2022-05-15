@@ -28,5 +28,3 @@ export const page = new Page404("div", {
   wrapper_class: "page-status_wrapper flex-c",
   link: new Link("div", { links }),
 });
-
-export default { page };

@@ -20,7 +20,6 @@ class Block {
   /** JSDoc
    * @param {string} tagName
    * @param {Object} props
-   * @param {Object} settings
    *
    * @returns {void}
    */
@@ -82,7 +81,6 @@ class Block {
     });
   }
 
-  // Может переопределять пользователь, необязательно трогать (oldProps)
   componentDidMount(): void {}
 
   dispatchComponentDidMount(): void {
@@ -96,7 +94,6 @@ class Block {
     }
   }
 
-  // Может переопределять пользователь, необязательно трогать
   componentDidUpdate(oldProps, newProps): Boolean {
     return true;
   }
@@ -130,15 +127,14 @@ class Block {
   }
 
   _render() {
-    const block = this.render(); // render теперь возвращает DocumentFragment
+    const block = this.render();
     this._removeEvents();
-    this._element.innerHTML = ""; // удаляем предыдущее содержимое
+    this._element.innerHTML = "";
     this._element.appendChild(block);
 
     this._addEvents();
   }
 
-  // Может переопределять пользователь, необязательно трогать
   render(): DocumentFragment {
     return;
   }
@@ -187,7 +183,6 @@ class Block {
   }
 
   _createDocumentElement(tagName) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     const element = document.createElement(tagName);
     element.setAttribute("data-id", this._id);
     return element;

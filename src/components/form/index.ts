@@ -9,6 +9,6 @@ export default class Form extends Block {
       action: this.props.action,
       inputs: this.props.inputs,
       button: this.props.button,
-    });
+    })
   }
 }

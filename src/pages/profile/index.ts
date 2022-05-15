@@ -1,13 +1,13 @@
-import tmpl from "./tpl.hbs";
+import tpl from "./tpl";
 import "./style.less";
-import linkComp from "../../components/link";
-import profileComp from "../../components/profile";
-import profileFieldsComp from "../../components/profile-field";
-import linkWithImageComp from "../../components/link-with-image";
-import modalComp from "../../components/modal";
-import buttonComp from "../../components/button";
-import inputComp from "../../components/input";
-import formComp from "../../components/form";
+import Link from "../../components/link";
+import Profile from "../../components/profile";
+import ProfileFields from "../../components/profile-field";
+import LinkWithImage from "../../components/link-with-image";
+import Modal from "../../components/modal";
+import Button from "../../components/button";
+import Input from "../../components/input";
+import Form from "../../components/form";
 
 let profileInfo = {
   avatar:
@@ -96,13 +96,12 @@ const inputAvatar = [
   },
 ];
 
-let prepareInfoProfile = () => {
-  for (let key in profileInfo) {
-    profileInfoPrepared[key].placeholder = profileInfo[key];
-  }
-};
 // copy values from profileInfo into profileInfoPrepared
-prepareInfoProfile();
+for (let key in profileInfo) {
+  profileInfoPrepared[key].placeholder = profileInfo[key];
+}
+
+
 
 let fieldsWithoutAvatar = (source) => {
   let profileInfoWithOutAvatar = {};

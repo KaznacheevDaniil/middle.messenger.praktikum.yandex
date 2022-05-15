@@ -66,6 +66,7 @@ class PageReg extends Block {
     return this.compile(tpl, {
       form: this.props.form,
       link: this.props.link,
+      events: this.props.events,
     });
   }
 }
@@ -82,6 +83,15 @@ export const page = new PageReg("div", {
     }),
   }),
   link: new Link("div", { links }),
+  events: {
+    submit: event => {
+      event.preventDefault();
+      const inputs = event.target.querySelectorAll('input');
+      let data = {};
+      inputs.forEach((current)=>{
+        data[current.name] = current.value;
+      })
+      console.log(data);
+    }
+  }
 });
-
-export default { page };

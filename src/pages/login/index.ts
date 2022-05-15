@@ -43,6 +43,7 @@ class PageLogin extends Block {
     return this.compile(tpl, {
       form: this.props.form,
       link: this.props.link,
+      events: this.props.events
     });
   }
 }
@@ -55,6 +56,16 @@ export const page = new PageLogin("div", {
     button: new Button("div", { id: "login", type: "submit", value: "Enter" }),
   }),
   link: new Link("div", { links }),
-});
+  events: {
+    submit: event => {
+      event.preventDefault();
+      const inputs = event.target.querySelectorAll('input');
+      let data = {};
 
-export default { page };
+      inputs.forEach((current)=>{
+        data[current.name] = current.value;
+      })
+      console.log(data);
+    }
+  }
+});

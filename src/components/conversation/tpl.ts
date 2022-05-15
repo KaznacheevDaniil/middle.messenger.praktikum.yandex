@@ -1,9 +1,6 @@
 const tpl = `<div class="conversation">
   {{{chatTopPanel}}}
-
-  <div class="messages-container">
-    <div class="ta-c chat-date"><span>{{date}}</span></div>
-    {{{messages}}}</div>
+  {{{messages}}}
   {{{chatBottomPanel}}}
 </div>`;
 export default tpl;

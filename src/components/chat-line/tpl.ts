@@ -1,6 +1,6 @@
 const tpl = `<ul class="chats">{{#each chatlinePersons}}
   <li class="chatline">
-    {{{photo}}}
+    {{{photoPerson}}}
     <div class="info">
       <div><span class="name">{{name}}</span>
         <span class="time">{{timeLastMessage}}</span></div>

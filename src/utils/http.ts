@@ -6,11 +6,6 @@ class HTTPTransport {
     DELETE: "DELETE",
   };
 
-  /**
-   * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
-   * На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
-   * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
-   */
   queryStringify(data: object) {
     // Здесь достаточно и [object Object] для объекта
     const keys = Object.keys(data);
