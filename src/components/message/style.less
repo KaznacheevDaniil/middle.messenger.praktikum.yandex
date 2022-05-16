@@ -1,0 +1,36 @@
+.conversation {
+  .message {
+    font-family: "Lato";
+    max-width: 400px;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    display: inline-block;
+
+    &.person {
+      background: #f0f0f0;
+
+      .info-msg {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    &.user {
+      background: #36abff36;
+      align-self: flex-end;
+
+      .info-msg {
+        display: flex;
+        justify-content: flex-start;
+      }
+    }
+    .time,
+    .status {
+      font-weight: 400;
+      font-size: 9px;
+      line-height: 11px;
+      color: #4b4b4b;
+    }
+  }
+}
