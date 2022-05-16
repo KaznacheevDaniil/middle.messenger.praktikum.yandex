@@ -1,5 +1,4 @@
 import Block from '../../utils/block';
-import './style.less';
 import tpl from './tpl';
 import Link from '../../components/link';
 import Input from '../../components/input';
