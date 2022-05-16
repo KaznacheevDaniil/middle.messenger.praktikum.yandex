@@ -8,6 +8,10 @@ npm run dev - сборка и тестирование через parcel.
 
 npm run start - запуск express сервера
 
+npm run lint - запуск Eslint
+
+npm run stylelint - запуск Stylelint
+
 ### Версия NodeJs
 
 v12.13.0
