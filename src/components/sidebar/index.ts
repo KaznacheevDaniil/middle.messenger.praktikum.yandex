@@ -5,7 +5,7 @@ import chatLineComp from '../chat-line';
 import Link from '../link';
 import Search from '../search';
 
-export default class Sidebar extends Block {
+class Sidebar extends Block {
   render() {
     return this.compile(tpl, {
       linkToProfile: this.props.linkToProfile,
@@ -31,4 +31,4 @@ const sidebarComp = new Sidebar('div', {
     class: 'sidebar',
   },
 });
-export { sidebarComp };
+export default sidebarComp;
