@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/KaznacheevDaniil/project#readme",
   "devDependencies": {
+    "@parcel/config-default": "^2.5.0",
     "@parcel/transformer-inline-string": "2.4.1",
     "@parcel/transformer-less": "2.5.0",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
