@@ -1,11 +1,9 @@
-import Block from "../../utils/block";
-import "./style.less";
-import tpl from "./tpl";
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
+import Block from '../../utils/block';
+import './style.less';
+import tpl from './tpl';
 
-Handlebars.registerHelper("isAuthor", function (value, Author) {
-  return value == Author;
-});
+Handlebars.registerHelper('isAuthor', (value, Author) => value === Author);
 
 class Messages extends Block {
   render() {
@@ -16,18 +14,36 @@ class Messages extends Block {
   }
 }
 
-let messages = [
+const messages = [
   {
-    author: "Person",
+    author: 'Person',
     message:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-    time: "12:32",
-    status: "read",
+    time: '12:32',
+    status: 'read',
   },
-  { author: "Person", message: "sadasdasd", time: "12:32", status: "read" },
-  { author: "Person", message: "sadasdasd", time: "12:32", status: "read" },
-  { author: "User", message: "Hi, man!", time: "12:32", status: "unread" },
+  {
+    author: 'Person',
+    message: 'sadasdasd',
+    time: '12:32',
+    status: 'read',
+  },
+  {
+    author: 'Person',
+    message: 'sadasdasd',
+    time: '12:32',
+    status: 'read',
+  },
+  {
+    author: 'User',
+    message: 'Hi, man!',
+    time: '12:32',
+    status: 'unread',
+  },
 ];
 
-let messagesComp = new Messages("div", { messages, date: "25 september 2019" });
-export { messagesComp };
+const messagesComp = new Messages('div', {
+  messages,
+  date: '25 september 2019',
+});
+export default messagesComp;

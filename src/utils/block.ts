@@ -1,20 +1,25 @@
-import EventBus from "../utils/event-bus";
-import Handlebars from "handlebars";
-import { v4 as makeUUID } from "uuid";
+import Handlebars from 'handlebars';
+import { v4 as makeUUID } from 'uuid';
+import EventBus from './event-bus';
 
 class Block {
   static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_CDU: "flow:component-did-update",
-    FLOW_RENDER: "flow:render",
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
   };
 
   private _element: HTMLElement;
-  private _meta: { tagName: string; props: object; withInternalID?: Boolean };
+
+  private _meta: { tagName: string; props: object; withInternalID?: boolean };
+
   public eventBus: Function;
+
   public children: object;
+
   public props;
+
   public _id: string = null;
 
   /** JSDoc
@@ -23,11 +28,11 @@ class Block {
    *
    * @returns {void}
    */
-  constructor(tagName: string = "div", propsAndChildren: object = {}) {
+  constructor(tagName = 'div', propsAndChildren: object = {}) {
     const { children, props } = this._getChildren(propsAndChildren);
 
     this.children = children;
-    let eventBus = new EventBus();
+    const eventBus = new EventBus();
     this._meta = {
       tagName,
       props,
@@ -40,6 +45,7 @@ class Block {
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
+
   _getChildren(propsAndChildren) {
     const children = {};
     const props = {};
@@ -94,7 +100,7 @@ class Block {
     }
   }
 
-  componentDidUpdate(oldProps, newProps): Boolean {
+  componentDidUpdate(oldProps, newProps): boolean {
     return true;
   }
 
@@ -102,8 +108,8 @@ class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      if (eventName === "focus" || eventName === "blur") {
-        const elements = this._element.querySelectorAll("input");
+      if (eventName === 'focus' || eventName === 'blur') {
+        const elements = this._element.querySelectorAll('input');
         elements.forEach((item) => {
           item.addEventListener(eventName, events[eventName]);
         });
@@ -125,8 +131,8 @@ class Block {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      if (eventName === "focus" || eventName === "blur") {
-        const elements = this._element.querySelectorAll("input");
+      if (eventName === 'focus' || eventName === 'blur') {
+        const elements = this._element.querySelectorAll('input');
         elements.forEach((item) => {
           item.removeEventListener(eventName, events[eventName]);
         });
@@ -144,14 +150,14 @@ class Block {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  get element() : HTMLElement {
     return this._element;
   }
 
-  _render() {
+  _render() : void {
     const block = this.render();
     this._removeEvents();
-    this._element.innerHTML = "";
+    this._element.innerHTML = '';
     this._element.appendChild(block);
 
     this._addAttributes();
@@ -159,7 +165,7 @@ class Block {
   }
 
   render(): DocumentFragment {
-    return;
+    return undefined;
   }
 
   getContent() {
@@ -171,23 +177,25 @@ class Block {
 
     return new Proxy(props, {
       set(target, prop, value) {
-        target[prop] = value;
+        const tar = target;
+        tar[prop] = value;
         self.eventBus().emit(Block.EVENTS.FLOW_CDU);
         return true;
       },
       get(target, prop: string) {
-        if (prop?.indexOf("_") === 0) {
-          throw new Error("Доступ отсутствует!");
+        if (prop?.indexOf('_') === 0) {
+          throw new Error('Доступ отсутствует!');
         }
 
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       deleteProperty() {
-        throw new Error("Доступ отсутствует!");
+        throw new Error('Доступ отсутствует!');
       },
     });
   }
+
   compile(template: string, props: object) {
     const propsAndStubs = { ...props };
 
@@ -195,7 +203,7 @@ class Block {
       propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
-    const fragment = this._createDocumentElement("template");
+    const fragment = this._createDocumentElement('template');
 
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
     Object.values(this.children).forEach((child) => {
@@ -208,17 +216,17 @@ class Block {
   _createDocumentElement(tagName) {
     const element = document.createElement(tagName);
     if (this.props.settings?.withInternalID) {
-      element.setAttribute("data-id", this._id);
+      element.setAttribute('data-id', this._id);
     }
     return element;
   }
 
   show() {
-    this._element.style.display = "block";
+    this._element.style.display = 'block';
   }
 
   hide() {
-    this._element.style.display = "none";
+    this._element.style.display = 'none';
   }
 }
 
