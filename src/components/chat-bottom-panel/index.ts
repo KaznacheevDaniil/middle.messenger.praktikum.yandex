@@ -5,9 +5,7 @@ import tpl from './tpl';
 export default class ChatBottomPanel extends Block {
   render() {
     return this.compile(tpl, {
-      addFileBtn: this.props.addFileBtn,
-      input: this.props.input,
-      sendMsgBtn: this.props.sendMsgBtn,
+      form: this.props.form,
     });
   }
 }

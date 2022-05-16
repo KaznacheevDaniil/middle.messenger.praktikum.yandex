@@ -20,7 +20,7 @@ npm run stylelint - запуск Stylelint
 
 ### Версия NodeJs
 
-v12.13.0
+v12.22.0
 
 ### Домен Netlify
 
