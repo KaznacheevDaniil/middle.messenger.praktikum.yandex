@@ -1,5 +1,4 @@
 import tpl from './tpl';
-import './style.less';
 import ProfileFields from '../../../components/profile-field';
 import LinkWithImage from '../../../components/link-with-image';
 import Button from '../../../components/button';

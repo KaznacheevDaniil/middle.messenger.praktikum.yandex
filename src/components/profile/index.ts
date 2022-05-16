@@ -1,5 +1,4 @@
 import Block from '../../utils/block';
-import './style.less';
 import tpl from './tpl';
 import ProfileFields from '../profile-field';
 import ProfileInfoHelper from '../../utils/profileInfoHelper';

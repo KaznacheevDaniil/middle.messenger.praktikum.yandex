@@ -1,6 +1,5 @@
 import Block from '../../utils/block';
 import Validation from '../../utils/validation';
-import './style.less';
 import tpl from './tpl';
 import Link from '../../components/link';
 import Input from '../../components/input';

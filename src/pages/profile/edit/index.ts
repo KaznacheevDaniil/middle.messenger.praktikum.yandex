@@ -1,4 +1,3 @@
-import './style.less';
 import Block from '../../../utils/block';
 import tpl from './tpl';
 import LinkWithImage from '../../../components/link-with-image';
