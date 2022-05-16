@@ -26,6 +26,16 @@ v12.22.0
 
 https://kaznacheev.netlify.app/
 
+### Используемые технологии
+
+- JavaScript
+- Typescript
+- Less
+- Handlebars
+- NodeJS Express
+- Parcel
+- Eslint
+- Stylelint
 
 ### Страницы:
 
