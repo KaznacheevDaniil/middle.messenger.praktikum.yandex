@@ -1,6 +1,4 @@
-const tpl = `<div class="bottom-panel">
-  {{{addFileBtn}}}
-  {{{input}}}
-  {{{sendMsgBtn}}}
-</div>`;
+const tpl = `
+  {{{form}}}
+`;
 export default tpl;

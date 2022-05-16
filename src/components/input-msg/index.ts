@@ -8,6 +8,8 @@ export default class InputMsg extends Block {
       placeholder: this.props.placeholder,
       name: this.props.name,
       className: this.props.className,
+      valid: this.props.valid,
+      attr: this.props.attr,
     });
   }
 }

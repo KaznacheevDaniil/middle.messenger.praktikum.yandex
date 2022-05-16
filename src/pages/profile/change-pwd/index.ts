@@ -51,12 +51,14 @@ const PageChangePassword = new ChangePassword('div', {
     events: {
       submit: (event) => {
         event.preventDefault();
-        const inputs = event.target.querySelectorAll('input');
-        const data = {};
-        inputs.forEach((current) => {
-          data[current.name] = current.value;
-        });
-        console.log(data);
+        if (validationForFormInputs.check(event.target)) {
+          const inputs = event.target.querySelectorAll('input');
+          const data = {};
+          inputs.forEach((current) => {
+            data[current.name] = current.value;
+          });
+          console.log(data);
+        }
       },
     },
   }),

@@ -1,7 +1,13 @@
 .bottom-panel {
-  display: flex;
-  margin: 0 40px 40px;
-  padding-top: 20px;
-  border-top: 1px solid #eaeaea;
-  align-items: center;
+  & > form {
+    display: flex;
+    margin: 0 40px 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eaeaea;
+    align-items: center;
+  }
+
+  & > .input-wrap {
+    width: calc(100% - 40px);
+  }
 }
