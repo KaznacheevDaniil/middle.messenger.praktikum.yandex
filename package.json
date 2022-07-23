@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "parcel src/index.html --target default --dist-dir ./build",
     "build": "parcel build src/index.html",
-    "start": "npm run build && node ./server.js"
+    "start": "npm run build && node ./server.js",
+    "lint": "npx eslint 'src/**'",
+    "stylelint": "npx stylelint '**/*.less'"
   },
   "repository": {
     "type": "git",
@@ -18,14 +20,28 @@
   },
   "homepage": "https://github.com/KaznacheevDaniil/project#readme",
   "devDependencies": {
+    "@parcel/config-default": "^2.5.0",
     "@parcel/transformer-inline-string": "2.4.1",
     "@parcel/transformer-less": "2.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "express": "4.17.3",
     "parcel": "2.5.0",
     "parcel-transformer-hbs": "1.0.4",
-    "prettier": "2.6.2"
+    "postcss-less": "^6.0.0",
+    "prettier": "2.6.2",
+    "stylelint": "^14.8.2",
+    "stylelint-config-standard": "^25.0.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
   },
   "dependencies": {
-    "handlebars": "4.7.7"
+    "handlebars": "4.7.7",
+    "uuid": "^8.3.2"
   }
 }

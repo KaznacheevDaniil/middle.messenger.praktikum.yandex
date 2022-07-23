@@ -1,27 +1,40 @@
 .info-fields {
   list-style: none;
-  padding-left: 0px;
+  padding-left: 0;
 
   li {
     justify-content: space-between;
     padding: 10px;
     display: flex;
+    height: 40px;
     border-bottom: 1px solid #eaeaea;
 
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     span {
-      font-family: "Lato";
+      font-family: Lato, sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 13px;
       line-height: 16px;
     }
 
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
     .value {
-      color: #000000;
+      color: #000;
       background: none;
       border: none;
       text-align: end;
       cursor: grab;
+
       &:focus {
         outline: none;
         border: none;

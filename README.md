@@ -1,4 +1,10 @@
-Ссылка на макет-прототип: [Макет](<https://www.figma.com/file/MyioLgjVnXTFAevtJYnb69/Chat_external_link-(Copy)?node-id=1%3A498>)
+### Ссылка на макет-прототип:
+
+[Макет](https://www.figma.com/file/MyioLgjVnXTFAevtJYnb69/Chat_external_link-(Copy)?node-id=1%3A498)
+
+### Ссылка на Pull Request 'Sprint 2'
+
+[Ссылочка](https://github.com/KaznacheevDaniil/middle.messenger.praktikum.yandex/pull/2) 
 
 ### Команды:
 
@@ -8,9 +14,13 @@ npm run dev - сборка и тестирование через parcel.
 
 npm run start - запуск express сервера
 
+npm run lint - запуск Eslint
+
+npm run stylelint - запуск Stylelint
+
 ### Версия NodeJs
 
-v12.13.0
+v12.22.0
 
 ### Домен Netlify
 
@@ -19,6 +29,17 @@ https://kaznacheev.netlify.app/
 
 # Ссылка на pull request (sprint_2)
 [Ссылочка](https://github.com/KaznacheevDaniil/middle.messenger.praktikum.yandex/pull/2)
+
+### Используемые технологии
+
+- JavaScript
+- Typescript
+- Less
+- Handlebars
+- NodeJS Express
+- Parcel
+- Eslint
+- Stylelint
 
 ### Страницы:
 
