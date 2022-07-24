@@ -16,7 +16,7 @@ class Error500 extends Block {
 const links = [
   {
     className: 'link__simple blue',
-    hrefLink: '/chats',
+    hrefLink: '/messenger',
     content: 'Back to chats',
   },
 ];
