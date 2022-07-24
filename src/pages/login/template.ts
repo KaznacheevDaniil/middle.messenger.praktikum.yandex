@@ -1,4 +1,4 @@
-const tpl = `<div class="content flex-c">
+const template = `<div class="content flex-c">
 
   <div class="form">
     {{{form}}}
@@ -8,4 +8,4 @@ const tpl = `<div class="content flex-c">
   </div>
 
 </div>`;
-export default tpl;
+export default template;

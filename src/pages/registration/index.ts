@@ -1,5 +1,5 @@
 import Block from '../../utils/block';
-import tpl from './tpl';
+import template from './template';
 import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
@@ -61,7 +61,7 @@ const links = [{ className: 'link__simple blue', hrefLink: '/', content: 'Sign i
 
 class Registration extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       link: this.props.link,
       events: this.props.events,

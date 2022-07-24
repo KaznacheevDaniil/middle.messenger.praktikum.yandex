@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
+import template from './template';
 import ChatTopPanel from '../chat-top-panel';
 import Avatar from '../avatar';
 import ButtonWithImage from '../button-with-image';
@@ -12,7 +12,7 @@ import Validation from '../../utils/validation';
 
 class Conversation extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       chatTopPanel: this.props.chatTopPanel,
       messages: this.props.messages,
       chatBottomPanel: this.props.chatBottomPanel,
@@ -25,7 +25,7 @@ const validationForFormInputs = new Validation();
 const conversationComp = new Conversation('div', {
   chatTopPanel: new ChatTopPanel('div', {
     photoPerson: new Avatar('div', {
-      photoPerson: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
+      photoPerson: 'https://64.media.tumblr.com/c7e94c9d66601db8b5c545b366063c2f/tumblr_pr6ux1VuJ81tawn8uo1_1280.jpg',
     }),
     namePerson: 'Viktor Evgen',
     button: new ButtonWithImage('div', {
