@@ -1,6 +1,6 @@
 import Block from '../../utils/block';
 import Validation from '../../utils/validation';
-import tpl from './tpl';
+import template from './template';
 import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
@@ -40,7 +40,7 @@ const links = [
 
 class Login extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       link: this.props.link,
       events: this.props.events,

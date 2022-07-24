@@ -1,11 +1,11 @@
 import Block from '../../utils/block';
-import tpl from './tpl';
+import template from './template';
 import ProfileFields from '../profile-field';
 import ProfileInfoHelper from '../../utils/profileInfoHelper';
 
 class Profile extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       avatarUrl: this.props.avatarUrl,
       nickname: this.props.nickname,
       profileFieldsInfo: this.props.profileFieldsInfo,

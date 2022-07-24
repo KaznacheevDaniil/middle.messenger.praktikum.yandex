@@ -1,4 +1,4 @@
-const tpl = `<input
+const template = `<input
   type="text"
   placeholder="{{placeholder}}"
   name="{{name}}"
@@ -8,4 +8,4 @@ const tpl = `<input
   {{/if}}
 >
 <span class="error"></span>`;
-export default tpl;
+export default template;

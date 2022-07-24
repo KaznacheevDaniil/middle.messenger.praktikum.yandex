@@ -1,4 +1,4 @@
-const tpl = `{{#each inputs}}
+const template = `{{#each inputs}}
   <div class="{{className}} input-wrap">
     {{#if label}}
       <label>{{label}}</label>
@@ -15,4 +15,4 @@ const tpl = `{{#each inputs}}
     <span class="error"></span>
   </div>
 {{/each}}`;
-export default tpl;
+export default template;

@@ -77,7 +77,7 @@ export default class ProfileinfoHelper {
   };
 
   private profileInfo = {
-    avatar: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
+    avatar: 'https://64.media.tumblr.com/c7e94c9d66601db8b5c545b366063c2f/tumblr_pr6ux1VuJ81tawn8uo1_1280.jpg',
     email: 'text@mail.ru',
     login: 'DKaznach',
     first_name: 'Daniil',

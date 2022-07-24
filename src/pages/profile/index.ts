@@ -1,4 +1,4 @@
-import tpl from './tpl';
+import template from './template';
 import './style.less';
 import Link from '../../components/link';
 import LinkWithImage from '../../components/link-with-image';
@@ -35,7 +35,7 @@ const inputs = [
 
 class Profile extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       profile: this.props.profile,
       link: this.props.link,
       backUrl: this.props.backUrl,

@@ -1,4 +1,4 @@
-import tpl from './tpl';
+import template from './template';
 import ProfileFields from '../../../components/profile-field';
 import LinkWithImage from '../../../components/link-with-image';
 import Button from '../../../components/button';
@@ -13,7 +13,7 @@ const profileFields = profileHelper.getPasswordChangeInfo();
 
 class ChangePassword extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       backUrl: this.props.backUrl,
       events: this.props.events,
