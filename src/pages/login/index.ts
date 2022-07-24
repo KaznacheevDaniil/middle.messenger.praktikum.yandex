@@ -33,7 +33,7 @@ const links = [
   },
   {
     className: 'link__simple blue',
-    hrefLink: '/reg',
+    hrefLink: '/sign-up',
     content: 'Create profile',
   },
 ];

@@ -1,6 +1,16 @@
 import Route from './route';
 
 export default class Router {
+  public routes;
+
+  public history;
+
+  private _currentRoute;
+
+  private _rootQuery;
+
+  private static __instance: any;
+
   constructor(rootQuery) {
     if (Router.__instance) {
       return Router.__instance;
