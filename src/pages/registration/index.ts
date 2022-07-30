@@ -80,29 +80,39 @@ const PageReg = new Registration('div', {
           validationForFormInputs.hideError(event.target);
         },
         blur: (event) => {
+          let errors : string[] = [];
           if (event.target.name === 'phone') {
             if (!validationForFormInputs.phone(event.target.value)) {
               validationForFormInputs.showError(event.target);
+              errors = [];
             }
           }
           if (event.target.name === 'email') {
-            if (!validationForFormInputs.email(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.email(event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'login') {
-            if (!validationForFormInputs.login(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.names(event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'first_name' || event.target.name === 'second_name') {
-            if (!validationForFormInputs.names(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.names(event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'password') {
-            if (!validationForFormInputs.password(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.password(event.target.value);
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
         },
