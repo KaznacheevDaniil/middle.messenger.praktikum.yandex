@@ -1,11 +1,16 @@
-/* eslint no-unused-vars: 0 */
-class HTTPTransport {
+export class HTTPTransport {
   METHODS = {
     GET: 'GET',
     PUT: 'PUT',
     POST: 'POST',
     DELETE: 'DELETE',
   };
+
+  private _instance: string;
+
+  constructor (url : string) {
+    this._instance = url;
+  }
 
   queryStringify(data: object) {
     // Здесь достаточно и [object Object] для объекта
@@ -16,13 +21,13 @@ class HTTPTransport {
     );
   }
 
-  get = (url: string, options = {}) => this.request(url, { ...options, method: this.METHODS.GET });
+  get = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.GET });
 
-  put = (url: string, options = {}) => this.request(url, { ...options, method: this.METHODS.PUT });
+  put = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.PUT });
 
-  post = (url: string, options = {}) => this.request(url, { ...options, method: this.METHODS.POST });
+  post = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.POST });
 
-  delete = (url: string, options = {}) => this.request(url, { ...options, method: this.METHODS.DELETE });
+  delete = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.DELETE });
 
   request = (url: string, options) => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();

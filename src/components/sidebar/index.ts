@@ -1,13 +1,13 @@
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
+import template from './template';
 import chatLineComp from '../chat-line';
 import Link from '../link';
 import Search from '../search';
 
 class Sidebar extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       linkToProfile: this.props.linkToProfile,
       search: this.props.search,
       chats: this.props.chats,

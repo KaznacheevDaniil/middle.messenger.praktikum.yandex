@@ -1,4 +1,4 @@
-import tpl from './tpl';
+import template from './template';
 import './style.less';
 import Link from '../../components/link';
 import LinkWithImage from '../../components/link-with-image';
@@ -35,7 +35,7 @@ const inputs = [
 
 class Profile extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       profile: this.props.profile,
       link: this.props.link,
       backUrl: this.props.backUrl,
@@ -55,7 +55,7 @@ const PageProfile = new Profile('div', {
   }),
   backUrl: new LinkWithImage('div', {
     className: 'link-back_blue',
-    link: '/chats',
+    link: '/messenger',
     urlImg:
       'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4=',
   }),

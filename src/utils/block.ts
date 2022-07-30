@@ -221,11 +221,11 @@ class Block {
     return element;
   }
 
-  show() {
+  show() : void {
     this._element.style.display = 'block';
   }
 
-  hide() {
+  hide() : void {
     this._element.style.display = 'none';
   }
 }

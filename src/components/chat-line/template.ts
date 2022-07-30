@@ -1,6 +1,6 @@
-const tpl = `<ul class="chats">{{#each chatlinePersons}}
+const template = `<ul class="chats">{{#each chatlinePersons}}
   <li class="chatline">
-    {{{photoPerson}}}
+    <div class="avatar" style="background-image: url({{photoPerson}})"></div>
     <div class="info">
       <div><span class="name">{{name}}</span>
         <span class="time">{{timeLastMessage}}</span></div>
@@ -10,4 +10,4 @@ const tpl = `<ul class="chats">{{#each chatlinePersons}}
   </li>
 {{/each}}
 </ul>`;
-export default tpl;
+export default template;

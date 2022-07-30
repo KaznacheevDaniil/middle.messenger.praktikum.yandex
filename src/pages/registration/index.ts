@@ -1,5 +1,5 @@
 import Block from '../../utils/block';
-import tpl from './tpl';
+import template from './template';
 import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
@@ -61,7 +61,7 @@ const links = [{ className: 'link__simple blue', hrefLink: '/', content: 'Sign i
 
 class Registration extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       link: this.props.link,
       events: this.props.events,
@@ -80,29 +80,39 @@ const PageReg = new Registration('div', {
           validationForFormInputs.hideError(event.target);
         },
         blur: (event) => {
+          let errors : string[] = [];
           if (event.target.name === 'phone') {
             if (!validationForFormInputs.phone(event.target.value)) {
               validationForFormInputs.showError(event.target);
+              errors = [];
             }
           }
           if (event.target.name === 'email') {
-            if (!validationForFormInputs.email(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.email(event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'login') {
-            if (!validationForFormInputs.login(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.names(event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'first_name' || event.target.name === 'second_name') {
-            if (!validationForFormInputs.names(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.names(event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'password') {
-            if (!validationForFormInputs.password(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.password(event.target.value);
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
         },

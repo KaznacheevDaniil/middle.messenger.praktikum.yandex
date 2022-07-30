@@ -1,4 +1,4 @@
-const tpl = `
+const template = `
   <div class="modal">
     <h3 class="modal-header">{{header}}</h3>
     <div class="modal-content">{{{content}}}</div>
@@ -8,4 +8,4 @@ const tpl = `
       {{/if}}
     </div>
   </div>`;
-export default tpl;
+export default template;

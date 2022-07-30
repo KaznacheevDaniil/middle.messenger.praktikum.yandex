@@ -1,6 +1,6 @@
-const tpl = `
+const template = `
   {{{chatTopPanel}}}
   {{{messages}}}
   {{{chatBottomPanel}}}
 `;
-export default tpl;
+export default template;

@@ -1,4 +1,4 @@
-import tpl from './tpl';
+import template from './template';
 import './style.less';
 import conversationComp from '../../components/conversation';
 import sidebarComp from '../../components/sidebar';
@@ -6,7 +6,7 @@ import Block from '../../utils/block';
 
 class Chats extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       sidebar: this.props.sidebar,
       conversation: this.props.conversation,
     });

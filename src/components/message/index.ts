@@ -1,13 +1,13 @@
 import Handlebars from 'handlebars';
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
+import template from './template';
 
 Handlebars.registerHelper('isAuthor', (value, Author) => value === Author);
 
 class Messages extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       messages: this.props.messages,
       date: this.props.date,
     });

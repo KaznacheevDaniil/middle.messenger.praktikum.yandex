@@ -1,4 +1,4 @@
-import tpl from './tpl';
+import template from './template';
 import ProfileFields from '../../../components/profile-field';
 import LinkWithImage from '../../../components/link-with-image';
 import Button from '../../../components/button';
@@ -13,7 +13,7 @@ const profileFields = profileHelper.getPasswordChangeInfo();
 
 class ChangePassword extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       backUrl: this.props.backUrl,
       events: this.props.events,
@@ -34,14 +34,19 @@ const PageChangePassword = new ChangePassword('div', {
           validationForFormInputs.hideError(event.target);
         },
         blur: (event) => {
+          let errors : string[] = [];
           if (event.target.name === 'password') {
-            if (!validationForFormInputs.password(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = validationForFormInputs.password(event.target.value);
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
-          if (event.target.name === 'сonfirm-password') {
-            if (!validationForFormInputs.confirmPassword(event.target, event.target.value)) {
-              validationForFormInputs.showError(event.target, "Passwords don't match!");
+          if (event.target.name === 'confirmPassword') {
+            errors = validationForFormInputs.confirmPassword(event.target, event.target.value)
+            if (errors.length > 0) {
+              validationForFormInputs.showError(event.target, errors);
+              errors = [];
             }
           }
         },

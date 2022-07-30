@@ -1,11 +1,10 @@
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
-import Avatar from '../avatar';
+import template from './template';
 
 class ChatLines extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       chatlinePersons: this.props.chatlinePersons,
     });
   }
@@ -13,18 +12,14 @@ class ChatLines extends Block {
 
 const chatlinePersons = [
   {
-    photoPerson: new Avatar('div', {
-      photoPerson: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
-    }),
+    photoPerson: 'https://64.media.tumblr.com/1a62b7ff4fa1aa1dd7d3d11a20768a1f/tumblr_pd3ncatbvc1tawn8uo1_1280.jpg',
     name: 'Daniil ',
     lastMessage: 'Hey, masaddd ddddddddddddddddd ddddddd ddddddddd ddddddddddn!',
     timeLastMessage: '11:32',
     countUnread: '203',
   },
   {
-    photoPerson: new Avatar('div', {
-      photoPerson: 'https://cdn.pixabay.com/photo/2018/01/21/14/16/woman-3096664_960_720.jpg',
-    }),
+    photoPerson: 'https://64.media.tumblr.com/b9de972d1b72ec08decc0a9e93b9338a/tumblr_prgjn43jHy1tawn8uo1_1280.jpg',
     name: 'Kino',
     lastMessage:
       'Hey,  masaddd ddddddddddddddddd dddddd ddddddddddddddddd dddddd ddddddddddddddddd dddddd ddddddddddddddddd ddddddd ddddddddd man!',

@@ -1,5 +1,5 @@
 import Block from '../../../utils/block';
-import tpl from './tpl';
+import template from './template';
 import LinkWithImage from '../../../components/link-with-image';
 import Form from '../../../components/form';
 import Button from '../../../components/button';
@@ -13,7 +13,7 @@ const profileFields = profileHelper.getFieldsWithoutAvatar();
 
 class EditProfile extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       backUrl: this.props.backUrl,
       events: this.props.events,

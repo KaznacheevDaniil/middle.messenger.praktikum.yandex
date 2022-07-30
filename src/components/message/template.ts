@@ -1,4 +1,4 @@
-const tpl = `
+const template = `
   <div class="messages-container">
     <div class="ta-c chat-date"><span>{{date}}</span></div>
 
@@ -13,4 +13,4 @@ const tpl = `
     </div>
 {{/each}}
     </div>`;
-export default tpl;
+export default template;

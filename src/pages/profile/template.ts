@@ -1,4 +1,4 @@
-const tpl = `<div class="content flex-c">
+const template = `<div class="content flex-c">
 
   <div class="profile ta-c">
     {{{profile}}}
@@ -7,4 +7,4 @@ const tpl = `<div class="content flex-c">
   {{{backUrl}}}
   {{{modal}}}
 </div>`;
-export default tpl;
+export default template;

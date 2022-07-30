@@ -1,4 +1,4 @@
-const tpl = `<ul class="info-fields">
+const template = `<ul class="info-fields">
   {{#each profileFields}}
     <li class="input-wrap"><div><label class="name">{{this.nameField}}</label></div>
       <div><input
@@ -14,4 +14,4 @@ const tpl = `<ul class="info-fields">
     </li>
   {{/each}}
 </ul>`;
-export default tpl;
+export default template;

@@ -1,10 +1,10 @@
 import Block from '../../utils/block';
-import tpl from './tpl';
+import template from './template';
 import Link from '../../components/link';
 
 class Error404 extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       statusCode: this.props.statusCode,
       contentInfoPage: this.props.contentInfoPage,
       wrapper_class: this.props.wrapper_class,
@@ -16,7 +16,7 @@ class Error404 extends Block {
 const links = [
   {
     className: 'link__simple blue',
-    hrefLink: '/chats',
+    hrefLink: '/messenger',
     content: 'Back to chats',
   },
 ];
