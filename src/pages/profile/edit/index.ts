@@ -5,11 +5,50 @@ import Form from '../../../components/form';
 import Button from '../../../components/button';
 import Validation from '../../../utils/validation';
 import ProfileFields from '../../../components/profile-field';
-import ProfileInfoHelper from '../../../utils/profileInfoHelper';
 
-const profileHelper = new ProfileInfoHelper();
-
-const profileFields = profileHelper.getFieldsWithoutAvatar();
+const profileFields = {
+  email: {
+    placeholder: 'Example@mail.ru',
+    nameField: 'Email',
+    name: 'email',
+    disabled: undefined,
+    valid: true,
+  },
+  login: {
+    placeholder: 'VasyDAsd_',
+    nameField: 'Login',
+    name: 'login',
+    disabled: undefined,
+    valid: true,
+  },
+  first_name: {
+    placeholder: 'Daniil',
+    nameField: 'Name',
+    name: 'first_name',
+    disabled: undefined,
+    valid: true,
+  },
+  second_name: {
+    placeholder: 'Kaznacheev',
+    nameField: 'Surname',
+    name: 'second_name',
+    disabled: undefined,
+    valid: true,
+  },
+  display_name: {
+    placeholder: 'DaniilK',
+    nameField: 'Nickname',
+    name: 'display_name',
+    disabled: 'disabled',
+  },
+  phone: {
+    placeholder: '88005553535',
+    nameField: 'Phone',
+    name: 'phone',
+    disabled: undefined,
+    valid: true,
+  },
+}
 
 class EditProfile extends Block {
   render() {

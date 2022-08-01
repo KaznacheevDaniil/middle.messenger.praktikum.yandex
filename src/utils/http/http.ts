@@ -1,14 +1,27 @@
-export class HTTPTransport {
-  METHODS = {
-    GET: 'GET',
-    PUT: 'PUT',
-    POST: 'POST',
-    DELETE: 'DELETE',
-  };
+enum METHOD {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE'
+}
 
+type Options = {
+  method: METHOD;
+  credentials?: string;
+  mode?: string;
+  headers?: object;
+  body?: string;
+  data?: any;
+  timeout?: number;
+};
+
+type OptionsWithoutMethod = Omit<Options, 'method'>;
+
+export class HTTPTransport {
   private _instance: string;
 
-  constructor (url : string) {
+  constructor(url : string) {
     this._instance = url;
   }
 
@@ -21,20 +34,22 @@ export class HTTPTransport {
     );
   }
 
-  get = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.GET });
+  get = (url: string, options: OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.GET });
 
-  put = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.PUT });
+  put = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.PUT });
 
-  post = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.POST });
+  post = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.POST });
 
-  delete = (url: string, options = {}) => this.request(this._instance + url, { ...options, method: this.METHODS.DELETE });
+  delete = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.DELETE });
 
-  request = (url: string, options) => new Promise((resolve, reject) => {
+  request = (url: string, options: Options = { method: METHOD.GET }) => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
+
+    xhr.withCredentials = true;
 
     xhr.open(
       options.method,
-      options.method === this.METHODS.GET && !!options.data
+      options.method === METHOD.GET && !!options.data
         ? `${url}${this.queryStringify(options.data)}`
         : url,
     );
@@ -58,10 +73,10 @@ export class HTTPTransport {
 
     xhr.ontimeout = reject;
 
-    if (options.method === this.METHODS.GET || !options.data) {
+    if (options.method === METHOD.GET || !options.body) {
       xhr.send();
     } else {
-      xhr.send(options.data);
+      xhr.send(options.body);
     }
   });
 }

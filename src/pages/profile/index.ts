@@ -8,6 +8,7 @@ import Input from '../../components/input';
 import Form from '../../components/form';
 import Block from '../../utils/block';
 import profileComp from '../../components/profile';
+import { UserController } from '../../utils/controllers/profile';
 
 const links = [
   {
@@ -20,7 +21,7 @@ const links = [
     hrefLink: '/profile/change-pwd',
     content: 'Change password',
   },
-  { className: 'link__simple red', hrefLink: '/', content: 'Logout' },
+  { className: 'link__simple red logout', content: 'Logout' },
 ];
 
 const inputs = [
@@ -52,6 +53,13 @@ const PageProfile = new Profile('div', {
     attr: {
       class: 'options',
     },
+    events: {
+      click: (event) => {
+        if (event.target.classList.contains('logout')) {
+          UserController.logoutUser();
+        }
+      },
+    },
   }),
   backUrl: new LinkWithImage('div', {
     className: 'link-back_blue',
@@ -69,6 +77,17 @@ const PageProfile = new Profile('div', {
         type: 'submit',
         value: 'save',
       }),
+      events: {
+        submit: (event) => {
+          event.preventDefault();
+          const inputsForm = event.target.querySelectorAll('input');
+          const data = {};
+          inputsForm.forEach((current) => {
+            data[current.name] = current.value;
+          });
+          console.log(data);
+        },
+      },
     }),
     attr: {
       id: 'changeProfileModal',

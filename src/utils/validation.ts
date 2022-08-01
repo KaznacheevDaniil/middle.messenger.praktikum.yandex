@@ -1,89 +1,89 @@
 export default class Validation {
-
   // utils functions for valid
 
-  checkLength = function(min: number, max: number, value: string): boolean {
+  checkLength = function (min: number, max: number, value: string): boolean {
     return value.length >= min && value.length <= max;
-  }
+  };
 
-  checkEmptyValue = function(value: string): boolean {
+  checkEmptyValue = function (value: string): boolean {
     return value !== '';
-  }
+  };
+
   // Частный случай, когда логин полностью состоит из цифр
-  checkValueOnAllNumbers = function(value: string): boolean {
+  checkValueOnAllNumbers = function (value: string): boolean {
     return /^\d+$/.test(value);
-  }
+  };
 
-  checkValueOnPresenceUpperSymbol = function(value: string): boolean {
+  checkValueOnPresenceUpperSymbol = function (value: string): boolean {
     return /[A-Z+]/g.test(value);
-  }
+  };
 
-  checkValueOnPresenceNumber = function(value: string): boolean {
+  checkValueOnPresenceNumber = function (value: string): boolean {
     return /[0-9+]/g.test(value);
-  }
+  };
 
-  checkValueOnCyrillic = function(value: string): boolean {
+  checkValueOnCyrillic = function (value: string): boolean {
     return /[А-Яа-я]/g.test(value);
-  }
+  };
 
-  checkValueOnSpaces = function(value: string): boolean {
+  checkValueOnSpaces = function (value: string): boolean {
     return /\s/g.test(value);
-  }
+  };
 
-  checkValueOnFirstSymbolIsUpper = function(value: string): boolean {
+  checkValueOnFirstSymbolIsUpper = function (value: string): boolean {
     return /^[A-ZА-Я]+/.test(value);
-  }
+  };
 
   // valid functions for fields
-  password = function(value: string): string[] {
-    let errors = [];
+  password = function (value: string): string[] {
+    const errors = [];
 
-     if(!this.checkEmptyValue(value)){
-       errors.push('Field is empty!');
-     }
-     if(!this.checkLength(8, 40, value)){
+    if (!this.checkEmptyValue(value)) {
+      errors.push('Field is empty!');
+    }
+    if (!this.checkLength(8, 40, value)) {
       errors.push('The field must contain from 8 to 40 characters!');
-     }
-    if(!this.checkValueOnPresenceUpperSymbol(value)){
+    }
+    if (!this.checkValueOnPresenceUpperSymbol(value)) {
       errors.push('The field must contain at least 1 uppercase character!');
     }
-    if(!this.checkValueOnPresenceNumber(value)){
+    if (!this.checkValueOnPresenceNumber(value)) {
       errors.push('The field must contain at least 1 digit!');
     }
-    if(this.checkValueOnCyrillic(value)){
+    if (this.checkValueOnCyrillic(value)) {
       errors.push('The field must not contain Cyrillic!');
     }
-    if(this.checkValueOnSpaces(value)){
+    if (this.checkValueOnSpaces(value)) {
       errors.push('The field must not contain Spaces!');
     }
     return errors;
   };
 
-  phone = function(value: string): string[] {
-    let errors = [];
+  phone = function (value: string): string[] {
+    const errors = [];
 
-    if(!this.checkEmptyValue(value)){
+    if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
-    if(!this.checkLength(10, 15, value)){
+    if (!this.checkLength(10, 15, value)) {
       errors.push('The field must contain from 10 to 15 characters!');
     }
-    if(!/^[+]?[0-9]+$/.test(value) ){
+    if (!/^[+]?[0-9]+$/.test(value)) {
       errors.push("The phone number must contain only digits and may contain the '+' character");
     }
     return errors;
-  }
+  };
 
-  message = function(value: string): string[] {
-    let errors = [];
-    if(!this.checkEmptyValue(value)){
+  message = function (value: string): string[] {
+    const errors = [];
+    if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
     return errors;
-  }
+  };
 
-  email = function(value: string): string[] {
-    let errors = [];
+  email = function (value: string): string[] {
+    const errors = [];
     if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
@@ -91,70 +91,69 @@ export default class Validation {
       errors.push('The mail should have the following similar form: example@gnail.com');
     }
     return errors;
-  }
+  };
 
-  login = function(value: string): string[] {
-    let errors = [];
+  login = function (value: string): string[] {
+    const errors = [];
 
-    if(!this.checkEmptyValue(value)){
+    if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
-    if(!this.checkLength(3, 20, value)){
+    if (!this.checkLength(3, 20, value)) {
       errors.push('The field must contain from 3 to 20 characters!');
     }
-    if(this.checkValueOnAllNumbers(value)){
+    if (this.checkValueOnAllNumbers(value)) {
       errors.push('The field should not consist entirely of digits!');
     }
-    if(!/^[A-Za-z0-9_-]+$/.test(value)){
+    if (!/^[A-Za-z0-9_-]+$/.test(value)) {
       errors.push("The login must contain the Latin alphabet and may contain '-_'!");
     }
 
     return errors;
-  }
+  };
 
-  names = function(value: string): string[] {
-    let errors = [];
-    if(!this.checkEmptyValue(value)){
+  names = function (value: string): string[] {
+    const errors = [];
+    if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
-    if(!this.checkValueOnFirstSymbolIsUpper(value)){
+    if (!this.checkValueOnFirstSymbolIsUpper(value)) {
       errors.push('The first letter should be capitalized!');
     }
-    if(!/[A-Za-zа-яА-Я-]+$/.test(value)){
+    if (!/[A-Za-zа-яА-Я-]+$/.test(value)) {
       errors.push('The field can contain only Latin, Cyrillic and the symbol \'-\'!');
     }
     return errors;
-  }
+  };
 
-  confirmPassword = function(input, value: string): string[] {
-    let errors = [];
-    if(input.closest('.info-fields').querySelector('input[name=password]').value !== value){
+  confirmPassword = function (input, value: string): string[] {
+    const errors = [];
+    if (input.closest('.info-fields').querySelector('input[name=password]').value !== value) {
       errors.push('Passwords don\'t match!');
-    };
+    }
     return errors;
-  }
+  };
 
-  currentPassword = function(value: string): string[] {
-    let errors = [];
-    if(!this.checkEmptyValue(value)){
+  currentPassword = function (value: string): string[] {
+    const errors = [];
+    if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
     return errors;
-  }
+  };
 
-// utils functions for check and show errors
+  // utils functions for check and show errors
 
   check = (form): boolean => {
     let valid = true;
     const inputs = form.querySelectorAll('[data-valid=true]');
     inputs.forEach((input) => {
-      let errors : string[] = []
-      if(input.name === 'confirmPassword'){
+      let errors : string[] = [];
+      if (input.name === 'confirmPassword') {
         errors = this[input.name](input, input.value);
-      }else{
+      } else {
         errors = this[input.name === 'first_name' || input.name === 'second_name' ? 'names' : input.name](input.value);
       }
-      console.log(input.name)
       if (errors.length > 0) {
         valid = false;
         this.showError(input, errors);
@@ -173,11 +172,11 @@ export default class Validation {
       errorContainer.textContent = `${input.name} is not required!`;
     } else {
       errorContainer.textContent = '';
-      messages.forEach((item)=>{
-        let elem = document.createElement('div');
+      messages.forEach((item) => {
+        const elem = document.createElement('div');
         elem.textContent = item;
-        errorContainer.appendChild(elem)
-      })
+        errorContainer.appendChild(elem);
+      });
     }
   };
 

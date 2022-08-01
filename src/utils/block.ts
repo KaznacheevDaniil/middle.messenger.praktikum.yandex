@@ -168,6 +168,9 @@ class Block {
     return undefined;
   }
 
+  checkLogin(): void {
+  }
+
   getContent() {
     return this.element;
   }
@@ -222,6 +225,7 @@ class Block {
   }
 
   show() : void {
+    this.checkLogin()
     this._element.style.display = 'block';
   }
 

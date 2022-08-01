@@ -7,7 +7,6 @@ export enum StoreEvents {
 
 // наследуем Store от EventBus, чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
-
   private state = {};
 
   public getState() {
@@ -19,7 +18,7 @@ class Store extends EventBus {
 
     // метод EventBus
     this.emit(StoreEvents.Updated);
-  };
+  }
 }
 
 export default new Store();
