@@ -1,11 +1,12 @@
-import { HTTPTransport } from "../http/http";
+import { HTTPTransport } from '../http/http';
 import { BaseAPI } from '../http/base-api';
-const chatAPIInstance = new HTTPTransport('api/v1/chats');
+
+const chatAPIInstance = new HTTPTransport('https://ya-praktikum.tech/api/v1/chats');
 
 class ChatAPI extends BaseAPI {
   create() {
     // Здесь уже не нужно писать полный путь /api/v1/chats/
-    return chatAPIInstance.post('/', {title: 'string'});
+    return chatAPIInstance.post('/', {});
   }
 
   request() {

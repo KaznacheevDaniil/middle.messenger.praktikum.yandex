@@ -5,6 +5,16 @@ import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import Form from '../../components/form';
+import { UserLoginController } from '../../utils/controllers/login';
+import { UserInfoAPI } from "../../utils/api/user-info.api";
+import Router from '../../utils/router';
+
+const router = new Router('.app');
+
+interface LoginFormModel {
+  login: string;
+  password: string;
+}
 
 const inputs = [
   {
@@ -13,7 +23,6 @@ const inputs = [
     type: 'text',
     placeholder: 'Your login',
     name: 'login',
-    valid: true,
   },
   {
     className: 'field',
@@ -21,7 +30,6 @@ const inputs = [
     type: 'password',
     placeholder: 'Your password',
     name: 'password',
-    valid: true,
   },
 ];
 
@@ -46,7 +54,22 @@ class Login extends Block {
       events: this.props.events,
     });
   }
+  checkLogin() {
+
+    function onFulfilled(){
+      console.log('user', 'onFulfilled');
+      router.go('/messenger');
+    }
+
+    function onRejected(){
+      console.log('user', 'onRejected');
+      router.go('/');
+    }
+    UserInfoAPI.request()
+      .then(onFulfilled, onRejected);
+  }
 }
+
 const validationForFormInputs = new Validation();
 const PageLogin = new Login('div', {
   form: new Form('div', {
@@ -54,23 +77,6 @@ const PageLogin = new Login('div', {
     action: '/login',
     inputs: new Input('div', {
       inputs,
-      events: {
-        focus: (event) => {
-          validationForFormInputs.hideError(event.target);
-        },
-        blur: (event) => {
-          if (event.target.name === 'login') {
-            if (!validationForFormInputs.login(event.target.value)) {
-              validationForFormInputs.showError(event.target);
-            }
-          }
-          if (event.target.name === 'password') {
-            if (!validationForFormInputs.password(event.target.value)) {
-              validationForFormInputs.showError(event.target);
-            }
-          }
-        },
-      },
     }),
     button: new Button('div', { id: 'login', type: 'submit', value: 'Enter' }),
     events: {
@@ -78,11 +84,15 @@ const PageLogin = new Login('div', {
         event.preventDefault();
         if (validationForFormInputs.check(event.target)) {
           const inputFields = event.target.querySelectorAll('input');
-          const data = {};
+          const data : LoginFormModel = {
+            login: '',
+            password: '',
+          };
+
           inputFields.forEach((current) => {
             data[current.name] = current.value;
           });
-          console.log(data);
+          UserLoginController.login(data);
         }
       },
     },
@@ -94,4 +104,5 @@ const PageLogin = new Login('div', {
     },
   }),
 });
+
 export default PageLogin;

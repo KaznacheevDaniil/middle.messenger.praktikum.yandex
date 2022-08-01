@@ -3,7 +3,7 @@ type Indexed<T = any> = {
 };
 
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
-  for (let p in rhs) {
+  for (const p in rhs) {
     if (!rhs.hasOwnProperty(p)) {
       continue;
     }
@@ -14,7 +14,7 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
       } else {
         lhs[p] = rhs[p];
       }
-    } catch(e) {
+    } catch (e) {
       lhs[p] = rhs[p];
     }
   }
@@ -37,4 +37,4 @@ function set(object: Indexed | unknown, path: string, value: unknown): Indexed |
   return merge(object as Indexed, result);
 }
 
-export default set
+export default set;

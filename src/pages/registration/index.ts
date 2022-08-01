@@ -5,6 +5,16 @@ import Input from '../../components/input';
 import Button from '../../components/button';
 import Form from '../../components/form';
 import Validation from '../../utils/validation';
+import { UserRegistrationController } from '../../utils/controllers/registration';
+
+interface RegFormModel {
+  email: string;
+  login: string;
+  first_name: string;
+  second_name: string;
+  phone: string;
+  password: string;
+}
 
 const inputs = [
   {
@@ -88,21 +98,21 @@ const PageReg = new Registration('div', {
             }
           }
           if (event.target.name === 'email') {
-            errors = validationForFormInputs.email(event.target.value)
+            errors = validationForFormInputs.email(event.target.value);
             if (errors.length > 0) {
               validationForFormInputs.showError(event.target, errors);
               errors = [];
             }
           }
           if (event.target.name === 'login') {
-            errors = validationForFormInputs.names(event.target.value)
+            errors = validationForFormInputs.names(event.target.value);
             if (errors.length > 0) {
               validationForFormInputs.showError(event.target, errors);
               errors = [];
             }
           }
           if (event.target.name === 'first_name' || event.target.name === 'second_name') {
-            errors = validationForFormInputs.names(event.target.value)
+            errors = validationForFormInputs.names(event.target.value);
             if (errors.length > 0) {
               validationForFormInputs.showError(event.target, errors);
               errors = [];
@@ -135,11 +145,18 @@ const PageReg = new Registration('div', {
       event.preventDefault();
       if (validationForFormInputs.check(event.target)) {
         const inputFields = event.target.querySelectorAll('input');
-        const data = {};
+        const data : RegFormModel = {
+          email: '',
+          login: '',
+          first_name: '',
+          second_name: '',
+          phone: '',
+          password: '',
+        };
         inputFields.forEach((current) => {
           data[current.name] = current.value;
         });
-        console.log(data);
+        UserRegistrationController.registration(data);
       }
     },
   },

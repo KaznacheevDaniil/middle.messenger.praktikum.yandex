@@ -5,11 +5,33 @@ import Button from '../../../components/button';
 import Form from '../../../components/form';
 import Validation from '../../../utils/validation';
 import Block from '../../../utils/block';
-import ProfileInfoHelper from '../../../utils/profileInfoHelper';
 
-const profileHelper = new ProfileInfoHelper();
-
-const profileFields = profileHelper.getPasswordChangeInfo();
+const profileFields = {
+  oldPassword: {
+    placeholder: 'Old password...',
+    type: 'text',
+    nameField: 'Current password',
+    name: 'currentPassword',
+    disabled: undefined,
+    valid: true,
+  },
+  newPassword: {
+    placeholder: 'New password...',
+    type: 'text',
+    nameField: 'New password',
+    name: 'password',
+    disabled: undefined,
+    valid: true,
+  },
+  confirmPassword: {
+    placeholder: 'Confirm password...',
+    type: 'password',
+    nameField: 'Сonfirm password',
+    name: 'confirmPassword',
+    disabled: undefined,
+    valid: true,
+  },
+};
 
 class ChangePassword extends Block {
   render() {
@@ -43,7 +65,7 @@ const PageChangePassword = new ChangePassword('div', {
             }
           }
           if (event.target.name === 'confirmPassword') {
-            errors = validationForFormInputs.confirmPassword(event.target, event.target.value)
+            errors = validationForFormInputs.confirmPassword(event.target, event.target.value);
             if (errors.length > 0) {
               validationForFormInputs.showError(event.target, errors);
               errors = [];
