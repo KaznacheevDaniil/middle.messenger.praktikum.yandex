@@ -82,7 +82,7 @@ const PageProfile = new Profile('div', {
 
           const formData = new FormData(event.target);
 
-          UserController.changeUserAvatar(formData, event.target)
+          UserController.changeUserAvatar(formData, event.target);
         },
       },
     }),

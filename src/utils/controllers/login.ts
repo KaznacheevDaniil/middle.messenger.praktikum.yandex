@@ -12,17 +12,16 @@ interface LoginFormModel {
 
 export class UserLoginController {
   static login(data: LoginFormModel, form) {
-
-      SignInAPI.request(data).then((response) => {
-        if(response.status == 200){
-          displayFormLog(form,'Succsessfull', true);
-          UserInfoAPI.request()
-            .then((response) => {
-              router.go('/messenger');
-            });
-        }else{
-          displayFormLog(form, JSON.parse(response.responseText).reason, false);
-        }
-      });
+    SignInAPI.request(data).then((response) => {
+      if (response.status === 200) {
+        displayFormLog(form, 'Succsessfull', true);
+        UserInfoAPI.request()
+          .then(() => {
+            router.go('/messenger');
+          });
+      } else {
+        displayFormLog(form, JSON.parse(response.responseText).reason, false);
+      }
+    });
   }
 }

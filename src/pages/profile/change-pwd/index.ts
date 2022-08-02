@@ -5,7 +5,7 @@ import Button from '../../../components/button';
 import Form from '../../../components/form';
 import Validation from '../../../utils/validation';
 import Block from '../../../utils/block';
-import { UserController } from "../../../utils/controllers/profile";
+import { UserController } from '../../../utils/controllers/profile';
 
 const profileFields = {
   oldPassword: {
@@ -84,7 +84,7 @@ const PageChangePassword = new ChangePassword('div', {
           inputs.forEach((current) => {
             data[current.name] = current.value;
           });
-          UserController.changeUserPassword(data, event.target)
+          UserController.changeUserPassword(data, event.target);
         }
       },
     },

@@ -5,10 +5,10 @@ import Form from '../../../components/form';
 import Button from '../../../components/button';
 import Validation from '../../../utils/validation';
 import ProfileFields from '../../../components/profile-field';
-import { connect } from "../../../utils/highOrderComponents";
-import { UserController } from "../../../utils/controllers/profile";
+import { connect } from '../../../utils/highOrderComponents';
+import { UserController } from '../../../utils/controllers/profile';
 
-const ProfileFieldsWrapState = connect(state => ({
+const ProfileFieldsWrapState = connect((state) => ({
   profileFields: {
     email: {
       value: state.user?.email,
@@ -28,7 +28,7 @@ const ProfileFieldsWrapState = connect(state => ({
       value: state.user?.display_name,
       nameField: 'Nickname',
       name: 'display_name',
-      disabled: undefined
+      disabled: undefined,
     },
     first_name: {
       value: state.user?.first_name,
@@ -51,11 +51,11 @@ const ProfileFieldsWrapState = connect(state => ({
       disabled: undefined,
       valid: true,
     },
-  }
-}))
+  },
+}));
 
-const ProfileFieldsWithState = ProfileFieldsWrapState(ProfileFields)
-const profileFields = {}
+const ProfileFieldsWithState = ProfileFieldsWrapState(ProfileFields);
+const profileFields = {};
 
 class EditProfile extends Block {
   render() {
@@ -112,7 +112,7 @@ const PageEditProfile = new EditProfile('div', {
           inputs.forEach((current) => {
             data[current.name] = current.value;
           });
-          UserController.changeUserProfileData(data, event.target)
+          UserController.changeUserProfileData(data, event.target);
         }
       },
     },

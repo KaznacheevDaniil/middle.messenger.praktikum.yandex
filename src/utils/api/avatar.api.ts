@@ -9,6 +9,6 @@ export class avatarAPI extends BaseAPI {
       credentials: 'include',
       mode: 'cors',
       body: data,
-    }).then(response => {return response})
+    }).then((response) => response);
   }
 }

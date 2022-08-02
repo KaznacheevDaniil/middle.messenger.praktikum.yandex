@@ -12,6 +12,6 @@ export class changeUserInfoAPI extends BaseAPI {
         'content-type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then(response => {return response})
+    }).then((response) => response);
   }
 }
