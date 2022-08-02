@@ -6,7 +6,7 @@ import Input from '../../components/input';
 import Button from '../../components/button';
 import Form from '../../components/form';
 import { UserLoginController } from '../../utils/controllers/login';
-import { UserInfoAPI } from "../../utils/api/user-info.api";
+import { UserInfoAPI } from '../../utils/api/user-info.api';
 import Router from '../../utils/router';
 
 const router = new Router('.app');
@@ -54,14 +54,14 @@ class Login extends Block {
       events: this.props.events,
     });
   }
-  checkLogin() {
 
-    function onFulfilled(){
+  checkLogin() {
+    function onFulfilled() {
       console.log('user', 'onFulfilled');
       router.go('/messenger');
     }
 
-    function onRejected(){
+    function onRejected() {
       console.log('user', 'onRejected');
       router.go('/');
     }

@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './event-bus';
-import { UserController } from "./controllers/profile";
+import { UserController } from './controllers/profile';
 
 class Block {
   static EVENTS = {
@@ -224,7 +224,7 @@ class Block {
   }
 
   show() : void {
-    this.checkLogin()
+    this.checkLogin();
     this._element.style.display = 'block';
   }
 

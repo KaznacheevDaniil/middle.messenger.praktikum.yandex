@@ -1,7 +1,7 @@
 import { SignUpAPI } from '../api/sign-up.api';
 import { UserInfoAPI } from '../api/user-info.api';
 import Router from '../router';
-import { displayFormLog } from "../formLogger";
+import { displayFormLog } from '../formLogger';
 
 const router = new Router('.app');
 
@@ -16,23 +16,17 @@ interface RegFormModel {
 
 export class UserRegistrationController {
   static registration(data: RegFormModel, form) {
-
-      SignUpAPI.create(data).then((response) => {
-
-        if(response.status == 200){
-          displayFormLog(form,'Succsessfull', true);
-        }else{
-          displayFormLog(form, JSON.parse(response.responseText).reason, false);
-        }
-
-      }).then((response) => {
+    SignUpAPI.create(data).then((response) => {
+      if (response.status === 200) {
+        displayFormLog(form, 'Succsessfull', true);
         UserInfoAPI.request()
-          .then((response) => JSON.parse(response.responseText))
-          .then((response) => {
-            console.log('user', response);
+          .then((responseData) => {
+            console.log('user', responseData);
             router.go('/messenger');
           });
-      });
-
+      } else {
+        displayFormLog(form, JSON.parse(response.responseText).reason, false);
+      }
+    });
   }
 }

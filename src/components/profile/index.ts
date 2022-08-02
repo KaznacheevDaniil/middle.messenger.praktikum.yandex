@@ -1,7 +1,7 @@
 import Block from '../../utils/block';
 import template from './template';
 import ProfileFields from '../profile-field';
-import { connect } from "../../utils/highOrderComponents";
+import { connect } from '../../utils/highOrderComponents';
 
 class Profile extends Block {
   render() {
@@ -12,12 +12,12 @@ class Profile extends Block {
     });
   }
 }
-const ProfileWrapState = connect(state => ({
+const ProfileWrapState = connect((state) => ({
   avatar: state.user?.avatar,
   display_name: state.user?.display_name,
-}))
+}));
 
-const ProfileFieldsWrapState = connect(state => ({
+const ProfileFieldsWrapState = connect((state) => ({
   profileFields: {
     email: {
       value: state.user?.email,
@@ -54,19 +54,19 @@ const ProfileFieldsWrapState = connect(state => ({
       disabled: 'disabled',
       valid: true,
     },
-  }
-}))
+  },
+}));
 
-const ProfileWithState = ProfileWrapState(Profile)
-const ProfileFieldsWithState = ProfileFieldsWrapState(ProfileFields)
-const profileFields = {}
+const ProfileWithState = ProfileWrapState(Profile);
+const ProfileFieldsWithState = ProfileFieldsWrapState(ProfileFields);
+const profileFields = {};
 
 const profileComp = new ProfileWithState('div', {
   avatar: '',
   display_name: 'Place for your NickName',
   profileFieldsInfo: new ProfileFieldsWithState('div', {
     profileFields,
- }),
+  }),
   events: {
     click: (event) => {
       if (event.target.id === 'changeAvatar') {
