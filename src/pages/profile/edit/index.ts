@@ -5,50 +5,57 @@ import Form from '../../../components/form';
 import Button from '../../../components/button';
 import Validation from '../../../utils/validation';
 import ProfileFields from '../../../components/profile-field';
+import { connect } from "../../../utils/highOrderComponents";
+import { UserController } from "../../../utils/controllers/profile";
 
-const profileFields = {
-  email: {
-    placeholder: 'Example@mail.ru',
-    nameField: 'Email',
-    name: 'email',
-    disabled: undefined,
-    valid: true,
-  },
-  login: {
-    placeholder: 'VasyDAsd_',
-    nameField: 'Login',
-    name: 'login',
-    disabled: undefined,
-    valid: true,
-  },
-  first_name: {
-    placeholder: 'Daniil',
-    nameField: 'Name',
-    name: 'first_name',
-    disabled: undefined,
-    valid: true,
-  },
-  second_name: {
-    placeholder: 'Kaznacheev',
-    nameField: 'Surname',
-    name: 'second_name',
-    disabled: undefined,
-    valid: true,
-  },
-  display_name: {
-    placeholder: 'DaniilK',
-    nameField: 'Nickname',
-    name: 'display_name',
-    disabled: 'disabled',
-  },
-  phone: {
-    placeholder: '88005553535',
-    nameField: 'Phone',
-    name: 'phone',
-    disabled: undefined,
-    valid: true,
-  },
-}
+const ProfileFieldsWrapState = connect(state => ({
+  profileFields: {
+    email: {
+      value: state.user?.email,
+      nameField: 'Email',
+      name: 'email',
+      disabled: undefined,
+      valid: true,
+    },
+    login: {
+      value: state.user?.login,
+      nameField: 'Login',
+      name: 'login',
+      disabled: undefined,
+      valid: true,
+    },
+    display_name: {
+      value: state.user?.display_name,
+      nameField: 'Nickname',
+      name: 'display_name',
+      disabled: undefined
+    },
+    first_name: {
+      value: state.user?.first_name,
+      nameField: 'Name',
+      name: 'first_name',
+      disabled: undefined,
+      valid: true,
+    },
+    second_name: {
+      value: state.user?.second_name,
+      nameField: 'Surname',
+      name: 'second_name',
+      disabled: undefined,
+      valid: true,
+    },
+    phone: {
+      value: state.user?.phone,
+      nameField: 'Phone',
+      name: 'phone',
+      disabled: undefined,
+      valid: true,
+    },
+  }
+}))
+
+const ProfileFieldsWithState = ProfileFieldsWrapState(ProfileFields)
+const profileFields = {}
 
 class EditProfile extends Block {
   render() {
@@ -65,8 +72,7 @@ const validationForFormInputs = new Validation();
 const PageEditProfile = new EditProfile('div', {
   form: new Form('div', {
     name: 'Edit profile',
-    action: '/edit',
-    inputs: new ProfileFields('div', {
+    inputs: new ProfileFieldsWithState('div', {
       profileFields,
       events: {
         focus: (event) => {
@@ -106,7 +112,7 @@ const PageEditProfile = new EditProfile('div', {
           inputs.forEach((current) => {
             data[current.name] = current.value;
           });
-          console.log(data);
+          UserController.changeUserProfileData(data, event.target)
         }
       },
     },

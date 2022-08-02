@@ -82,7 +82,6 @@ const validationForFormInputs = new Validation();
 const PageReg = new Registration('div', {
   form: new Form('div', {
     name: 'Registration',
-    action: '/registration',
     inputs: new Input('div', {
       inputs,
       events: {
@@ -156,7 +155,7 @@ const PageReg = new Registration('div', {
         inputFields.forEach((current) => {
           data[current.name] = current.value;
         });
-        UserRegistrationController.registration(data);
+        UserRegistrationController.registration(data, event.target);
       }
     },
   },

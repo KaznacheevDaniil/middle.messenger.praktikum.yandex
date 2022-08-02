@@ -3,7 +3,11 @@ const template = `<div class="profile-info">
       id="changeAvatar"
       type="button"
     >Change avatar</button></div>
-  <div class="nickname"><span>{{display_name}}</span></div>
+  <div class="nickname"><span>
+  {{#if display_name}}
+      <label>{{display_name}}</label>
+    {{/if}}
+  </span></div>
   {{{profileFieldsInfo}}}
 </div>`;
 export default template;

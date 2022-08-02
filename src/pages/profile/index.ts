@@ -70,7 +70,6 @@ const PageProfile = new Profile('div', {
   modal: new Modal('div', {
     header: 'Input file',
     content: new Form('div', {
-      action: '/change-avatar',
       inputs: new Input('div', { inputs }),
       button: new Button('div', {
         id: 'saveImg',
@@ -80,12 +79,10 @@ const PageProfile = new Profile('div', {
       events: {
         submit: (event) => {
           event.preventDefault();
-          const inputsForm = event.target.querySelectorAll('input');
-          const data = {};
-          inputsForm.forEach((current) => {
-            data[current.name] = current.value;
-          });
-          console.log(data);
+
+          const formData = new FormData(event.target);
+
+          UserController.changeUserAvatar(formData, event.target)
         },
       },
     }),

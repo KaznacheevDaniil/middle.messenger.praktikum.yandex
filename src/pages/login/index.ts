@@ -74,7 +74,6 @@ const validationForFormInputs = new Validation();
 const PageLogin = new Login('div', {
   form: new Form('div', {
     name: 'Log in',
-    action: '/login',
     inputs: new Input('div', {
       inputs,
     }),
@@ -92,7 +91,7 @@ const PageLogin = new Login('div', {
           inputFields.forEach((current) => {
             data[current.name] = current.value;
           });
-          UserLoginController.login(data);
+          UserLoginController.login(data, event.target);
         }
       },
     },
