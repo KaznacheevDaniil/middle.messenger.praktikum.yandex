@@ -1,6 +1,7 @@
 import Handlebars from 'handlebars';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './event-bus';
+import { UserController } from "./controllers/profile";
 
 class Block {
   static EVENTS = {
@@ -30,7 +31,6 @@ class Block {
    */
   constructor(tagName = 'div', propsAndChildren: object = {}) {
     const { children, props } = this._getChildren(propsAndChildren);
-
     this.children = children;
     const eventBus = new EventBus();
     this._meta = {
@@ -146,7 +146,6 @@ class Block {
     if (!nextProps) {
       return;
     }
-
     Object.assign(this.props, nextProps);
   };
 

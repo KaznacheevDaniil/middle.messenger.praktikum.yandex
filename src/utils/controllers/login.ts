@@ -1,6 +1,7 @@
 import { SignInAPI } from '../api/sign-in.api';
 import Router from '../router';
 import { UserInfoAPI } from '../api/user-info.api';
+import { displayFormLog } from '../formLogger';
 
 const router = new Router('.app');
 
@@ -10,24 +11,18 @@ interface LoginFormModel {
 }
 
 export class UserLoginController {
-  static async login(data: LoginFormModel) {
-    try {
-      // Запускаем крутилку
+  static login(data: LoginFormModel, form) {
 
       SignInAPI.request(data).then((response) => {
-        UserInfoAPI.request()
-          .then((response) => {
-            if(response.status === 200){
-
+        if(response.status == 200){
+          displayFormLog(form,'Succsessfull', true);
+          UserInfoAPI.request()
+            .then((response) => {
               router.go('/messenger');
-              console.log('user', response);
-            }
-          });
+            });
+        }else{
+          displayFormLog(form, JSON.parse(response.responseText).reason, false);
+        }
       });
-
-      // Останавливаем крутилку
-    } catch (error) {
-      // Логика обработки ошибок
-    }
   }
 }

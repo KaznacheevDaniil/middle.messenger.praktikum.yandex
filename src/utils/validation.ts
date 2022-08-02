@@ -128,13 +128,15 @@ export default class Validation {
 
   confirmPassword = function (input, value: string): string[] {
     const errors = [];
-    if (input.closest('.info-fields').querySelector('input[name=password]').value !== value) {
+    if (input.closest('.info-fields').querySelector('input[name=newPassword]').value !== value) {
       errors.push('Passwords don\'t match!');
     }
     return errors;
   };
 
-  currentPassword = function (value: string): string[] {
+  newPassword = this.password;
+
+  oldPassword = function (value: string): string[] {
     const errors = [];
     if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');

@@ -5,13 +5,14 @@ import Button from '../../../components/button';
 import Form from '../../../components/form';
 import Validation from '../../../utils/validation';
 import Block from '../../../utils/block';
+import { UserController } from "../../../utils/controllers/profile";
 
 const profileFields = {
   oldPassword: {
     placeholder: 'Old password...',
     type: 'text',
     nameField: 'Current password',
-    name: 'currentPassword',
+    name: 'oldPassword',
     disabled: undefined,
     valid: true,
   },
@@ -19,7 +20,7 @@ const profileFields = {
     placeholder: 'New password...',
     type: 'text',
     nameField: 'New password',
-    name: 'password',
+    name: 'newPassword',
     disabled: undefined,
     valid: true,
   },
@@ -48,7 +49,6 @@ const validationForFormInputs = new Validation();
 const PageChangePassword = new ChangePassword('div', {
   form: new Form('div', {
     name: 'Edit profile',
-    action: '/change-pwd',
     inputs: new ProfileFields('div', {
       profileFields,
       events: {
@@ -57,7 +57,7 @@ const PageChangePassword = new ChangePassword('div', {
         },
         blur: (event) => {
           let errors : string[] = [];
-          if (event.target.name === 'password') {
+          if (event.target.name === 'newPassword') {
             errors = validationForFormInputs.password(event.target.value);
             if (errors.length > 0) {
               validationForFormInputs.showError(event.target, errors);
@@ -79,12 +79,12 @@ const PageChangePassword = new ChangePassword('div', {
       submit: (event) => {
         event.preventDefault();
         if (validationForFormInputs.check(event.target)) {
-          const inputs = event.target.querySelectorAll('input');
+          const inputs = event.target.querySelectorAll('input[name="newPassword"], input[name="oldPassword"]');
           const data = {};
           inputs.forEach((current) => {
             data[current.name] = current.value;
           });
-          console.log(data);
+          UserController.changeUserPassword(data, event.target)
         }
       },
     },

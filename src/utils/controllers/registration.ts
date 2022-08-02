@@ -1,6 +1,7 @@
 import { SignUpAPI } from '../api/sign-up.api';
 import { UserInfoAPI } from '../api/user-info.api';
 import Router from '../router';
+import { displayFormLog } from "../formLogger";
 
 const router = new Router('.app');
 
@@ -14,14 +15,16 @@ interface RegFormModel {
 }
 
 export class UserRegistrationController {
-  static async registration(data: RegFormModel) {
-    try {
-      // Запускаем крутилку
+  static registration(data: RegFormModel, form) {
 
-      const userID = SignUpAPI.create(data).then((response) => {
-        if (response.status !== 200 && response.status !== 409) {
-          throw new Error('Ошибка регистрации');
+      SignUpAPI.create(data).then((response) => {
+
+        if(response.status == 200){
+          displayFormLog(form,'Succsessfull', true);
+        }else{
+          displayFormLog(form, JSON.parse(response.responseText).reason, false);
         }
+
       }).then((response) => {
         UserInfoAPI.request()
           .then((response) => JSON.parse(response.responseText))
@@ -30,9 +33,6 @@ export class UserRegistrationController {
             router.go('/messenger');
           });
       });
-      // Останавливаем крутилку
-    } catch (error) {
-      // Логика обработки ошибок
-    }
+
   }
 }
