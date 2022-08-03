@@ -1,6 +1,9 @@
 import Block from '../../utils/block';
 import './style.less';
 import template from './template';
+import { connect } from "../../utils/highOrderComponents";
+import ProfileFields from "../profile-field";
+import chats from "../../pages/chats";
 
 class ChatLines extends Block {
   render() {
@@ -8,6 +11,15 @@ class ChatLines extends Block {
       chatlinePersons: this.props.chatlinePersons,
     });
   }
+}
+
+interface stateChatsModel {
+  avatar: string | any;
+  created_by: number;
+  id: number;
+  last_message: string | any;
+  title: string;
+  unread_count: string | number;
 }
 
 const chatlinePersons = [
@@ -18,15 +30,14 @@ const chatlinePersons = [
     timeLastMessage: '11:32',
     countUnread: '203',
   },
-  {
-    photoPerson: 'https://64.media.tumblr.com/b9de972d1b72ec08decc0a9e93b9338a/tumblr_prgjn43jHy1tawn8uo1_1280.jpg',
-    name: 'Kino',
-    lastMessage:
-      'Hey,  masaddd ddddddddddddddddd dddddd ddddddddddddddddd dddddd ddddddddddddddddd dddddd ddddddddddddddddd ddddddd ddddddddd man!',
-    timeLastMessage: '11:32',
-    countUnread: '2',
-  },
 ];
 
-const chatLineComp = new ChatLines('div', { chatlinePersons });
+
+const ChatLinesWrapState = connect((state) => ({
+  chatlinePersons: state.chats
+}));
+
+const ChatLinesWithState = ChatLinesWrapState(ChatLines);
+
+const chatLineComp = new ChatLinesWithState('div', { chatlinePersons });
 export default chatLineComp;

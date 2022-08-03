@@ -9,6 +9,10 @@ import ChatBottomPanel from '../chat-bottom-panel';
 import InputMsg from '../input-msg';
 import Form from '../form';
 import Validation from '../../utils/validation';
+import Modal from '../modal';
+import Input from '../input';
+import Button from '../button';
+import { UserController } from '../../utils/controllers/profile';
 
 class Conversation extends Block {
   render() {
@@ -27,12 +31,18 @@ const conversationComp = new Conversation('div', {
     photoPerson: new Avatar('div', {
       photoPerson: 'https://64.media.tumblr.com/c7e94c9d66601db8b5c545b366063c2f/tumblr_pr6ux1VuJ81tawn8uo1_1280.jpg',
     }),
-    namePerson: 'Viktor Evgen',
+    namePerson: 'Мега чат ептааааа',
     button: new ButtonWithImage('div', {
       imgLink:
-        'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1wYXBlcmNsaXAiIGZpbGw9Im5vbmUiIGhlaWdodD0iMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxLjQ0IDExLjA1bC05LjE5IDkuMTlhNiA2IDAgMCAxLTguNDktOC40OWw5LjE5LTkuMTlhNCA0IDAgMCAxIDUuNjYgNS42NmwtOS4yIDkuMTlhMiAyIDAgMCAxLTIuODMtMi44M2w4LjQ5LTguNDgiLz48L3N2Zz4=',
+        'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxwYXRoIGQ9Ik0xNiw3YTIsMiwwLDEsMSwyLTJBMiwyLDAsMCwxLDE2LDdabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMThhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMThabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMjlhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMjlabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48L2c+PGcgaWQ9ImZyYW1lIj48cmVjdCBjbGFzcz0iY2xzLTEiIGhlaWdodD0iMzIiIHdpZHRoPSIzMiIvPjwvZz48L3N2Zz4=',
       type: 'button',
       className: 'button-option',
+      id: 'add-user',
+      events: {
+        click: (event) => {
+          document.getElementById('getUserByLoginModal').style.display = 'flex';
+        },
+      },
     }),
   }),
   messages: messagesComp,

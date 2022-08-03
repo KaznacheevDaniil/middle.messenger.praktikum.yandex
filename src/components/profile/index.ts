@@ -13,7 +13,7 @@ class Profile extends Block {
   }
 }
 const ProfileWrapState = connect((state) => ({
-  avatar: state.user?.avatar,
+  avatar: `https://ya-praktikum.tech/api/v2/resources${state.user?.avatar}`,
   display_name: state.user?.display_name,
 }));
 
