@@ -57,12 +57,12 @@ class Login extends Block {
 
   checkLogin() {
     function onFulfilled() {
-      console.log('user', 'onFulfilled');
+
       router.go('/messenger');
     }
 
     function onRejected() {
-      console.log('user', 'onRejected');
+
       router.go('/');
     }
     UserInfoAPI.request()

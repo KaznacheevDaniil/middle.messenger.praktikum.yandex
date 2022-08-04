@@ -79,7 +79,6 @@ export class ChatController {
           } else {
             console.log('Обрыв соединения');
           }
-          console.log(event);
           console.log(`Код: ${event.code} | Причина: ${event.reason}`);
         });
 

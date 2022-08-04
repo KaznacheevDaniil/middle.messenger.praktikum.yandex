@@ -26,7 +26,6 @@ function getAllSiblings(element, include) {
 
 export class UserChatController {
   static deleteUserFromChat(data, form) {
-    console.log(data.users);
     const arrayUsersId = [];
     data.users.split(',').forEach((item) => {
       arrayUsersId.push(Number(trim(item)));
@@ -43,12 +42,11 @@ export class UserChatController {
   }
 
   static addUserFromChat(data, form) {
-    console.log(data.users);
     const arrayUsersId = [];
     data.users.split(',').forEach((item) => {
       arrayUsersId.push(Number(trim(item)));
     });
-    console.log(arrayUsersId);
+
     data.users = arrayUsersId;
 
     ChatApi.addUsers(data).then((response) => {
@@ -61,7 +59,7 @@ export class UserChatController {
   }
 
   static createChat(data, form) {
-    console.log(data);
+
     ChatApi.create(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Succsessfull', true);
@@ -73,7 +71,7 @@ export class UserChatController {
   }
 
   static deleteChat(data, form) {
-    console.log(data);
+
     ChatApi.delete(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Succsessfull', true);
