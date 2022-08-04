@@ -25,7 +25,7 @@ interface stateChatsModel {
 const chatlinePersons = [];
 
 const ChatLinesWrapState = connect((state) => ({
-  chatlinePersons: state.chats,
+  chatlinePersons: state.chats
 }));
 
 const ChatLinesWithState = ChatLinesWrapState(ChatLines);

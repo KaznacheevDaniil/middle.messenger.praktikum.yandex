@@ -131,7 +131,6 @@ export const PageChats = new Chats('div', {
           const data = {};
           data[input.name] = input.value;
 
-          console.log('Delete Chat');
           UserChatController.deleteChat(data, event.target);
         },
       },

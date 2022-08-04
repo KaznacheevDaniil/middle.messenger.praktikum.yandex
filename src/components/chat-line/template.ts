@@ -5,8 +5,8 @@ const template = `<ul class="chats">{{#each chatlinePersons}}
     <div class="avatar" style="background-image: url({{avatar}})"></div>
     <div class="info">
       <div><span class="name">{{title}}</span>
-        <span class="time">{{id}}</span></div>
-      <div><span class="message">{{last_message}}</span>
+        <span class="time">{{last_message.time}}</span></div>
+      <div><span class="message">{{last_message.content}}</span>
         <span class="count">{{unread_count}}</span></div>
     </div>
   </li>
