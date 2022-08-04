@@ -7,6 +7,8 @@ import { Validation } from '../../../utils/validation';
 import ProfileFields from '../../../components/profile-field';
 import { connect } from '../../../utils/highOrderComponents';
 import { UserController } from '../../../utils/controllers/profile';
+import ButtonWithImage from '../../../components/button-with-image';
+import Router from '../../../utils/router';
 
 const ProfileFieldsWrapState = connect((state) => ({
   profileFields: {
@@ -115,11 +117,17 @@ const PageEditProfile = new EditProfile('div', {
       },
     },
   }),
-  backUrl: new LinkWithImage('div', {
-    className: 'link-back_blue',
-    link: '/profile',
-    urlImg:
+  backUrl: new ButtonWithImage('div', {
+    className: 'link-back_blue flex-c',
+    imgLink:
       'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIj48cGF0aCBkPSJNMzUyIDExNS40IDMzMS4zIDk2IDE2MCAyNTZsMTcxLjMgMTYwIDIwLjctMTkuM0wyMDEuNSAyNTZ6IiBmaWxsPSIjZmZmZmZmIiBjbGFzcz0iZmlsbC0wMDAwMDAiPjwvcGF0aD48L3N2Zz4=',
+    events: {
+      click: (event) => {
+        const router = new Router('.app');
+        router.back();
+      },
+    },
+
   }),
 });
 export default PageEditProfile;

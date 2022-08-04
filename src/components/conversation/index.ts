@@ -91,7 +91,9 @@ const conversationComp = new Conversation('div', {
       }),
       events: {
         submit: (event) => {
+
           event.preventDefault();
+
           const element = event.target;
           if (Validation.check(element)) {
             const message = event.target.querySelector('input').value;

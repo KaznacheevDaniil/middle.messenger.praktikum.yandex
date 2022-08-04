@@ -59,6 +59,7 @@ export class ChatController {
 
   static SendMessage(message, chatId, userId) {
     this.createSessionsMessage(chatId).then((response) => {
+
       const tokenChat = JSON.parse(response.responseText).token;
       if (tokenChat) {
         const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenChat}`);
