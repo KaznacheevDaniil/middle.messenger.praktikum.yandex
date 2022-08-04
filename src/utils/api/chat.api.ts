@@ -51,4 +51,16 @@ export class ChatApi extends BaseAPI {
     });
   }
 
+  static addUsers(data) {
+    // Здесь уже не нужно писать полный путь /api/v1/chats/
+    return chatAPIInstance.put('users', {
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
 }

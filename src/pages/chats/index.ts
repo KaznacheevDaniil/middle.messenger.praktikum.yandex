@@ -21,23 +21,21 @@ class Chats extends Block {
   }
 }
 
-const inputs = [
-  {
-    className: 'field',
-    type: 'text',
-    placeholder: 'Login',
-    name: 'login',
-    disabled: 'disabled',
-  },
-];
-
 export const PageChats = new Chats('div', {
   sidebar: sidebarComp,
   conversation: conversationComp,
   modalAddUser: new Modal('div', {
-    header: 'Add user',
+    header: 'Add users into this chat',
     content: new Form('div', {
-      inputs: new Input('div', { inputs }),
+      inputs: new Input('div', { inputs:[
+          {
+            className: 'field',
+            type: 'text',
+            placeholder: 'Users id',
+            name: 'users',
+            disabled: 'disabled',
+          },
+        ] }),
       button: new Button('div', {
         id: 'getUserByLogin',
         type: 'submit',
@@ -46,7 +44,12 @@ export const PageChats = new Chats('div', {
       events: {
         submit: (event) => {
           event.preventDefault();
-          console.log('Add user');
+
+          const input = event.target.querySelector('input');
+          const data = {};
+          data[input.name] = input.value;
+          data['chatId'] = store.getState().active?.chat.id;
+          UserChatController.addUserFromChat(data, event.target);
         },
       },
     }),
@@ -87,7 +90,6 @@ export const PageChats = new Chats('div', {
           data[input.name] = input.value;
 
           UserChatController.createChat(data, event.target);
-          console.log('Create chat');
         },
       },
     }),
@@ -146,7 +148,7 @@ export const PageChats = new Chats('div', {
     },
   }),
   modalDeleteUserFromChat: new Modal('div', {
-    header: 'Delete user from this chat',
+    header: 'Delete users from this chat',
     content: new Form('div', {
       inputs: new Input('div', {
         inputs: [{

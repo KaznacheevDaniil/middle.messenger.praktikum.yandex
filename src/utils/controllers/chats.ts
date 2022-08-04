@@ -22,6 +22,25 @@ export class UserChatController {
     });
   }
 
+  static addUserFromChat(data, form){
+    console.log(data['users'] )
+    let arrayUsersId = []
+    data['users'].split(',').forEach((item)=>{
+      arrayUsersId.push(trim(item));
+    })
+    data['users'] = arrayUsersId;
+
+    console.log(data['users'] )
+
+    ChatApi.addUsers(data).then((response) => {
+      if (response.status === 200) {
+        displayFormLog(form, 'Succsessfull', true);
+      } else {
+        displayFormLog(form, JSON.parse(response.responseText).reason, false);
+      }
+    });
+  }
+
   static createChat(data, form) {
     console.log(data);
     ChatApi.create(data).then((response) => {
