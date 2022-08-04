@@ -49,6 +49,7 @@ export const PageChats = new Chats('div', {
           const data = {};
           data[input.name] = input.value;
           data['chatId'] = store.getState().active?.chat.id;
+          console.log(data)
           UserChatController.addUserFromChat(data, event.target);
         },
       },

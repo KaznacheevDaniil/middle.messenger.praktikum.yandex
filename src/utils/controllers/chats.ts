@@ -7,7 +7,7 @@ export class UserChatController {
     console.log(data['users'] )
     let arrayUsersId = []
     data['users'].split(',').forEach((item)=>{
-      arrayUsersId.push(trim(item));
+      arrayUsersId.push(Number(trim(item)));
     })
     data['users'] = arrayUsersId;
 
@@ -26,8 +26,9 @@ export class UserChatController {
     console.log(data['users'] )
     let arrayUsersId = []
     data['users'].split(',').forEach((item)=>{
-      arrayUsersId.push(trim(item));
+      arrayUsersId.push(Number(trim(item)));
     })
+    console.log(arrayUsersId )
     data['users'] = arrayUsersId;
 
     console.log(data['users'] )

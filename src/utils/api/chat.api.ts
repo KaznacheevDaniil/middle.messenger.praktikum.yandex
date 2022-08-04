@@ -41,7 +41,7 @@ export class ChatApi extends BaseAPI {
 
   static deleteUsers(data) {
     // Здесь уже не нужно писать полный путь /api/v1/chats/
-    return chatAPIInstance.delete('users', {
+    return chatAPIInstance.delete('/users', {
       credentials: 'include',
       mode: 'cors',
       headers: {
@@ -53,7 +53,7 @@ export class ChatApi extends BaseAPI {
 
   static addUsers(data) {
     // Здесь уже не нужно писать полный путь /api/v1/chats/
-    return chatAPIInstance.put('users', {
+    return chatAPIInstance.put('/users', {
       credentials: 'include',
       mode: 'cors',
       headers: {
