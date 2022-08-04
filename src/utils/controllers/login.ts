@@ -2,6 +2,7 @@ import { SignInAPI } from '../api/sign-in.api';
 import Router from '../router';
 import { UserInfoAPI } from '../api/user-info.api';
 import { displayFormLog } from '../formLogger';
+import store from "../store";
 
 const router = new Router('.app');
 
@@ -16,8 +17,13 @@ export class UserLoginController {
       if (response.status === 200) {
         displayFormLog(form, 'Succsessfull', true);
         UserInfoAPI.request()
-          .then(() => {
-            router.go('/messenger');
+          .then((responseData) => {
+            if (responseData.status === 200) {
+              store.set('user', JSON.parse(responseData.responseText));
+              router.go('/messenger')
+            }else{
+              displayFormLog(form, JSON.parse(responseData.responseText).reason, false);
+            }
           });
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
