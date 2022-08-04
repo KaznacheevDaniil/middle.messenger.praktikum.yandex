@@ -105,12 +105,8 @@ function displayMessage (event, name) {
   time.textContent = new Date(event.time).toLocaleTimeString();
   time.classList.add('time');
 
-  let status = document.createElement('span');
-  status.textContent = event.user_id;
-  status.classList.add('status');
 
   wrapInfoMessage.appendChild(time);
-  wrapInfoMessage.appendChild(status);
   wrapMessage.appendChild(wrapInfoMessage)
 
   document.getElementById('MessagesContainer').appendChild(wrapMessage)
