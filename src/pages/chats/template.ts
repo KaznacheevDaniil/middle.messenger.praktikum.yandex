@@ -3,8 +3,9 @@ const template = `<div class="content">
   {{{sidebar}}}
   {{{conversation}}}
   
-  {{{modalAddUser}}}
-  {{{modalCreateChat}}}
-  {{{modalDeleteChat}}}
+  {{{ modalAddUser }}}
+  {{{ modalDeleteUserFromChat }}}
+  {{{ modalCreateChat }}}
+  {{{ modalDeleteChat }}}
 </div>`;
 export default template;

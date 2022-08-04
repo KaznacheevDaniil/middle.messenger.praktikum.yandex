@@ -2,9 +2,11 @@ import Block from '../../utils/block';
 import template from './template';
 import ProfileFields from '../profile-field';
 import { connect } from '../../utils/highOrderComponents';
+import { UserController } from '../../utils/controllers/profile';
 
 class Profile extends Block {
   render() {
+    UserController.getUser();
     return this.compile(template, {
       avatar: this.props.avatar,
       display_name: this.props.display_name,

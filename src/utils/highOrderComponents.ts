@@ -1,7 +1,6 @@
 import Block from './block';
 import store, { StoreEvents } from './store';
 import isEqual from './methods/isequal';
-import { UserController } from './controllers/profile';
 
 type Indexed<T = unknown> = {
   [key in string]: T;
@@ -15,7 +14,6 @@ export function connect(mapStateToProps: (state: Indexed) => Indexed) {
         let state = mapStateToProps(store.getState());
 
         super(...props);
-        UserController.getUser();
         // подписываемся на событие
         store.on(StoreEvents.Updated, () => {
           // при обновлении получаем новое состояние

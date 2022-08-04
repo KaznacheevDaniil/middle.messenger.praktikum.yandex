@@ -13,7 +13,7 @@ class Sidebar extends Block {
       options: this.props.options,
       linkToProfile: this.props.linkToProfile,
       search: this.props.search,
-      chats: this.props.chats,
+      chatsList: this.props.chatList,
       list: this.props.list,
       attr: this.props.attr,
     });
@@ -41,7 +41,7 @@ const sidebarComp = new Sidebar('div', {
     placeholder: 'Search...',
     className: 'search',
   }),
-  chats: chatLineComp,
+  chatList: chatLineComp,
   menu: new Menu('div', {
     className: 'menu-li',
     listsMenu: [{

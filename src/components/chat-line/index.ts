@@ -1,9 +1,9 @@
 import Block from '../../utils/block';
 import './style.less';
 import template from './template';
-import { connect } from "../../utils/highOrderComponents";
-import ProfileFields from "../profile-field";
-import chats from "../../pages/chats";
+import { connect } from '../../utils/highOrderComponents';
+import store from '../../utils/store';
+import { UserChatController } from '../../utils/controllers/chats';
 
 class ChatLines extends Block {
   render() {
@@ -22,22 +22,22 @@ interface stateChatsModel {
   unread_count: string | number;
 }
 
-const chatlinePersons = [
-  {
-    photoPerson: 'https://64.media.tumblr.com/1a62b7ff4fa1aa1dd7d3d11a20768a1f/tumblr_pd3ncatbvc1tawn8uo1_1280.jpg',
-    name: 'Daniil ',
-    lastMessage: 'Hey, masaddd ddddddddddddddddd ddddddd ddddddddd ddddddddddn!',
-    timeLastMessage: '11:32',
-    countUnread: '203',
-  },
-];
-
+const chatlinePersons = [];
 
 const ChatLinesWrapState = connect((state) => ({
-  chatlinePersons: state.chats
+  chatlinePersons: state.chats,
 }));
 
 const ChatLinesWithState = ChatLinesWrapState(ChatLines);
 
-const chatLineComp = new ChatLinesWithState('div', { chatlinePersons });
+const chatLineComp = new ChatLinesWithState('div', {
+  chatlinePersons,
+  events: {
+    click: (event) => {
+      if (event.target.className === 'wrap') {
+        UserChatController.setActiveChat(event.target.parentElement, event.target.dataset.id, store.getState().user.id);
+      }
+    },
+  },
+});
 export default chatLineComp;

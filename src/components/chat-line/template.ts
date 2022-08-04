@@ -1,5 +1,7 @@
 const template = `<ul class="chats">{{#each chatlinePersons}}
   <li class="chatline">
+    <div class="wrap" data-id="{{id}}">
+    </div>
     <div class="avatar" style="background-image: url({{avatar}})"></div>
     <div class="info">
       <div><span class="name">{{title}}</span>

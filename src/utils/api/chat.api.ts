@@ -23,7 +23,32 @@ export class ChatApi extends BaseAPI {
       mode: 'cors',
       headers: {
         'content-type': 'application/json',
-      }
+      },
     });
   }
+
+  static delete(data) {
+    // Здесь уже не нужно писать полный путь /api/v1/chats/
+    return chatAPIInstance.delete('', {
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
+  static deleteUsers(data) {
+    // Здесь уже не нужно писать полный путь /api/v1/chats/
+    return chatAPIInstance.delete('users', {
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
 }

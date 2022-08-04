@@ -1,5 +1,7 @@
 const template = `
-  <ul class="{{className}}">
+  <ul{{#if className}}
+        class="{{className}}"
+      {{/if}}>
     {{#each listsMenu}}
       <li id="{{this.id}}">{{this.content}}</li>
     {{/each}}

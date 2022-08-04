@@ -8,10 +8,11 @@ import Form from '../../components/form';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import { UserChatController } from '../../utils/controllers/chats';
+import store from "../../utils/store";
 
 class Chats extends Block {
   render() {
-    UserChatController.getAll();
+    UserChatController.getAllChats();
     return this.compile(template, {
       sidebar: this.props.sidebar,
       conversation: this.props.conversation,
@@ -85,7 +86,7 @@ export const PageChats = new Chats('div', {
           const data = {};
           data[input.name] = input.value;
 
-          UserChatController.create(data, event.target);
+          UserChatController.createChat(data, event.target);
           console.log('Create chat');
         },
       },
@@ -110,7 +111,7 @@ export const PageChats = new Chats('div', {
           className: 'field',
           type: 'text',
           placeholder: 'Id chat',
-          name: 'id',
+          name: 'chatId',
           disabled: 'disabled',
         }],
       }),
@@ -122,7 +123,13 @@ export const PageChats = new Chats('div', {
       events: {
         submit: (event) => {
           event.preventDefault();
+
+          const input = event.target.querySelector('input');
+          const data = {};
+          data[input.name] = input.value;
+
           console.log('Delete Chat');
+          UserChatController.deleteChat(data, event.target);
         },
       },
     }),
@@ -137,7 +144,48 @@ export const PageChats = new Chats('div', {
         }
       },
     },
-  })
+  }),
+  modalDeleteUserFromChat: new Modal('div', {
+    header: 'Delete user from this chat',
+    content: new Form('div', {
+      inputs: new Input('div', {
+        inputs: [{
+          className: 'field',
+          type: 'text',
+          placeholder: 'Users id',
+          name: 'users',
+          disabled: 'disabled',
+        }],
+      }),
+      button: new Button('div', {
+        id: 'DeleteUsers',
+        type: 'submit',
+        value: 'Delete',
+      }),
+      events: {
+        submit: (event) => {
+          event.preventDefault();
+
+          const input = event.target.querySelector('input');
+          const data = {};
+          data[input.name] = input.value;
+          data['chatId'] = store.getState().active?.chat.id;
+          UserChatController.deleteUserFromChat(data, event.target);
+        },
+      },
+    }),
+    attr: {
+      id: 'DeleteUsersModal',
+      class: 'modal-wrapper',
+    },
+    events: {
+      click: (event) => {
+        if (event.target.className === 'modal-wrapper') {
+          document.getElementById('DeleteUsersModal').style.display = 'none';
+        }
+      },
+    },
+  }),
 });
 
 export default PageChats;

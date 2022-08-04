@@ -2,19 +2,21 @@ import Handlebars from 'handlebars';
 import Block from '../../utils/block';
 import './style.less';
 import template from './template';
+import store from '../../utils/store';
+import { connect } from '../../utils/highOrderComponents';
 
-Handlebars.registerHelper('isAuthor', (value, Author) => value === Author);
+Handlebars.registerHelper('isAuthor', (value, userId) => value === userId);
 
 class Messages extends Block {
   render() {
     return this.compile(template, {
-      messages: this.props.messages,
+      userMessages: this.props.userMessages,
       date: this.props.date,
     });
   }
 }
 
-const messages = [
+const userMessages = [
   {
     author: 'Person',
     message:
@@ -23,10 +25,10 @@ const messages = [
     status: 'read',
   },
   {
-    author: 'Person',
-    message: 'sadasdasd',
+    userId: 'Person',
+    content: 'sadasdasd',
     time: '12:32',
-    status: 'read',
+    id: 'read',
   },
   {
     author: 'Person',
@@ -42,8 +44,14 @@ const messages = [
   },
 ];
 
-const messagesComp = new Messages('div', {
-  messages,
+const MessagesWrapState = connect((state) => ({
+  userMessages: state.messages,
+}));
+const MessagesWithState = MessagesWrapState(Messages);
+
+const messagesComp = new MessagesWithState('div', {
+  PersonId: store.getState().user?.id,
+  userMessages,
   date: '25 september 2019',
 });
 export default messagesComp;

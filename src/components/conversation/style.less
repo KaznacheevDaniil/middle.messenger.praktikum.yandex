@@ -2,6 +2,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   .chat-date > span {
     font-family: Lato, sans-serif;
@@ -11,6 +12,15 @@
     line-height: 12px;
     text-align: center;
     color: #999;
+  }
+
+  .chat-not-choose {
+    position: absolute;
+    width: 200px;
+    height: 60px;
+    color: #999;
+    top: calc(50% - 60px);
+    left: calc(50% - 100px);
   }
 
   .messages-container {

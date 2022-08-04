@@ -1,8 +1,11 @@
 const template = `<div class="top-panel">
   <div class="info">
-    {{{photoPerson}}}
-    <div class="name"> {{namePerson}}</div>
+    <div class="avatar" style="background-image: url({{photoChat}})"></div>
+    <div class="name"> {{nameChat}}</div>
   </div>
-  {{{button}}}
+  <div class="options">
+      {{{button}}}
+      {{{ menu }}}
+  </div>
 </div>`;
 export default template;

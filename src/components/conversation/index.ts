@@ -2,17 +2,15 @@ import Block from '../../utils/block';
 import './style.less';
 import template from './template';
 import ChatTopPanel from '../chat-top-panel';
-import Avatar from '../avatar';
 import ButtonWithImage from '../button-with-image';
 import messagesComp from '../message';
 import ChatBottomPanel from '../chat-bottom-panel';
 import InputMsg from '../input-msg';
 import Form from '../form';
 import Validation from '../../utils/validation';
-import Modal from '../modal';
-import Input from '../input';
-import Button from '../button';
-import { UserController } from '../../utils/controllers/profile';
+import { ChatController } from '../../utils/controllers/chat-messages';
+import store from '../../utils/store';
+import Menu from "../menu";
 
 class Conversation extends Block {
   render() {
@@ -28,10 +26,8 @@ class Conversation extends Block {
 const validationForFormInputs = new Validation();
 const conversationComp = new Conversation('div', {
   chatTopPanel: new ChatTopPanel('div', {
-    photoPerson: new Avatar('div', {
-      photoPerson: 'https://64.media.tumblr.com/c7e94c9d66601db8b5c545b366063c2f/tumblr_pr6ux1VuJ81tawn8uo1_1280.jpg',
-    }),
-    namePerson: 'Мега чат ептааааа',
+    photoChat: '',
+    nameChat: '',
     button: new ButtonWithImage('div', {
       imgLink:
         'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxwYXRoIGQ9Ik0xNiw3YTIsMiwwLDEsMSwyLTJBMiwyLDAsMCwxLDE2LDdabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMThhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMThabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMjlhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMjlabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48L2c+PGcgaWQ9ImZyYW1lIj48cmVjdCBjbGFzcz0iY2xzLTEiIGhlaWdodD0iMzIiIHdpZHRoPSIzMiIvPjwvZz48L3N2Zz4=',
@@ -40,10 +36,27 @@ const conversationComp = new Conversation('div', {
       id: 'add-user',
       events: {
         click: (event) => {
-          document.getElementById('getUserByLoginModal').style.display = 'flex';
+          document.querySelector('.options__chat').classList.toggle('hidden')
         },
       },
     }),
+    menu: new Menu('div', {
+      className: 'menu-li',
+      listsMenu: [{id: 'AddUserIntoChat', content: 'Add user'}, {id: 'DeleteUserFromChat', content: 'Delete user'},],
+      events: {
+        click: (event)=>{
+          if(event.target.id === 'AddUserIntoChat'){
+            document.getElementById('getUserByLoginModal').style.display = 'flex';
+          }
+          if(event.target.id === 'DeleteUserFromChat'){
+            document.getElementById('DeleteUsersModal').style.display = 'flex';
+          }
+        }
+      },
+      attr: {
+        class: 'options__chat hidden',
+      },
+    })
   }),
   messages: messagesComp,
   chatBottomPanel: new ChatBottomPanel('div', {
@@ -81,12 +94,9 @@ const conversationComp = new Conversation('div', {
         submit: (event) => {
           event.preventDefault();
           if (validationForFormInputs.check(event.target)) {
-            const inputFields = event.target.querySelectorAll('input');
-            const data = {};
-            inputFields.forEach((current) => {
-              data[current.name] = current.value;
-            });
-            console.log(data);
+            const message = event.target.querySelector('input').value;
+            console.log(store.getState());
+            ChatController.SendMessage(message, store.getState().active.chat.id, store.getState().user.id);
           }
         },
       },
