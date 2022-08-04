@@ -10,6 +10,7 @@ class ChatTopPanel extends Block {
       nameChat: this.props.nameChat,
       button: this.props.button,
       menu: this.props.menu,
+      id: this.props.id
     });
   }
 }
@@ -17,5 +18,6 @@ class ChatTopPanel extends Block {
 const ChatTopPanelWrapState = connect((state) => ({
   photoChat: state.active?.chat?.avatar,
   nameChat: state.active?.chat?.title,
+  id: state.user?.id,
 }));
 export default ChatTopPanelWrapState(ChatTopPanel);

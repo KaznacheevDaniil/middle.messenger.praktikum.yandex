@@ -15,7 +15,7 @@ export class ChatController {
           console.log('Соединение установлено');
 
           socket.send(JSON.stringify({
-            content: 'Моё первое сообщение миру!',
+            content: message,
             type: 'message',
           }));
 
@@ -43,10 +43,6 @@ export class ChatController {
           console.log('Ошибка', event.message);
         });
 
-        socket.send(JSON.stringify({
-          content: '0',
-          type: 'get old',
-        }));
       }
     });
   }

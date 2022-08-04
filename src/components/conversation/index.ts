@@ -95,8 +95,8 @@ const conversationComp = new Conversation('div', {
           event.preventDefault();
           if (validationForFormInputs.check(event.target)) {
             const message = event.target.querySelector('input').value;
-            console.log(store.getState());
             ChatController.SendMessage(message, store.getState().active.chat.id, store.getState().user.id);
+            event.target.querySelector('input').value = '';
           }
         },
       },
