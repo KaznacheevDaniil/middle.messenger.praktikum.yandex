@@ -9,7 +9,7 @@ export class ChatController {
     this.createSessionsMessage(chatId).then((response) => {
       const tokenChat = JSON.parse(response.responseText).token;
       if (tokenChat) {
-        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${chatId}/${userId}/${tokenChat}`);
+        const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenChat}`);
 
         socket.addEventListener('open', () => {
           console.log('Соединение установлено');
@@ -20,7 +20,6 @@ export class ChatController {
           }));
 
           socket.send(JSON.stringify({
-            content: '0',
             type: 'get old',
           }));
         });
@@ -31,7 +30,7 @@ export class ChatController {
           } else {
             console.log('Обрыв соединения');
           }
-
+          console.log(event)
           console.log(`Код: ${event.code} | Причина: ${event.reason}`);
         });
 
