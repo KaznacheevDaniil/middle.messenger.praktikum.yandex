@@ -8,7 +8,7 @@ import Form from '../../components/form';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import { UserChatController } from '../../utils/controllers/chats';
-import store from "../../utils/store";
+import store from '../../utils/store';
 
 class Chats extends Block {
   render() {
@@ -27,7 +27,8 @@ export const PageChats = new Chats('div', {
   modalAddUser: new Modal('div', {
     header: 'Add users into this chat',
     content: new Form('div', {
-      inputs: new Input('div', { inputs:[
+      inputs: new Input('div', {
+        inputs: [
           {
             className: 'field',
             type: 'text',
@@ -35,7 +36,8 @@ export const PageChats = new Chats('div', {
             name: 'users',
             disabled: 'disabled',
           },
-        ] }),
+        ],
+      }),
       button: new Button('div', {
         id: 'getUserByLogin',
         type: 'submit',
@@ -48,8 +50,8 @@ export const PageChats = new Chats('div', {
           const input = event.target.querySelector('input');
           const data = {};
           data[input.name] = input.value;
-          data['chatId'] = store.getState().active?.chat.id;
-          console.log(data)
+          data.chatId = store.getState().active?.chat.id;
+          console.log(data);
           UserChatController.addUserFromChat(data, event.target);
         },
       },
@@ -171,7 +173,7 @@ export const PageChats = new Chats('div', {
           const input = event.target.querySelector('input');
           const data = {};
           data[input.name] = input.value;
-          data['chatId'] = store.getState().active?.chat.id;
+          data.chatId = store.getState().active?.chat.id;
           UserChatController.deleteUserFromChat(data, event.target);
         },
       },

@@ -11,7 +11,6 @@ class Messages extends Block {
   render() {
     return this.compile(template, {
       userMessages: this.props.userMessages,
-      date: this.props.date,
     });
   }
 }
@@ -26,6 +25,5 @@ const MessagesWithState = MessagesWrapState(Messages);
 const messagesComp = new MessagesWithState('div', {
   PersonId: store.getState().user?.id,
   userMessages,
-  date: '25 september 2019',
 });
 export default messagesComp;

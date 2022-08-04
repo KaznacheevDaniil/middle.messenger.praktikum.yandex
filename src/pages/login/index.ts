@@ -1,5 +1,5 @@
 import Block from '../../utils/block';
-import Validation from '../../utils/validation';
+import { Validation } from '../../utils/validation';
 import template from './template';
 import Link from '../../components/link';
 import Input from '../../components/input';
@@ -70,7 +70,6 @@ class Login extends Block {
   }
 }
 
-const validationForFormInputs = new Validation();
 const PageLogin = new Login('div', {
   form: new Form('div', {
     name: 'Log in',
@@ -81,7 +80,7 @@ const PageLogin = new Login('div', {
     events: {
       submit: (event) => {
         event.preventDefault();
-        if (validationForFormInputs.check(event.target)) {
+        if (Validation.check(event.target)) {
           const inputFields = event.target.querySelectorAll('input');
           const data : LoginFormModel = {
             login: '',

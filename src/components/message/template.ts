@@ -1,6 +1,5 @@
 const template = `
   <div class="messages-container" id="MessagesContainer">
-    <div class="ta-c chat-date"><span>{{date}}</span></div>
 
 {{#each userMessages }}
     {{#if (isAuthor userId PersonId)}}

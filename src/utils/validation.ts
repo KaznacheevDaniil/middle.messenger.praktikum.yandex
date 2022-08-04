@@ -1,41 +1,41 @@
-export default class Validation {
+export class Validation {
   // utils functions for valid
 
-  checkLength = function (min: number, max: number, value: string): boolean {
+  static checkLength(min: number, max: number, value: string): boolean {
     return value.length >= min && value.length <= max;
-  };
+  }
 
-  checkEmptyValue = function (value: string): boolean {
+  static checkEmptyValue(value: string): boolean {
     return value !== '';
-  };
+  }
 
   // Частный случай, когда логин полностью состоит из цифр
-  checkValueOnAllNumbers = function (value: string): boolean {
+  static checkValueOnAllNumbers(value: string): boolean {
     return /^\d+$/.test(value);
-  };
+  }
 
-  checkValueOnPresenceUpperSymbol = function (value: string): boolean {
+  static checkValueOnPresenceUpperSymbol(value: string): boolean {
     return /[A-Z+]/g.test(value);
-  };
+  }
 
-  checkValueOnPresenceNumber = function (value: string): boolean {
+  static checkValueOnPresenceNumber(value: string): boolean {
     return /[0-9+]/g.test(value);
-  };
+  }
 
-  checkValueOnCyrillic = function (value: string): boolean {
+  static checkValueOnCyrillic(value: string): boolean {
     return /[А-Яа-я]/g.test(value);
-  };
+  }
 
-  checkValueOnSpaces = function (value: string): boolean {
+  static checkValueOnSpaces(value: string): boolean {
     return /\s/g.test(value);
-  };
+  }
 
-  checkValueOnFirstSymbolIsUpper = function (value: string): boolean {
+  static checkValueOnFirstSymbolIsUpper(value: string): boolean {
     return /^[A-ZА-Я]+/.test(value);
-  };
+  }
 
   // valid functions for fields
-  password = function (value: string): string[] {
+  static password(value: string): string[] {
     const errors = [];
 
     if (!this.checkEmptyValue(value)) {
@@ -57,9 +57,9 @@ export default class Validation {
       errors.push('The field must not contain Spaces!');
     }
     return errors;
-  };
+  }
 
-  phone = function (value: string): string[] {
+  static phone(value: string): string[] {
     const errors = [];
 
     if (!this.checkEmptyValue(value)) {
@@ -72,17 +72,17 @@ export default class Validation {
       errors.push("The phone number must contain only digits and may contain the '+' character");
     }
     return errors;
-  };
+  }
 
-  message = function (value: string): string[] {
+  static message(value: string): string[] {
     const errors = [];
     if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
     return errors;
-  };
+  }
 
-  email = function (value: string): string[] {
+  static email(value: string): string[] {
     const errors = [];
     if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
@@ -91,9 +91,9 @@ export default class Validation {
       errors.push('The mail should have the following similar form: example@gnail.com');
     }
     return errors;
-  };
+  }
 
-  login = function (value: string): string[] {
+  static login(value: string): string[] {
     const errors = [];
 
     if (!this.checkEmptyValue(value)) {
@@ -110,9 +110,9 @@ export default class Validation {
     }
 
     return errors;
-  };
+  }
 
-  names = function (value: string): string[] {
+  static names(value: string): string[] {
     const errors = [];
     if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
@@ -124,29 +124,29 @@ export default class Validation {
       errors.push('The field can contain only Latin, Cyrillic and the symbol \'-\'!');
     }
     return errors;
-  };
+  }
 
-  confirmPassword = function (input, value: string): string[] {
+  static confirmPassword(input, value: string): string[] {
     const errors = [];
     if (input.closest('.info-fields').querySelector('input[name=newPassword]').value !== value) {
       errors.push('Passwords don\'t match!');
     }
     return errors;
-  };
+  }
 
-  newPassword = this.password;
+  static newPassword = this.password;
 
-  oldPassword = function (value: string): string[] {
+  static oldPassword(value: string): string[] {
     const errors = [];
     if (!this.checkEmptyValue(value)) {
       errors.push('Field is empty!');
     }
     return errors;
-  };
+  }
 
   // utils functions for check and show errors
 
-  check = (form): boolean => {
+  static check(form): boolean {
     let valid = true;
     const inputs = form.querySelectorAll('[data-valid=true]');
     inputs.forEach((input) => {
@@ -162,9 +162,9 @@ export default class Validation {
       }
     });
     return valid;
-  };
+  }
 
-  showError = (input, messages?: string[]): void => {
+  static showError(input, messages?: string[]): void {
     const errorContainer = input.closest('.input-wrap').querySelector('.error');
     const label = input.closest('.input-wrap').querySelector('label');
     if (label) {
@@ -180,14 +180,14 @@ export default class Validation {
         errorContainer.appendChild(elem);
       });
     }
-  };
+  }
 
-  hideError = (input : HTMLInputElement): void => {
+  static hideError(input : HTMLInputElement): void {
     const inputWrap = input.closest('.input-wrap');
     const label = inputWrap.querySelector('label');
     if (label) {
       label.style.color = '';
     }
     inputWrap.querySelector('.error').textContent = '';
-  };
+  }
 }

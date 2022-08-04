@@ -3,7 +3,7 @@ import template from './template';
 import LinkWithImage from '../../../components/link-with-image';
 import Form from '../../../components/form';
 import Button from '../../../components/button';
-import Validation from '../../../utils/validation';
+import { Validation } from '../../../utils/validation';
 import ProfileFields from '../../../components/profile-field';
 import { connect } from '../../../utils/highOrderComponents';
 import { UserController } from '../../../utils/controllers/profile';
@@ -67,8 +67,6 @@ class EditProfile extends Block {
   }
 }
 
-const validationForFormInputs = new Validation();
-
 const PageEditProfile = new EditProfile('div', {
   form: new Form('div', {
     name: 'Edit profile',
@@ -76,27 +74,27 @@ const PageEditProfile = new EditProfile('div', {
       profileFields,
       events: {
         focus: (event) => {
-          validationForFormInputs.hideError(event.target);
+          Validation.hideError(event.target);
         },
         blur: (event) => {
           if (event.target.name === 'phone') {
-            if (!validationForFormInputs.phone(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            if (!Validation.phone(event.target.value)) {
+              Validation.showError(event.target);
             }
           }
           if (event.target.name === 'email') {
-            if (!validationForFormInputs.email(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            if (!Validation.email(event.target.value)) {
+              Validation.showError(event.target);
             }
           }
           if (event.target.name === 'login') {
-            if (!validationForFormInputs.login(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            if (!Validation.login(event.target.value)) {
+              Validation.showError(event.target);
             }
           }
           if (event.target.name === 'first_name' || event.target.name === 'second_name') {
-            if (!validationForFormInputs.names(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            if (!Validation.names(event.target.value)) {
+              Validation.showError(event.target);
             }
           }
         },
@@ -106,7 +104,7 @@ const PageEditProfile = new EditProfile('div', {
     events: {
       submit: (event) => {
         event.preventDefault();
-        if (validationForFormInputs.check(event.target)) {
+        if (Validation.check(event.target)) {
           const inputs = event.target.querySelectorAll('input');
           const data = {};
           inputs.forEach((current) => {

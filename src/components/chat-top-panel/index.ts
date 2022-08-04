@@ -10,7 +10,7 @@ class ChatTopPanel extends Block {
       nameChat: this.props.nameChat,
       button: this.props.button,
       menu: this.props.menu,
-      id: this.props.id
+      id: this.props.id,
     });
   }
 }

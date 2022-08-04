@@ -1,6 +1,6 @@
 import { UserInfoAPI } from '../api/user-info.api';
 import { logOutAPI } from '../api/logout.api';
-import store, { StoreEvents } from '../store';
+import store from '../store';
 import Router from '../router';
 import { avatarAPI } from '../api/avatar.api';
 import { changeUserInfoAPI } from '../api/change-user-info.api';
@@ -28,7 +28,7 @@ export class UserController {
     avatarAPI.change(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Succsessfull', true);
-        setTimeout(() => { location.reload(); }, 500);
+        setTimeout(() => { window.location.reload(); }, 500);
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }

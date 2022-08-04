@@ -4,7 +4,7 @@ import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import Form from '../../components/form';
-import Validation from '../../utils/validation';
+import { Validation } from '../../utils/validation';
 import { UserRegistrationController } from '../../utils/controllers/registration';
 
 interface RegFormModel {
@@ -78,7 +78,7 @@ class Registration extends Block {
     });
   }
 }
-const validationForFormInputs = new Validation();
+
 const PageReg = new Registration('div', {
   form: new Form('div', {
     name: 'Registration',
@@ -86,41 +86,41 @@ const PageReg = new Registration('div', {
       inputs,
       events: {
         focus: (event) => {
-          validationForFormInputs.hideError(event.target);
+          Validation.hideError(event.target);
         },
         blur: (event) => {
           let errors : string[] = [];
           if (event.target.name === 'phone') {
-            if (!validationForFormInputs.phone(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            if (!Validation.phone(event.target.value)) {
+              Validation.showError(event.target);
               errors = [];
             }
           }
           if (event.target.name === 'email') {
-            errors = validationForFormInputs.email(event.target.value);
+            errors = Validation.email(event.target.value);
             if (errors.length > 0) {
-              validationForFormInputs.showError(event.target, errors);
+              Validation.showError(event.target, errors);
               errors = [];
             }
           }
           if (event.target.name === 'login') {
-            errors = validationForFormInputs.names(event.target.value);
+            errors = Validation.names(event.target.value);
             if (errors.length > 0) {
-              validationForFormInputs.showError(event.target, errors);
+              Validation.showError(event.target, errors);
               errors = [];
             }
           }
           if (event.target.name === 'first_name' || event.target.name === 'second_name') {
-            errors = validationForFormInputs.names(event.target.value);
+            errors = Validation.names(event.target.value);
             if (errors.length > 0) {
-              validationForFormInputs.showError(event.target, errors);
+              Validation.showError(event.target, errors);
               errors = [];
             }
           }
           if (event.target.name === 'password') {
-            errors = validationForFormInputs.password(event.target.value);
+            errors = Validation.password(event.target.value);
             if (errors.length > 0) {
-              validationForFormInputs.showError(event.target, errors);
+              Validation.showError(event.target, errors);
               errors = [];
             }
           }
@@ -142,7 +142,7 @@ const PageReg = new Registration('div', {
   events: {
     submit: (event) => {
       event.preventDefault();
-      if (validationForFormInputs.check(event.target)) {
+      if (Validation.check(event.target)) {
         const inputFields = event.target.querySelectorAll('input');
         const data : RegFormModel = {
           email: '',

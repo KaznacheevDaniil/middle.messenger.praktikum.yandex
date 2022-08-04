@@ -7,10 +7,10 @@ import messagesComp from '../message';
 import ChatBottomPanel from '../chat-bottom-panel';
 import InputMsg from '../input-msg';
 import Form from '../form';
-import Validation from '../../utils/validation';
+import { Validation } from '../../utils/validation';
 import { ChatController } from '../../utils/controllers/chat-messages';
 import store from '../../utils/store';
-import Menu from "../menu";
+import Menu from '../menu';
 
 class Conversation extends Block {
   render() {
@@ -23,7 +23,6 @@ class Conversation extends Block {
   }
 }
 
-const validationForFormInputs = new Validation();
 const conversationComp = new Conversation('div', {
   chatTopPanel: new ChatTopPanel('div', {
     photoChat: '',
@@ -36,27 +35,27 @@ const conversationComp = new Conversation('div', {
       id: 'add-user',
       events: {
         click: (event) => {
-          document.querySelector('.options__chat').classList.toggle('hidden')
+          document.querySelector('.options__chat').classList.toggle('hidden');
         },
       },
     }),
     menu: new Menu('div', {
       className: 'menu-li',
-      listsMenu: [{id: 'AddUserIntoChat', content: 'Add user'}, {id: 'DeleteUserFromChat', content: 'Delete user'},],
+      listsMenu: [{ id: 'AddUserIntoChat', content: 'Add user' }, { id: 'DeleteUserFromChat', content: 'Delete user' }],
       events: {
-        click: (event)=>{
-          if(event.target.id === 'AddUserIntoChat'){
+        click: (event) => {
+          if (event.target.id === 'AddUserIntoChat') {
             document.getElementById('getUserByLoginModal').style.display = 'flex';
           }
-          if(event.target.id === 'DeleteUserFromChat'){
+          if (event.target.id === 'DeleteUserFromChat') {
             document.getElementById('DeleteUsersModal').style.display = 'flex';
           }
-        }
+        },
       },
       attr: {
         class: 'options__chat hidden',
       },
-    })
+    }),
   }),
   messages: messagesComp,
   chatBottomPanel: new ChatBottomPanel('div', {
@@ -73,12 +72,12 @@ const conversationComp = new Conversation('div', {
         },
         events: {
           focus: (event) => {
-            validationForFormInputs.hideError(event.target);
+            Validation.hideError(event.target);
           },
           blur: (event) => {
             if (event.target.name === 'message') {
-              if (!validationForFormInputs.message(event.target.value)) {
-                validationForFormInputs.showError(event.target);
+              if (!Validation.message(event.target.value)) {
+                Validation.showError(event.target);
               }
             }
           },
@@ -93,10 +92,12 @@ const conversationComp = new Conversation('div', {
       events: {
         submit: (event) => {
           event.preventDefault();
-          if (validationForFormInputs.check(event.target)) {
+          const element = event.target;
+          if (Validation.check(element)) {
             const message = event.target.querySelector('input').value;
+
             ChatController.SendMessage(message, store.getState().active.chat.id, store.getState().user.id);
-            event.target.querySelector('input').value = '';
+            element.querySelector('input').value = '';
           }
         },
       },

@@ -3,7 +3,7 @@ import ProfileFields from '../../../components/profile-field';
 import LinkWithImage from '../../../components/link-with-image';
 import Button from '../../../components/button';
 import Form from '../../../components/form';
-import Validation from '../../../utils/validation';
+import { Validation } from '../../../utils/validation';
 import Block from '../../../utils/block';
 import { UserController } from '../../../utils/controllers/profile';
 
@@ -44,8 +44,6 @@ class ChangePassword extends Block {
   }
 }
 
-const validationForFormInputs = new Validation();
-
 const PageChangePassword = new ChangePassword('div', {
   form: new Form('div', {
     name: 'Edit profile',
@@ -53,21 +51,21 @@ const PageChangePassword = new ChangePassword('div', {
       profileFields,
       events: {
         focus: (event) => {
-          validationForFormInputs.hideError(event.target);
+          Validation.hideError(event.target);
         },
         blur: (event) => {
           let errors : string[] = [];
           if (event.target.name === 'newPassword') {
-            errors = validationForFormInputs.password(event.target.value);
+            errors = Validation.password(event.target.value);
             if (errors.length > 0) {
-              validationForFormInputs.showError(event.target, errors);
+              Validation.showError(event.target, errors);
               errors = [];
             }
           }
           if (event.target.name === 'confirmPassword') {
-            errors = validationForFormInputs.confirmPassword(event.target, event.target.value);
+            errors = Validation.confirmPassword(event.target, event.target.value);
             if (errors.length > 0) {
-              validationForFormInputs.showError(event.target, errors);
+              Validation.showError(event.target, errors);
               errors = [];
             }
           }
@@ -78,7 +76,7 @@ const PageChangePassword = new ChangePassword('div', {
     events: {
       submit: (event) => {
         event.preventDefault();
-        if (validationForFormInputs.check(event.target)) {
+        if (Validation.check(event.target)) {
           const inputs = event.target.querySelectorAll('input[name="newPassword"], input[name="oldPassword"]');
           const data = {};
           inputs.forEach((current) => {

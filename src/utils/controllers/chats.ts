@@ -2,16 +2,36 @@ import { ChatApi } from '../api/chat.api';
 import { displayFormLog } from '../formLogger';
 import store from '../store';
 
-export class UserChatController {
-  static deleteUserFromChat(data, form){
-    console.log(data['users'] )
-    let arrayUsersId = []
-    data['users'].split(',').forEach((item)=>{
-      arrayUsersId.push(Number(trim(item)));
-    })
-    data['users'] = arrayUsersId;
+function trim(word: string, symbols?: string) : string {
+  if (!symbols) {
+    return word.replace(/^[\s|u'\xa0']+|[\s|u'\xa0']+$/gu, '');
+  }
+  const rep = new RegExp(`^[${symbols}]+|[${symbols}]+$`, 'gu');
+  return word.replace(rep, '');
+}
 
-    console.log(data['users'] )
+function getAllSiblings(element, include) {
+  const siblings = element.parentNode.children;
+  if (include) return siblings;
+
+  const out = [];
+  for (let i = 0; i < siblings.length; i += 1) {
+    if (siblings[i] !== element) {
+      out.push(siblings[i]);
+    }
+  }
+
+  return out;
+}
+
+export class UserChatController {
+  static deleteUserFromChat(data, form) {
+    console.log(data.users);
+    const arrayUsersId = [];
+    data.users.split(',').forEach((item) => {
+      arrayUsersId.push(Number(trim(item)));
+    });
+    data.users = arrayUsersId;
 
     ChatApi.deleteUsers(data).then((response) => {
       if (response.status === 200) {
@@ -22,16 +42,14 @@ export class UserChatController {
     });
   }
 
-  static addUserFromChat(data, form){
-    console.log(data['users'] )
-    let arrayUsersId = []
-    data['users'].split(',').forEach((item)=>{
+  static addUserFromChat(data, form) {
+    console.log(data.users);
+    const arrayUsersId = [];
+    data.users.split(',').forEach((item) => {
       arrayUsersId.push(Number(trim(item)));
-    })
-    console.log(arrayUsersId )
-    data['users'] = arrayUsersId;
-
-    console.log(data['users'] )
+    });
+    console.log(arrayUsersId);
+    data.users = arrayUsersId;
 
     ChatApi.addUsers(data).then((response) => {
       if (response.status === 200) {
@@ -66,7 +84,6 @@ export class UserChatController {
     });
   }
 
-
   static getAllChats() {
     ChatApi.request().then((response) => {
       store.set('chats', JSON.parse(response.responseText));
@@ -76,9 +93,9 @@ export class UserChatController {
   static setActiveChat(chatInSidebar, chatId, userId) {
     chatInSidebar.classList.add('active');
 
-    getAllSiblings(chatInSidebar, false).forEach((item)=>{
+    getAllSiblings(chatInSidebar, false).forEach((item) => {
       item.classList.remove('active');
-    })
+    });
 
     store.set('active.chat', {});
 
@@ -88,46 +105,17 @@ export class UserChatController {
       store.set('active.chat', activeChatOgj);
     }
 
-    document.querySelector('.message-panel').classList.remove('hidden')
-    document.querySelector('.chat-not-choose').classList.add('hidden')
-
-
+    document.querySelector('.message-panel').classList.remove('hidden');
+    document.querySelector('.chat-not-choose').classList.add('hidden');
   }
 
   static getActiveChat(stateCopy, chatId) {
     let currentItem;
     stateCopy.chats.forEach((item) => {
-      if (item.id == chatId) {
+      if (item.id.toString() === chatId) {
         currentItem = item;
       }
     });
     return currentItem;
-  }
-
-}
-
-
-
-function getAllSiblings(element, include) {
-  var siblings = element.parentNode.children;
-  if(include)
-    return siblings;
-
-  var out = [];
-  for(var i=0; i<siblings.length; i++) {
-    if (siblings[i] != element) {
-      out.push(siblings[i]);
-    }
-  }
-
-  return out;
-}
-
-function trim (word: string, symbols?: string) : string{
-  if(!symbols){
-    return word.replace(/^[\s|u'\xa0']+|[\s|u'\xa0']+$/gu,"")
-  }else{
-    let rep = new RegExp("^[" + symbols + "]+|[" + symbols + "]+$", 'gu')
-    return word.replace(rep, "")
   }
 }

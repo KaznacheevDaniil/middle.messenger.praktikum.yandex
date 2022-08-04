@@ -1,7 +1,7 @@
 import EventBus from './event-bus';
 import set from './methods/set';
 
-export enum StoreEvents {
+enum StoreEvents {
   Updated = 'updated',
 }
 

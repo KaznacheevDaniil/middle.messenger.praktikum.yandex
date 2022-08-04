@@ -62,5 +62,4 @@ export class ChatApi extends BaseAPI {
       body: JSON.stringify(data),
     });
   }
-
 }
