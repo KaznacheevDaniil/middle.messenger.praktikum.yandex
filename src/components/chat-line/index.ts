@@ -22,7 +22,7 @@ interface StateChatsModel {
   unread_count: string | number;
 }
 
-const chatlinePersons = [];
+const chatlinePersons = [{}];
 
 const ChatLinesWrapState = connect((state) => ({
   chatlinePersons: state.chats,

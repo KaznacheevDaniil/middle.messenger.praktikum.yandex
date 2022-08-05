@@ -1,24 +1,15 @@
 import { ChatMessagesAPI } from '../api/chat-messages-api';
 import { displayMessage } from '../methods/displayChatMessages';
+import store from "../store";
 
 export class ChatController {
-  static createSessionsMessage(chatId) {
-    return ChatMessagesAPI.request(chatId);
-  }
-
-  static SendMessage(message, chatId, userId) {
-    this.createSessionsMessage(chatId).then((response) => {
+  static createSessionsMessage(chatId, userId) {
+     ChatMessagesAPI.request(chatId).then((response) => {
       const tokenChat = JSON.parse(response.responseText).token;
       if (tokenChat) {
         const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenChat}`);
-
         socket.addEventListener('open', () => {
           console.log('Соединение установлено');
-
-          socket.send(JSON.stringify({
-            content: message,
-            type: 'message',
-          }));
         });
 
         socket.addEventListener('close', (event) => {
@@ -32,7 +23,7 @@ export class ChatController {
 
         socket.addEventListener('message', (event) => {
           const eventJson = JSON.parse(event.data);
-
+          console.log(eventJson)
           if (eventJson.user_id !== userId) {
             displayMessage(eventJson, 'person');
           } else {
@@ -43,7 +34,20 @@ export class ChatController {
         socket.addEventListener('error', (event) => {
           console.log('Ошибка', event.message);
         });
+
+        store.set('active.socket', socket)
+      }else{
+        console.error('Token chat was not found!')
       }
-    });
+    })
   }
+
+  static SendMessage(message, socket) {
+
+       socket.send(JSON.stringify({
+          content: message,
+          type: 'message',
+        }));
+
+      }
 }
