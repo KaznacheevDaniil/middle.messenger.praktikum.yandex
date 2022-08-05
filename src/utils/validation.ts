@@ -128,10 +128,15 @@ export class Validation {
 
   static confirmPassword(input, value: string): string[] {
     const errors = [];
-    if (input.closest('.info-fields').querySelector('input[name=newPassword]').value !== value) {
-      errors.push('Passwords don\'t match!');
+    try{
+      if (input.closest('.info-fields').querySelector('input[name=newPassword]').value !== value) {
+        errors.push('Passwords don\'t match!');
+      }
+      return errors;
+    }catch(error){
+      console.error('confirmPassword was not work')
     }
-    return errors;
+
   }
 
   static newPassword = this.password;
@@ -165,29 +170,38 @@ export class Validation {
   }
 
   static showError(input, messages?: string[]): void {
-    const errorContainer = input.closest('.input-wrap').querySelector('.error');
-    const label = input.closest('.input-wrap').querySelector('label');
-    if (label) {
-      label.style.color = 'red';
+    try{
+      const errorContainer = input.closest('.input-wrap').querySelector('.error');
+      const label = input.closest('.input-wrap').querySelector('label');
+      if (label) {
+        label.style.color = 'red';
+      }
+      if (!messages) {
+        errorContainer.textContent = `${input.name} is not required!`;
+      } else {
+        errorContainer.textContent = '';
+        messages.forEach((item) => {
+          const elem = document.createElement('div');
+          elem.textContent = item;
+          errorContainer.appendChild(elem);
+        });
+      }
+    }catch(error){
+      console.error('showError was not work')
     }
-    if (!messages) {
-      errorContainer.textContent = `${input.name} is not required!`;
-    } else {
-      errorContainer.textContent = '';
-      messages.forEach((item) => {
-        const elem = document.createElement('div');
-        elem.textContent = item;
-        errorContainer.appendChild(elem);
-      });
-    }
+
   }
 
   static hideError(input : HTMLInputElement): void {
-    const inputWrap = input.closest('.input-wrap');
-    const label = inputWrap.querySelector('label');
-    if (label) {
-      label.style.color = '';
+    try{
+      const inputWrap = input.closest('.input-wrap');
+      const label = inputWrap.querySelector('label');
+      if (label) {
+        label.style.color = '';
+      }
+      inputWrap.querySelector('.error').textContent = '';
+    }catch(error){
+      console.error('showError was not work')
     }
-    inputWrap.querySelector('.error').textContent = '';
   }
 }

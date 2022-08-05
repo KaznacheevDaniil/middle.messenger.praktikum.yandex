@@ -34,7 +34,7 @@ export class UserChatController {
 
     ChatApi.deleteUsers(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'Succsessfull', true);
+        displayFormLog(form, 'User\'s removed from chat', true);
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
@@ -51,7 +51,7 @@ export class UserChatController {
 
     ChatApi.addUsers(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'Succsessfull', true);
+        displayFormLog(form, 'User\s added into chat', true);
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
@@ -62,7 +62,7 @@ export class UserChatController {
 
     ChatApi.create(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'Succsessfull', true);
+        displayFormLog(form, 'Chat created', true);
         this.getAllChats();
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
@@ -74,7 +74,7 @@ export class UserChatController {
 
     ChatApi.delete(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'Succsessfull', true);
+        displayFormLog(form, 'Chat removed', true);
         this.getAllChats();
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
@@ -102,9 +102,13 @@ export class UserChatController {
     if (activeChatOgj.id !== store.getState().active.chat.id) {
       store.set('active.chat', activeChatOgj);
     }
-
-    document.querySelector('.message-panel').classList.remove('hidden');
-    document.querySelector('.chat-not-choose').classList.add('hidden');
+    try {
+      document.querySelector('.message-panel').classList.remove('hidden');
+      document.querySelector('.chat-not-choose').classList.add('hidden');
+      document.querySelector('.top-panel .button-option').classList.remove('hidden');
+    }catch(error){
+      console.error('setActiveChat queryselectors was not work')
+    }
   }
 
   static getActiveChat(stateCopy, chatId) {

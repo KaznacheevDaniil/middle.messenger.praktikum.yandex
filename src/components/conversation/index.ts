@@ -31,11 +31,15 @@ const conversationComp = new Conversation('div', {
       imgLink:
         'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxwYXRoIGQ9Ik0xNiw3YTIsMiwwLDEsMSwyLTJBMiwyLDAsMCwxLDE2LDdabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMThhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMThabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMjlhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMjlabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48L2c+PGcgaWQ9ImZyYW1lIj48cmVjdCBjbGFzcz0iY2xzLTEiIGhlaWdodD0iMzIiIHdpZHRoPSIzMiIvPjwvZz48L3N2Zz4=',
       type: 'button',
-      className: 'button-option',
+      className: 'button-option hidden',
       id: 'add-user',
       events: {
         click: (event) => {
-          document.querySelector('.options__chat').classList.toggle('hidden');
+          try{
+            document.querySelector('.options__chat').classList.toggle('hidden');
+          }catch(error){
+            console.error('options__chat was not found')
+          }
         },
       },
     }),
@@ -96,10 +100,17 @@ const conversationComp = new Conversation('div', {
 
           const element = event.target;
           if (Validation.check(element)) {
-            const message = event.target.querySelector('input').value;
-
-            ChatController.SendMessage(message, store.getState().active.chat.id, store.getState().user.id);
-            element.querySelector('input').value = '';
+            try{
+              const message = event.target.querySelector('input').value;
+              if(typeof message === 'string'){
+                ChatController.SendMessage(message, store.getState().active.chat.id, store.getState().user.id);
+                element.querySelector('input').value = '';
+              }else{
+                console.error(message + ' (message) was not is string!')
+              }
+            }catch(error){
+              console.error('SendMessage was not work')
+            }
           }
         },
       },

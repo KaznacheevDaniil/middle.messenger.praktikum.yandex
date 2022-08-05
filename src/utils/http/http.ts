@@ -1,4 +1,4 @@
-enum METHOD {
+enum Method {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -7,7 +7,7 @@ enum METHOD {
 }
 
 type Options = {
-  method: METHOD;
+  method: Method;
   credentials?: string;
   mode?: string;
   headers?: object;
@@ -34,22 +34,22 @@ export class HTTPTransport {
     );
   }
 
-  get = (url: string, options: OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.GET });
+  get = (url: string, options: OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: Method.GET });
 
-  put = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.PUT });
+  put = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: Method.PUT });
 
-  post = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.POST });
+  post = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: Method.POST });
 
-  delete = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: METHOD.DELETE });
+  delete = (url: string, options : OptionsWithoutMethod = {}) => this.request(this._instance + url, { ...options, method: Method.DELETE });
 
-  request = (url: string, options: Options = { method: METHOD.GET }) => new Promise((resolve, reject) => {
+  request = (url: string, options: Options = { method: Method.GET }) => new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
 
     xhr.withCredentials = true;
 
     xhr.open(
       options.method,
-      options.method === METHOD.GET && !!options.data
+      options.method === Method.GET && !!options.data
         ? `${url}${this.queryStringify(options.data)}`
         : url,
     );
@@ -73,7 +73,7 @@ export class HTTPTransport {
 
     xhr.ontimeout = reject;
 
-    if (options.method === METHOD.GET || !options.body) {
+    if (options.method === Method.GET || !options.body) {
       xhr.send();
     } else {
       xhr.send(options.body);

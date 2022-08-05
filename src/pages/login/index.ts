@@ -36,11 +36,6 @@ const inputs = [
 const links = [
   {
     className: 'link__simple blue',
-    hrefLink: '/404',
-    content: 'Forgot your password?',
-  },
-  {
-    className: 'link__simple blue',
     hrefLink: '/sign-up',
     content: 'Create profile',
   },

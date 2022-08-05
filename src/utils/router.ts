@@ -39,7 +39,7 @@ export default class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname) {
+  private _onRoute(pathname) {
     const route = this.getRoute(pathname);
 
     if (this._currentRoute) {

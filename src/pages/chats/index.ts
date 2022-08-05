@@ -12,7 +12,6 @@ import store from '../../utils/store';
 
 class Chats extends Block {
   render() {
-    UserChatController.getAllChats();
     return this.compile(template, {
       sidebar: this.props.sidebar,
       conversation: this.props.conversation,
@@ -20,7 +19,7 @@ class Chats extends Block {
     });
   }
 }
-
+UserChatController.getAllChats();
 export const PageChats = new Chats('div', {
   sidebar: sidebarComp,
   conversation: conversationComp,
@@ -48,11 +47,16 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          const data = {};
-          data[input.name] = input.value;
-          data.chatId = store.getState().active?.chat.id;
+          if(input && typeof input !== null){
+            const data = {};
+            data[input.name] = input.value;
+            data.chatId = store.getState().active?.chat.id;
 
-          UserChatController.addUserFromChat(data, event.target);
+            UserChatController.addUserFromChat(data, event.target);
+          }else{
+            console.error('getUserByLogin\`s inputs was not defined!')
+          }
+
         },
       },
     }),
@@ -88,11 +92,16 @@ export const PageChats = new Chats('div', {
       events: {
         submit: (event) => {
           event.preventDefault();
-          const input = event.target.querySelector('input');
-          const data = {};
-          data[input.name] = input.value;
 
-          UserChatController.createChat(data, event.target);
+          const input = event.target.querySelector('input');
+          if(input && typeof input !== null){
+            const data = {};
+            data[input.name] = input.value;
+
+            UserChatController.createChat(data, event.target);
+         }else{
+            console.error('CreateChat\`s inputs was not defined!')
+          }
         },
       },
     }),
@@ -130,10 +139,14 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          const data = {};
-          data[input.name] = input.value;
+          if(input && typeof input !== null){
+            const data = {};
+            data[input.name] = input.value;
 
-          UserChatController.deleteChat(data, event.target);
+            UserChatController.deleteChat(data, event.target);
+         }else{
+            console.error('DeleteChat\`s inputs was not defined!')
+         }
         },
       },
     }),
@@ -171,10 +184,14 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          const data = {};
-          data[input.name] = input.value;
-          data.chatId = store.getState().active?.chat.id;
-          UserChatController.deleteUserFromChat(data, event.target);
+          if(input && typeof input !== null){
+            const data = {};
+            data[input.name] = input.value;
+            data.chatId = store.getState().active?.chat.id;
+            UserChatController.deleteUserFromChat(data, event.target);
+          }else{
+            console.error('DeleteUsers\`s inputs was not defined!')
+          }
         },
       },
     }),

@@ -13,11 +13,11 @@ class ChatLines extends Block {
   }
 }
 
-interface stateChatsModel {
-  avatar: string | any;
+interface StateChatsModel {
+  avatar: string;
   created_by: number;
   id: number;
-  last_message: string | any;
+  last_message: string;
   title: string;
   unread_count: string | number;
 }

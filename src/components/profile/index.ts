@@ -6,7 +6,6 @@ import { UserController } from '../../utils/controllers/profile';
 
 class Profile extends Block {
   render() {
-    UserController.getUser();
     return this.compile(template, {
       avatar: this.props.avatar,
       display_name: this.props.display_name,
@@ -14,9 +13,11 @@ class Profile extends Block {
     });
   }
 }
+
+UserController.getUser();
+
 const ProfileWrapState = connect((state) => ({
   avatar: `https://ya-praktikum.tech/api/v2/resources${state.user?.avatar}`,
-  display_name: state.user?.display_name,
 }));
 
 const ProfileFieldsWrapState = connect((state) => ({
@@ -35,14 +36,21 @@ const ProfileFieldsWrapState = connect((state) => ({
       disabled: 'disabled',
       valid: true,
     },
-    first_name: {
+    displayName: {
+      value: state.user?.display_name,
+      nameField: 'Nickname',
+      name: 'display_name',
+      disabled: 'disabled',
+      valid: true,
+    },
+    firstName: {
       value: state.user?.first_name,
       nameField: 'Name',
       name: 'first_name',
       disabled: 'disabled',
       valid: true,
     },
-    second_name: {
+    secondName: {
       value: state.user?.second_name,
       nameField: 'Surname',
       name: 'second_name',
@@ -65,7 +73,6 @@ const profileFields = {};
 
 const profileComp = new ProfileWithState('div', {
   avatar: '',
-  display_name: 'Place for your NickName',
   profileFieldsInfo: new ProfileFieldsWithState('div', {
     profileFields,
   }),
