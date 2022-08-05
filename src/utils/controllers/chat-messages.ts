@@ -1,10 +1,10 @@
 import { ChatMessagesAPI } from '../api/chat-messages-api';
 import { displayMessage } from '../methods/displayChatMessages';
-import store from "../store";
+import store from '../store';
 
 export class ChatController {
   static createSessionsMessage(chatId, userId) {
-     ChatMessagesAPI.request(chatId).then((response) => {
+    ChatMessagesAPI.request(chatId).then((response) => {
       const tokenChat = JSON.parse(response.responseText).token;
       if (tokenChat) {
         const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenChat}`);
@@ -23,7 +23,6 @@ export class ChatController {
 
         socket.addEventListener('message', (event) => {
           const eventJson = JSON.parse(event.data);
-          console.log(eventJson)
           if (eventJson.user_id !== userId) {
             displayMessage(eventJson, 'person');
           } else {
@@ -35,19 +34,17 @@ export class ChatController {
           console.log('Ошибка', event.message);
         });
 
-        store.set('active.socket', socket)
-      }else{
-        console.error('Token chat was not found!')
+        store.set('active.socket', socket);
+      } else {
+        console.error('Token chat was not found!');
       }
-    })
+    });
   }
 
   static SendMessage(message, socket) {
-
-       socket.send(JSON.stringify({
-          content: message,
-          type: 'message',
-        }));
-
-      }
+    socket.send(JSON.stringify({
+      content: message,
+      type: 'message',
+    }));
+  }
 }

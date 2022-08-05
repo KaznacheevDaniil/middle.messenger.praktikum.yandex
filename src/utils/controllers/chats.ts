@@ -3,7 +3,7 @@ import { displayFormLog } from '../formLogger';
 import store from '../store';
 import { getAllSiblings } from '../methods/getSiblings';
 import { trim } from '../methods/trim';
-import { ChatController } from "./chat-messages";
+import { ChatController } from './chat-messages';
 
 export class UserChatController {
   static deleteUserFromChat(data, form, input) {
@@ -85,7 +85,7 @@ export class UserChatController {
 
     if (activeChatOgj.id !== store.getState().active.chat.id) {
       store.set('active.chat', activeChatOgj);
-      ChatController.createSessionsMessage(chatId, userId)
+      ChatController.createSessionsMessage(chatId, userId);
     }
     try {
       document.querySelector('.message-panel').classList.remove('hidden');

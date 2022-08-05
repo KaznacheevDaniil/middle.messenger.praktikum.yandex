@@ -102,7 +102,7 @@ const conversationComp = new Conversation('div', {
             try {
               const message = event.target.querySelector('input').value;
               if (typeof message === 'string') {
-                ChatController.SendMessage(message, store.getState().active?.socket,store.getState().user?.id);
+                ChatController.SendMessage(message, store.getState().active?.socket, store.getState().user?.id);
                 element.querySelector('input').value = '';
               } else {
                 console.error(`${message} (message) was not is string!`);
