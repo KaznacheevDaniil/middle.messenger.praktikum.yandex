@@ -37,7 +37,7 @@ const chatLineComp = new ChatLinesWithState('div', {
       if (event.target.className === 'wrap' && !event.target.parentElement.classList.contains('active')) {
         const childBlockMessages = document.getElementById('MessagesContainer');
         while (childBlockMessages.firstChild) {
-          childBlockMessages.firstChild.remove()
+          childBlockMessages.firstChild.remove();
         }
         UserChatController.setActiveChat(event.target.parentElement, event.target.dataset.id, store.getState().user.id);
       }

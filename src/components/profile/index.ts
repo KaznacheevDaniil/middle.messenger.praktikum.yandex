@@ -79,7 +79,7 @@ const profileComp = new ProfileWithState('div', {
   events: {
     click: (event) => {
       if (event.target.id === 'changeAvatar') {
-        document.getElementById('changeProfileModal').style.display = 'flex';
+        document.getElementById('changeAvatarModal').style.display = 'flex';
       }
     },
   },

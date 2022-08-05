@@ -2,7 +2,7 @@ import { SignUpAPI } from '../api/sign-up.api';
 import { UserInfoAPI } from '../api/user-info.api';
 import Router from '../router';
 import { displayFormLog } from '../formLogger';
-import store from "../store";
+import store from '../store';
 
 const router = new Router('.app');
 
@@ -24,8 +24,8 @@ export class UserRegistrationController {
           .then((responseData) => {
             if (responseData.status === 200) {
               store.set('user', JSON.parse(responseData.responseText));
-              router.go('/messenger')
-            }else{
+              router.go('/messenger');
+            } else {
               displayFormLog(form, JSON.parse(responseData.responseText).reason, false);
             }
           });

@@ -35,10 +35,10 @@ const conversationComp = new Conversation('div', {
       id: 'add-user',
       events: {
         click: (event) => {
-          try{
+          try {
             document.querySelector('.options__chat').classList.toggle('hidden');
-          }catch(error){
-            console.error('options__chat was not found')
+          } catch (error) {
+            console.error('options__chat was not found');
           }
         },
       },
@@ -95,21 +95,20 @@ const conversationComp = new Conversation('div', {
       }),
       events: {
         submit: (event) => {
-
           event.preventDefault();
 
           const element = event.target;
           if (Validation.check(element)) {
-            try{
+            try {
               const message = event.target.querySelector('input').value;
-              if(typeof message === 'string'){
+              if (typeof message === 'string') {
                 ChatController.SendMessage(message, store.getState().active.chat.id, store.getState().user.id);
                 element.querySelector('input').value = '';
-              }else{
-                console.error(message + ' (message) was not is string!')
+              } else {
+                console.error(`${message} (message) was not is string!`);
               }
-            }catch(error){
-              console.error('SendMessage was not work')
+            } catch (error) {
+              console.error('SendMessage was not work');
             }
           }
         },

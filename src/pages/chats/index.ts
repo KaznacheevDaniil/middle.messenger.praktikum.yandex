@@ -47,16 +47,15 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if(input && typeof input !== null){
+          if (input && input !== null) {
             const data = {};
             data[input.name] = input.value;
             data.chatId = store.getState().active?.chat.id;
 
             UserChatController.addUserFromChat(data, event.target, input);
-          }else{
-            console.error('getUserByLogin\`s inputs was not found!')
+          } else {
+            console.error("getUserByLogin's inputs was not found!");
           }
-
         },
       },
     }),
@@ -68,9 +67,9 @@ export const PageChats = new Chats('div', {
       click: (event) => {
         if (event.target.className === 'modal-wrapper') {
           document.getElementById('getUserByLoginModal').style.display = 'none';
-          try{
+          try {
             event.target.querySelector('.log-container').textContent = '';
-          }catch(event){
+          } catch (event) {
             console.error('getUserByLoginModal log-container was not found!');
           }
         }
@@ -99,13 +98,13 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if(input && typeof input !== null){
+          if (input && input !== null) {
             const data = {};
             data[input.name] = input.value;
 
             UserChatController.createChat(data, event.target, input);
-         }else{
-            console.error('CreateChat\`s inputs was not defined!')
+          } else {
+            console.error("CreateChat's inputs was not defined!");
           }
         },
       },
@@ -118,9 +117,9 @@ export const PageChats = new Chats('div', {
       click: (event) => {
         if (event.target.className === 'modal-wrapper') {
           document.getElementById('CreateChatModal').style.display = 'none';
-          try{
+          try {
             event.target.querySelector('.log-container').textContent = '';
-          }catch(event){
+          } catch (event) {
             console.error('CreateChatModal log-container was not found!');
           }
         }
@@ -149,14 +148,14 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if(input && typeof input !== null){
+          if (input && input !== null) {
             const data = {};
             data[input.name] = input.value;
 
             UserChatController.deleteChat(data, event.target, input);
-         }else{
-            console.error('DeleteChat\`s inputs was not defined!')
-         }
+          } else {
+            console.error("DeleteChat's inputs was not defined!");
+          }
         },
       },
     }),
@@ -168,9 +167,9 @@ export const PageChats = new Chats('div', {
       click: (event) => {
         if (event.target.className === 'modal-wrapper') {
           document.getElementById('DeleteChatModal').style.display = 'none';
-          try{
+          try {
             event.target.querySelector('.log-container').textContent = '';
-          }catch(event){
+          } catch (event) {
             console.error('DeleteChatModal log-container was not found!');
           }
         }
@@ -199,13 +198,13 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if(input && typeof input !== null){
+          if (input && input !== null) {
             const data = {};
             data[input.name] = input.value;
             data.chatId = store.getState().active?.chat.id;
             UserChatController.deleteUserFromChat(data, event.target, input);
-          }else{
-            console.error('DeleteUsers\`s inputs was not defined!')
+          } else {
+            console.error("DeleteUsers's inputs was not defined!");
           }
         },
       },
@@ -218,9 +217,9 @@ export const PageChats = new Chats('div', {
       click: (event) => {
         if (event.target.className === 'modal-wrapper') {
           document.getElementById('DeleteUsersModal').style.display = 'none';
-          try{
+          try {
             event.target.querySelector('.log-container').textContent = '';
-          }catch(event){
+          } catch (event) {
             console.error('DeleteUsersModal log-container was not found!');
           }
         }

@@ -19,7 +19,7 @@ export function displayFormLog(form, message, isSuccess) {
     }
 
     logContainer.textContent = message;
-  }catch(error){
-    console.error('log-container was not found')
+  } catch (error) {
+    console.error('log-container was not found');
   }
 }

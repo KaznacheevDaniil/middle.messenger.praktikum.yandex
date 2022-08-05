@@ -128,15 +128,15 @@ export class Validation {
 
   static confirmPassword(input, value: string): string[] {
     const errors = [];
-    try{
+    try {
       if (input.closest('.info-fields').querySelector('input[name=newPassword]').value !== value) {
         errors.push('Passwords don\'t match!');
       }
       return errors;
-    }catch(error){
-      console.error('confirmPassword was not work')
+    } catch (error) {
+      console.error('confirmPassword was not work');
+      return errors;
     }
-
   }
 
   static newPassword = this.password;
@@ -170,7 +170,7 @@ export class Validation {
   }
 
   static showError(input, messages?: string[]): void {
-    try{
+    try {
       const errorContainer = input.closest('.input-wrap').querySelector('.error');
       const label = input.closest('.input-wrap').querySelector('label');
       if (label) {
@@ -186,22 +186,21 @@ export class Validation {
           errorContainer.appendChild(elem);
         });
       }
-    }catch(error){
-      console.error('showError was not work')
+    } catch (error) {
+      console.error('showError was not work');
     }
-
   }
 
   static hideError(input : HTMLInputElement): void {
-    try{
+    try {
       const inputWrap = input.closest('.input-wrap');
       const label = inputWrap.querySelector('label');
       if (label) {
         label.style.color = '';
       }
       inputWrap.querySelector('.error').textContent = '';
-    }catch(error){
-      console.error('showError was not work')
+    } catch (error) {
+      console.error('showError was not work');
     }
   }
 }

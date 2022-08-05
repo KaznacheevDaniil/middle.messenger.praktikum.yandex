@@ -52,7 +52,7 @@ export class UserChatController {
 
     ChatApi.addUsers(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'User\s added into chat', true);
+        displayFormLog(form, "User's added into chat", true);
         input.value = '';
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
@@ -61,7 +61,6 @@ export class UserChatController {
   }
 
   static createChat(data, form, input) {
-
     ChatApi.create(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Chat created', true);
@@ -74,12 +73,11 @@ export class UserChatController {
   }
 
   static deleteChat(data, form, input) {
-
     ChatApi.delete(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Chat removed', true);
         this.getAllChats();
-        console.log(input)
+        console.log(input);
         input.value = '';
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
@@ -111,8 +109,8 @@ export class UserChatController {
       document.querySelector('.message-panel').classList.remove('hidden');
       document.querySelector('.chat-not-choose').classList.add('hidden');
       document.querySelector('.top-panel .button-option').classList.remove('hidden');
-    }catch(error){
-      console.error('setActiveChat queryselectors was not work')
+    } catch (error) {
+      console.error('setActiveChat queryselectors was not work');
     }
   }
 

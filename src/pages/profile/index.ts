@@ -99,13 +99,18 @@ const PageProfile = new Profile('div', {
       },
     }),
     attr: {
-      id: 'changeProfileModal',
+      id: 'changeAvatarModal',
       class: 'modal-wrapper',
     },
     events: {
       click: (event) => {
         if (event.target.className === 'modal-wrapper') {
-          document.getElementById('changeProfileModal').style.display = 'none';
+          document.getElementById('changeAvatarModal').style.display = 'none';
+          try {
+            event.target.querySelector('.log-container').textContent = '';
+          } catch (event) {
+            console.error('changeAvatarModal log-container was not found!');
+          }
         }
       },
     },
