@@ -1,8 +1,8 @@
 import { ChatApi } from '../api/chat.api';
 import { displayFormLog } from '../formLogger';
 import store from '../store';
-import { getAllSiblings } from '../methods/getSiblings'
-import { trim } from '../methods/trim'
+import { getAllSiblings } from '../methods/getSiblings';
+import { trim } from '../methods/trim';
 
 export class UserChatController {
   static deleteUserFromChat(data, form, input) {

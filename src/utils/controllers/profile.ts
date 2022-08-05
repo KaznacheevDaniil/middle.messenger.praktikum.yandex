@@ -27,7 +27,8 @@ export class UserController {
   static changeUserAvatar(data, form) {
     avatarAPI.change(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'Succsessfull', true);
+        displayFormLog(form, 'Avatar was changed!', true);
+        this.getUser();
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
@@ -37,7 +38,8 @@ export class UserController {
   static changeUserProfileData(data, form) {
     changeUserInfoAPI.change(data).then((response) => {
       if (response.status === 200) {
-        displayFormLog(form, 'Succsessfull', true);
+        displayFormLog(form, 'Profile data was changed!', true);
+        this.getUser();
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }

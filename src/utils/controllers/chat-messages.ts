@@ -1,8 +1,7 @@
 import { ChatMessagesAPI } from '../api/chat-messages-api';
-import { displayMessage } from '../methods/displayChatMessages'
+import { displayMessage } from '../methods/displayChatMessages';
 
 export class ChatController {
-
   static createSessionsMessage(chatId) {
     return ChatMessagesAPI.request(chatId);
   }
