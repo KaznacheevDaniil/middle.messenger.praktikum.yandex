@@ -1,28 +1,8 @@
 import { ChatApi } from '../api/chat.api';
 import { displayFormLog } from '../formLogger';
 import store from '../store';
-
-function trim(word: string, symbols?: string) : string {
-  if (!symbols) {
-    return word.replace(/^[\s|u'\xa0']+|[\s|u'\xa0']+$/gu, '');
-  }
-  const rep = new RegExp(`^[${symbols}]+|[${symbols}]+$`, 'gu');
-  return word.replace(rep, '');
-}
-
-function getAllSiblings(element, include) {
-  const siblings = element.parentNode.children;
-  if (include) return siblings;
-
-  const out = [];
-  for (let i = 0; i < siblings.length; i += 1) {
-    if (siblings[i] !== element) {
-      out.push(siblings[i]);
-    }
-  }
-
-  return out;
-}
+import { getAllSiblings } from '../methods/getSiblings'
+import { trim } from '../methods/trim'
 
 export class UserChatController {
   static deleteUserFromChat(data, form, input) {
