@@ -28,7 +28,6 @@ export class UserController {
     avatarAPI.change(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Succsessfull', true);
-        setTimeout(() => { window.location.reload(); }, 500);
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }

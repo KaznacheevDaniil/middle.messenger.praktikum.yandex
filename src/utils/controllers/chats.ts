@@ -25,7 +25,7 @@ function getAllSiblings(element, include) {
 }
 
 export class UserChatController {
-  static deleteUserFromChat(data, form) {
+  static deleteUserFromChat(data, form, input) {
     const arrayUsersId = [];
     data.users.split(',').forEach((item) => {
       arrayUsersId.push(Number(trim(item)));
@@ -35,13 +35,14 @@ export class UserChatController {
     ChatApi.deleteUsers(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'User\'s removed from chat', true);
+        input.value = '';
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
     });
   }
 
-  static addUserFromChat(data, form) {
+  static addUserFromChat(data, form, input) {
     const arrayUsersId = [];
     data.users.split(',').forEach((item) => {
       arrayUsersId.push(Number(trim(item)));
@@ -52,30 +53,34 @@ export class UserChatController {
     ChatApi.addUsers(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'User\s added into chat', true);
+        input.value = '';
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
     });
   }
 
-  static createChat(data, form) {
+  static createChat(data, form, input) {
 
     ChatApi.create(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Chat created', true);
         this.getAllChats();
+        input.value = '';
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
     });
   }
 
-  static deleteChat(data, form) {
+  static deleteChat(data, form, input) {
 
     ChatApi.delete(data).then((response) => {
       if (response.status === 200) {
         displayFormLog(form, 'Chat removed', true);
         this.getAllChats();
+        console.log(input)
+        input.value = '';
       } else {
         displayFormLog(form, JSON.parse(response.responseText).reason, false);
       }
