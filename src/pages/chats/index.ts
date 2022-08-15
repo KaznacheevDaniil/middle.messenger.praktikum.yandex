@@ -47,8 +47,10 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if (input && input !== null) {
-            const data = {};
+          if (input) {
+            const data = {
+              chatId: undefined
+            };
             data[input.name] = input.value;
             data.chatId = store.getState().active?.chat.id;
 
@@ -98,7 +100,7 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if (input && input !== null) {
+          if (input) {
             const data = {};
             data[input.name] = input.value;
 
@@ -148,7 +150,7 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if (input && input !== null) {
+          if (input) {
             const data = {};
             data[input.name] = input.value;
 
@@ -198,8 +200,10 @@ export const PageChats = new Chats('div', {
           event.preventDefault();
 
           const input = event.target.querySelector('input');
-          if (input && input !== null) {
-            const data = {};
+          if (input) {
+            const data = {
+              chatId: undefined
+            };
             data[input.name] = input.value;
             data.chatId = store.getState().active?.chat.id;
             UserChatController.deleteUserFromChat(data, event.target, input);

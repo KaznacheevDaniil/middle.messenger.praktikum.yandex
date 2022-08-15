@@ -3,7 +3,6 @@ const template = `
     {{{ options }}}
     {{{linkToProfile}}}
   </div>
-  {{{search}}}
   {{{chatList}}}
   <div class="menu" id="SidebarMenu">
     <div class="m-10 ta-r">

@@ -7,7 +7,10 @@ export enum StoreEvents {
 
 // наследуем Store от EventBus, чтобы его методы были сразу доступны у экземпляра Store
 class Store extends EventBus {
-  private state = {};
+  private state = {
+    active: undefined,
+    user: undefined
+  };
 
   public getState() {
     return this.state;

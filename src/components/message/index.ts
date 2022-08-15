@@ -1,4 +1,4 @@
-import Handlebars from 'handlebars';
+import * as Handlebars from 'handlebars/dist/cjs/handlebars';
 import Block from '../../utils/block';
 import './style.less';
 import template from './template';

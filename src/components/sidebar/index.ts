@@ -3,7 +3,6 @@ import './style.less';
 import template from './template';
 import chatLineComp from '../chat-line';
 import Link from '../link';
-import Search from '../search';
 import ButtonWithImage from '../button-with-image';
 import Menu from '../menu';
 
@@ -36,10 +35,6 @@ const sidebarComp = new Sidebar('div', {
 
   }),
   linkToProfile: new Link('div', { links }),
-  search: new Search('div', {
-    placeholder: 'Search...',
-    className: 'search',
-  }),
   chatList: chatLineComp,
   menu: new Menu('div', {
     className: 'menu-li',
