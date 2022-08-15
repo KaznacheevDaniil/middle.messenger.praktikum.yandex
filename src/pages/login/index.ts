@@ -50,9 +50,8 @@ function checkLogin() {
   }
   UserInfoAPI.request()
     .then(onFulfilled, onRejected);
-};
+}
 
-// checkLogin();
 
 class Login extends Block {
   render() {

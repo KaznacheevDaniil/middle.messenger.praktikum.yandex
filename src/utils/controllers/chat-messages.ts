@@ -35,8 +35,8 @@ export class ChatController {
           }
         });
 
-        socket.addEventListener('error', (event) => {
-          console.log('Ошибка', event['message']);
+        socket.addEventListener('error', (event: any) => {
+          console.log('Ошибка', event.message);
         });
 
         store.set('active.socket', socket);

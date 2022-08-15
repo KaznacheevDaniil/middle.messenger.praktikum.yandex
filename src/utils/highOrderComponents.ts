@@ -4,7 +4,7 @@ import isEqual from './methods/isequal';
 
 interface Indexed {
   [key: string]: any;
-};
+}
 
 export function connect(mapStateToProps: (state: Indexed) => Indexed) {
   return function (Component: typeof Block) {

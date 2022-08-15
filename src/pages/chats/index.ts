@@ -49,7 +49,7 @@ export const PageChats = new Chats('div', {
           const input = event.target.querySelector('input');
           if (input) {
             const data = {
-              chatId: undefined
+              chatId: undefined,
             };
             data[input.name] = input.value;
             data.chatId = store.getState().active?.chat.id;
@@ -202,7 +202,7 @@ export const PageChats = new Chats('div', {
           const input = event.target.querySelector('input');
           if (input) {
             const data = {
-              chatId: undefined
+              chatId: undefined,
             };
             data[input.name] = input.value;
             data.chatId = store.getState().active?.chat.id;

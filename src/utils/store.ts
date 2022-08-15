@@ -9,7 +9,7 @@ export enum StoreEvents {
 class Store extends EventBus {
   private state = {
     active: undefined,
-    user: undefined
+    user: undefined,
   };
 
   public getState() {

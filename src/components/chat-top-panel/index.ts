@@ -3,7 +3,6 @@ import './style.less';
 import template from './template';
 import { connect } from '../../utils/highOrderComponents';
 
-
 class ChatTopPanel extends Block {
   render() {
     return this.compile(template, {
