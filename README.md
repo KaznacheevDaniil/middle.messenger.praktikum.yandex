@@ -33,10 +33,11 @@ https://kaznacheev.netlify.app/
 - Less
 - Handlebars
 - NodeJS Express
-- Parcel
 - Eslint
 - Stylelint
-- Тесты (Сказано, что делать сейчас, в 3-ем спринте, не обязательно. Я пока не делал, ибо по времени загруз. Сделаю к концу 4-го спринта:) .)
+- Mocha
+- Chai
+- Husky
 
 ### Страницы:
 

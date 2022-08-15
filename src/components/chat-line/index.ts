@@ -1,10 +1,10 @@
+import * as Handlebars from 'handlebars/dist/cjs/handlebars';
 import Block from '../../utils/block';
 import './style.less';
 import template from './template';
 import { connect } from '../../utils/highOrderComponents';
 import store from '../../utils/store';
 import { UserChatController } from '../../utils/controllers/chats';
-import * as Handlebars from 'handlebars/dist/cjs/handlebars';
 
 class ChatLines extends Block {
   render() {
@@ -14,7 +14,7 @@ class ChatLines extends Block {
   }
 }
 
-Handlebars.registerHelper("date", function(conditional) {
+Handlebars.registerHelper('date', (conditional) => {
   if (conditional) {
     return new Date(conditional).toLocaleTimeString();
   }

@@ -52,7 +52,6 @@ function checkLogin() {
     .then(onFulfilled, onRejected);
 }
 
-
 class Login extends Block {
   render() {
     return this.compile(template, {
