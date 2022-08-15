@@ -1,10 +1,20 @@
 import Block from '../../utils/block';
-import Validation from '../../utils/validation';
-import tpl from './tpl';
+import { Validation } from '../../utils/validation';
+import template from './template';
 import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import Form from '../../components/form';
+import { UserLoginController } from '../../utils/controllers/login';
+import { UserInfoAPI } from '../../utils/api/user-info.api';
+import Router from '../../utils/router';
+
+const router = new Router('.app');
+
+interface LoginFormModel {
+  login: string;
+  password: string;
+}
 
 const inputs = [
   {
@@ -13,7 +23,6 @@ const inputs = [
     type: 'text',
     placeholder: 'Your login',
     name: 'login',
-    valid: true,
   },
   {
     className: 'field',
@@ -21,68 +30,60 @@ const inputs = [
     type: 'password',
     placeholder: 'Your password',
     name: 'password',
-    valid: true,
   },
 ];
 
 const links = [
   {
     className: 'link__simple blue',
-    hrefLink: '/404',
-    content: 'Forgot your password?',
-  },
-  {
-    className: 'link__simple blue',
-    hrefLink: '/reg',
+    hrefLink: '/sign-up',
     content: 'Create profile',
   },
 ];
 
 class Login extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       link: this.props.link,
       events: this.props.events,
     });
   }
+
+  checkLogin() {
+    function onFulfilled() {
+      router.go('/messenger');
+    }
+
+    function onRejected() {
+      router.go('/');
+    }
+    UserInfoAPI.request()
+      .then(onFulfilled, onRejected);
+  }
 }
-const validationForFormInputs = new Validation();
+
 const PageLogin = new Login('div', {
   form: new Form('div', {
     name: 'Log in',
-    action: '/login',
     inputs: new Input('div', {
       inputs,
-      events: {
-        focus: (event) => {
-          validationForFormInputs.hideError(event.target);
-        },
-        blur: (event) => {
-          if (event.target.name === 'login') {
-            if (!validationForFormInputs.login(event.target.value)) {
-              validationForFormInputs.showError(event.target);
-            }
-          }
-          if (event.target.name === 'password') {
-            if (!validationForFormInputs.password(event.target.value)) {
-              validationForFormInputs.showError(event.target);
-            }
-          }
-        },
-      },
     }),
     button: new Button('div', { id: 'login', type: 'submit', value: 'Enter' }),
     events: {
       submit: (event) => {
         event.preventDefault();
-        if (validationForFormInputs.check(event.target)) {
+        if (Validation.check(event.target)) {
           const inputFields = event.target.querySelectorAll('input');
-          const data = {};
+          const data : LoginFormModel = {
+            login: '',
+            password: '',
+          };
+
           inputFields.forEach((current) => {
             data[current.name] = current.value;
           });
-          console.log(data);
+          UserLoginController.login(data, event.target);
         }
       },
     },
@@ -94,4 +95,5 @@ const PageLogin = new Login('div', {
     },
   }),
 });
+
 export default PageLogin;

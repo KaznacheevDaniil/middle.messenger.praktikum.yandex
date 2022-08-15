@@ -1,18 +1,20 @@
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
+import template from './template';
 import ChatTopPanel from '../chat-top-panel';
-import Avatar from '../avatar';
 import ButtonWithImage from '../button-with-image';
 import messagesComp from '../message';
 import ChatBottomPanel from '../chat-bottom-panel';
 import InputMsg from '../input-msg';
 import Form from '../form';
-import Validation from '../../utils/validation';
+import { Validation } from '../../utils/validation';
+import { ChatController } from '../../utils/controllers/chat-messages';
+import store from '../../utils/store';
+import Menu from '../menu';
 
 class Conversation extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       chatTopPanel: this.props.chatTopPanel,
       messages: this.props.messages,
       chatBottomPanel: this.props.chatBottomPanel,
@@ -21,18 +23,42 @@ class Conversation extends Block {
   }
 }
 
-const validationForFormInputs = new Validation();
 const conversationComp = new Conversation('div', {
   chatTopPanel: new ChatTopPanel('div', {
-    photoPerson: new Avatar('div', {
-      photoPerson: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
-    }),
-    namePerson: 'Viktor Evgen',
+    photoChat: '',
+    nameChat: '',
     button: new ButtonWithImage('div', {
       imgLink:
-        'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgY2xhc3M9ImZlYXRoZXIgZmVhdGhlci1wYXBlcmNsaXAiIGZpbGw9Im5vbmUiIGhlaWdodD0iMjQiIHN0cm9rZT0iY3VycmVudENvbG9yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiB3aWR0aD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxLjQ0IDExLjA1bC05LjE5IDkuMTlhNiA2IDAgMCAxLTguNDktOC40OWw5LjE5LTkuMTlhNCA0IDAgMCAxIDUuNjYgNS42NmwtOS4yIDkuMTlhMiAyIDAgMCAxLTIuODMtMi44M2w4LjQ5LTguNDgiLz48L3N2Zz4=',
+        'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pjxzdmcgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDpub25lO308L3N0eWxlPjwvZGVmcz48dGl0bGUvPjxnIGRhdGEtbmFtZT0iTGF5ZXIgMiIgaWQ9IkxheWVyXzIiPjxwYXRoIGQ9Ik0xNiw3YTIsMiwwLDEsMSwyLTJBMiwyLDAsMCwxLDE2LDdabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMThhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMThabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48cGF0aCBkPSJNMTYsMjlhMiwyLDAsMSwxLDItMkEyLDIsMCwwLDEsMTYsMjlabTAtMmgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFptMCwwaDBabTAsMGgwWm0wLDBoMFoiLz48L2c+PGcgaWQ9ImZyYW1lIj48cmVjdCBjbGFzcz0iY2xzLTEiIGhlaWdodD0iMzIiIHdpZHRoPSIzMiIvPjwvZz48L3N2Zz4=',
       type: 'button',
-      className: 'button-option',
+      className: 'button-option hidden',
+      id: 'add-user',
+      events: {
+        click: (event) => {
+          try {
+            document.querySelector('.options__chat').classList.toggle('hidden');
+          } catch (error) {
+            console.error('options__chat was not found');
+          }
+        },
+      },
+    }),
+    menu: new Menu('div', {
+      className: 'menu-li',
+      listsMenu: [{ id: 'AddUserIntoChat', content: 'Add user' }, { id: 'DeleteUserFromChat', content: 'Delete user' }],
+      events: {
+        click: (event) => {
+          if (event.target.id === 'AddUserIntoChat') {
+            document.getElementById('getUserByLoginModal').style.display = 'flex';
+          }
+          if (event.target.id === 'DeleteUserFromChat') {
+            document.getElementById('DeleteUsersModal').style.display = 'flex';
+          }
+        },
+      },
+      attr: {
+        class: 'options__chat hidden',
+      },
     }),
   }),
   messages: messagesComp,
@@ -50,12 +76,12 @@ const conversationComp = new Conversation('div', {
         },
         events: {
           focus: (event) => {
-            validationForFormInputs.hideError(event.target);
+            Validation.hideError(event.target);
           },
           blur: (event) => {
             if (event.target.name === 'message') {
-              if (!validationForFormInputs.message(event.target.value)) {
-                validationForFormInputs.showError(event.target);
+              if (!Validation.message(event.target.value)) {
+                Validation.showError(event.target);
               }
             }
           },
@@ -70,13 +96,20 @@ const conversationComp = new Conversation('div', {
       events: {
         submit: (event) => {
           event.preventDefault();
-          if (validationForFormInputs.check(event.target)) {
-            const inputFields = event.target.querySelectorAll('input');
-            const data = {};
-            inputFields.forEach((current) => {
-              data[current.name] = current.value;
-            });
-            console.log(data);
+
+          const element = event.target;
+          if (Validation.check(element)) {
+            try {
+              const message = event.target.querySelector('input').value;
+              if (typeof message === 'string') {
+                ChatController.SendMessage(message, store.getState().active?.socket, store.getState().user?.id);
+                element.querySelector('input').value = '';
+              } else {
+                console.error(`${message} (message) was not is string!`);
+              }
+            } catch (error) {
+              console.error('SendMessage was not work');
+            }
           }
         },
       },

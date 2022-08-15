@@ -1,10 +1,20 @@
 import Block from '../../utils/block';
-import tpl from './tpl';
+import template from './template';
 import Link from '../../components/link';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import Form from '../../components/form';
-import Validation from '../../utils/validation';
+import { Validation } from '../../utils/validation';
+import { UserRegistrationController } from '../../utils/controllers/registration';
+
+interface RegFormModel {
+  email: string;
+  login: string;
+  first_name: string;
+  second_name: string;
+  phone: string;
+  password: string;
+}
 
 const inputs = [
   {
@@ -61,48 +71,57 @@ const links = [{ className: 'link__simple blue', hrefLink: '/', content: 'Sign i
 
 class Registration extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       form: this.props.form,
       link: this.props.link,
       events: this.props.events,
     });
   }
 }
-const validationForFormInputs = new Validation();
+
 const PageReg = new Registration('div', {
   form: new Form('div', {
     name: 'Registration',
-    action: '/registration',
     inputs: new Input('div', {
       inputs,
       events: {
         focus: (event) => {
-          validationForFormInputs.hideError(event.target);
+          Validation.hideError(event.target);
         },
         blur: (event) => {
+          let errors : string[] = [];
           if (event.target.name === 'phone') {
-            if (!validationForFormInputs.phone(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            if (!Validation.phone(event.target.value)) {
+              Validation.showError(event.target);
+              errors = [];
             }
           }
           if (event.target.name === 'email') {
-            if (!validationForFormInputs.email(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = Validation.email(event.target.value);
+            if (errors.length > 0) {
+              Validation.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'login') {
-            if (!validationForFormInputs.login(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = Validation.names(event.target.value);
+            if (errors.length > 0) {
+              Validation.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'first_name' || event.target.name === 'second_name') {
-            if (!validationForFormInputs.names(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = Validation.names(event.target.value);
+            if (errors.length > 0) {
+              Validation.showError(event.target, errors);
+              errors = [];
             }
           }
           if (event.target.name === 'password') {
-            if (!validationForFormInputs.password(event.target.value)) {
-              validationForFormInputs.showError(event.target);
+            errors = Validation.password(event.target.value);
+            if (errors.length > 0) {
+              Validation.showError(event.target, errors);
+              errors = [];
             }
           }
         },
@@ -123,13 +142,20 @@ const PageReg = new Registration('div', {
   events: {
     submit: (event) => {
       event.preventDefault();
-      if (validationForFormInputs.check(event.target)) {
+      if (Validation.check(event.target)) {
         const inputFields = event.target.querySelectorAll('input');
-        const data = {};
+        const data : RegFormModel = {
+          email: '',
+          login: '',
+          first_name: '',
+          second_name: '',
+          phone: '',
+          password: '',
+        };
         inputFields.forEach((current) => {
           data[current.name] = current.value;
         });
-        console.log(data);
+        UserRegistrationController.registration(data, event.target);
       }
     },
   },

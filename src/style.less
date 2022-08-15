@@ -10,18 +10,40 @@ body {
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+}
+
 .flex-c {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-h1,
-span,
-p {
-  font-family: Lato, sans-serif;
+.hidden {
+  display: none !important;
 }
 
+h1,
+span,
+p,
+li,
+.font-l{
+  font-family: Lato, sans-serif;
+}
+form {
+  .log-container{
+    padding: 20px;
+    text-align: center;
+
+    &.success{
+      color: #008000;
+    }
+    &.error{
+      color: #ff0000;
+    }
+  }
+}
 .form {
   display: flex;
   justify-content: center;
@@ -50,13 +72,15 @@ p {
 
 .link-back {
   &_blue {
-    background: #36abff;
     width: 30px;
     height: 30px;
+    background: #36abff;
     border-radius: 100%;
-    left: 20px;
     position: absolute;
     top: calc(50% - 30px);
+    border: 0;
+    left: 20px;
+    cursor: pointer;
   }
 }
 
@@ -76,6 +100,9 @@ p {
   margin: 10px 0;
 }
 
+.m-r-30 {
+  margin-right: 30px;
+}
 .f-col {
   display: flex;
   flex-direction: column;

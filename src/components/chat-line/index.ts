@@ -1,37 +1,47 @@
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
-import Avatar from '../avatar';
+import template from './template';
+import { connect } from '../../utils/highOrderComponents';
+import store from '../../utils/store';
+import { UserChatController } from '../../utils/controllers/chats';
 
 class ChatLines extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       chatlinePersons: this.props.chatlinePersons,
     });
   }
 }
 
-const chatlinePersons = [
-  {
-    photoPerson: new Avatar('div', {
-      photoPerson: 'https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg',
-    }),
-    name: 'Daniil ',
-    lastMessage: 'Hey, masaddd ddddddddddddddddd ddddddd ddddddddd ddddddddddn!',
-    timeLastMessage: '11:32',
-    countUnread: '203',
-  },
-  {
-    photoPerson: new Avatar('div', {
-      photoPerson: 'https://cdn.pixabay.com/photo/2018/01/21/14/16/woman-3096664_960_720.jpg',
-    }),
-    name: 'Kino',
-    lastMessage:
-      'Hey,  masaddd ddddddddddddddddd dddddd ddddddddddddddddd dddddd ddddddddddddddddd dddddd ddddddddddddddddd ddddddd ddddddddd man!',
-    timeLastMessage: '11:32',
-    countUnread: '2',
-  },
-];
+interface StateChatsModel {
+  avatar: string;
+  created_by: number;
+  id: number;
+  last_message: string;
+  title: string;
+  unread_count: string | number;
+}
 
-const chatLineComp = new ChatLines('div', { chatlinePersons });
+const chatlinePersons = [{}];
+
+const ChatLinesWrapState = connect((state) => ({
+  chatlinePersons: state.chats,
+}));
+
+const ChatLinesWithState = ChatLinesWrapState(ChatLines);
+
+const chatLineComp = new ChatLinesWithState('div', {
+  chatlinePersons,
+  events: {
+    click: (event) => {
+      if (event.target.className === 'wrap' && !event.target.parentElement.classList.contains('active')) {
+        const childBlockMessages = document.getElementById('MessagesContainer');
+        while (childBlockMessages.firstChild) {
+          childBlockMessages.firstChild.remove();
+        }
+        UserChatController.setActiveChat(event.target.parentElement, event.target.dataset.id, store.getState().user.id);
+      }
+    },
+  },
+});
 export default chatLineComp;

@@ -1,10 +1,10 @@
 import Block from '../../utils/block';
 import './style.less';
-import tpl from './tpl';
+import template from './template';
 
 export default class InputMsg extends Block {
   render() {
-    return this.compile(tpl, {
+    return this.compile(template, {
       placeholder: this.props.placeholder,
       name: this.props.name,
       className: this.props.className,
