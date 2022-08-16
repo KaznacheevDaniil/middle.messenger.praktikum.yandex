@@ -27,12 +27,8 @@ export default class Route {
     }
   }
 
-  leave() {
-    if (this._block) {
-      // @ts-ignore
-      this._block.hide();
-    }
-  }
+  leave(
+
 
   match(pathname) {
     return isEqual(pathname, this.pathname);
