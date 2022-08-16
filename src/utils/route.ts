@@ -5,7 +5,7 @@ function isEqual(lhs, rhs) {
 }
 
 export default class Route {
-  private _pathname: string;
+  public pathname: string;
 
   private _blockClass: object;
 
@@ -14,7 +14,7 @@ export default class Route {
   private _props: object;
 
   constructor(pathname, view, props) {
-    this._pathname = pathname;
+    this.pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
@@ -22,7 +22,7 @@ export default class Route {
 
   navigate(pathname) {
     if (this.match(pathname)) {
-      this._pathname = pathname;
+      this.pathname = pathname;
       this.render();
     }
   }
@@ -35,7 +35,7 @@ export default class Route {
   }
 
   match(pathname) {
-    return isEqual(pathname, this._pathname);
+    return isEqual(pathname, this.pathname);
   }
 
   render() {

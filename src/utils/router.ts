@@ -5,7 +5,7 @@ export default class Router {
 
   public history;
 
-  private _currentRoute;
+  public currentRoute;
 
   private _rootQuery;
 
@@ -18,7 +18,7 @@ export default class Router {
 
     this.routes = [];
     this.history = window.history;
-    this._currentRoute = null;
+    this.currentRoute = null;
     this._rootQuery = rootQuery;
 
     Router.__instance = this;
@@ -40,13 +40,13 @@ export default class Router {
   }
 
   private _onRoute(pathname) {
-    const route = this.getRoute(pathname);
+    const route = this._getRoute(pathname);
 
-    if (this._currentRoute) {
-      this._currentRoute.leave();
+    if (this.currentRoute) {
+      this.currentRoute.leave();
     }
 
-    this._currentRoute = route;
+    this.currentRoute = route;
     route.render(route, pathname);
   }
 
@@ -63,7 +63,7 @@ export default class Router {
     this.history.go(1);
   }
 
-  getRoute(pathname) {
+  _getRoute(pathname) {
     return this.routes.find((route) => route.match(pathname));
   }
 }

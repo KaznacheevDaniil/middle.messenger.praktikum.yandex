@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import Block from './block';
 import Router from './router';
 
-class testPage extends Block {
+class TestPage extends Block {
   constructor() {
     super('div');
   }
@@ -18,7 +18,7 @@ describe('Router test', () => {
     const { window } = new JSDOM(
       `<html>
          <body>
-          <div id="root"></div>
+          <div class="app"></div>
          </body>
        </html>`,
       { url: 'http://localhost' },
@@ -27,17 +27,18 @@ describe('Router test', () => {
     global.document = window.document;
   });
 
-  it('check use function.', () => {
-    const expTestPage = new testPage();
+  it('check use function', () => {
+    const expTestPage = new TestPage();
     const router = new Router('.app');
     router.use('/', expTestPage);
     expect(router.routes.length).to.eq(1);
   });
 
-  it('check use function.', () => {
-    const expTestPage = new testPage();
+  it('check go function', () => {
+    const expTestPage = new TestPage();
     const router = new Router('.app');
-    router.use('/', expTestPage);
-    expect(router.routes.length).to.eq(1);
+    router.use('/some-url', expTestPage);
+    router.go('/some-url');
+    expect(router.currentRoute.pathname).to.eq('/some-url');
   });
 });

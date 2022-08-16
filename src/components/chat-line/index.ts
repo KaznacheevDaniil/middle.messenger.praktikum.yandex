@@ -14,11 +14,7 @@ class ChatLines extends Block {
   }
 }
 
-Handlebars.registerHelper('date', (conditional) => {
-  if (conditional) {
-    return new Date(conditional).toLocaleTimeString();
-  }
-});
+Handlebars.registerHelper('date', (conditional) => new Date(conditional).toLocaleTimeString());
 
 interface StateChatsModel {
   avatar: string;
