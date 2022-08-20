@@ -10,21 +10,23 @@ npm run dev - сборка и тестирование через parcel.
 
 npm run start - запуск express сервера
 
-npm run lint - запуск Eslint
+npm run lint:ts - запуск Eslint
 
-npm run stylelint - запуск Stylelint
+npm run lint:style - запуск Stylelint
+
+npm run test - запуск тестов
 
 ### Версия NodeJs
 
-v12.22.0
+v16.15.1
 
 ### Домен Netlify
 
 https://kaznacheev.netlify.app/
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a5203fd1-b2b8-42b0-b225-e1783f04f4c5/deploy-status)](https://app.netlify.com/sites/kaznacheev/deploys)
 
-# Ссылка на pull request (sprint_3)
-[Ссылочка](https://github.com/KaznacheevDaniil/middle.messenger.praktikum.yandex/pull/3)
+# Ссылка на pull request (sprint_4)
+[Ссылочка](https://github.com/KaznacheevDaniil/middle.messenger.praktikum.yandex/pull/5)
 
 ### Используемые технологии
 
@@ -41,18 +43,18 @@ https://kaznacheev.netlify.app/
 
 ### Страницы:
 
-[Login](https://kaznacheev.netlify.app/)
+[Login](https://kaznacheykin.herokuapp.com/)
 
-[Registration](https://kaznacheev.netlify.app/sign-up)
+[Registration](https://kaznacheykin.herokuapp.com/sign-up)
 
-[Chats](https://kaznacheev.netlify.app/messenger)
+[Chats](https://kaznacheykin.herokuapp.com/messenger)
 
-[Profile](https://kaznacheev.netlify.app/profile)
+[Profile](https://kaznacheykin.herokuapp.com/profile)
 
-[Profile edit](https://kaznacheev.netlify.app/profile/egit)
+[Profile edit](https://kaznacheykin.herokuapp.com/profile/egit)
 
-[Profile change password](https://kaznacheev.netlify.app/profile/change-pwd)
+[Profile change password](https://kaznacheykin.herokuapp.com/profile/change-pwd)
 
-[404](https://kaznacheev.netlify.app/404)
+[404](https://kaznacheykin.herokuapp.com/404)
 
-[500](https://kaznacheev.netlify.app/500)
+[500](https://kaznacheykin.herokuapp.com/500)
