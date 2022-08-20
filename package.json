@@ -8,8 +8,7 @@
     "start": "npm run build && node ./server.js",
     "lint:ts": "npx eslint 'src/**' --fix",
     "lint:style": "npx stylelint '**/*.less'",
-    "test": "mocha --config .mocharc.js",
-    "prepare": "husky install"
+    "test": "mocha --config .mocharc.js"
   },
   "husky": {
     "hooks": {
