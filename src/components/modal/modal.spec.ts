@@ -29,7 +29,7 @@ describe('Modal component test', () => {
     global.document = window.document;
   });
 
-  it('check use function', () => {
+  it('check display component', () => {
     const modal = new ModalMock(
       'div',
       {
