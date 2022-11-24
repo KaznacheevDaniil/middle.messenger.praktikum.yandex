@@ -15,13 +15,18 @@ interface RegFormModel {
   password: string;
 }
 
+interface responseModel {
+  status: number;
+  responseText: string;
+}
+
 export class UserRegistrationController {
   static registration(data: RegFormModel, form) {
-    SignUpAPI.create(data).then((response) => {
+    SignUpAPI.create(data).then((response : responseModel) => {
       if (response.status === 200) {
         displayFormLog(form, 'Succsessfull', true);
         UserInfoAPI.request()
-          .then((responseData) => {
+          .then((responseData : responseModel) => {
             if (responseData.status === 200) {
               store.set('user', JSON.parse(responseData.responseText));
               router.go('/messenger');

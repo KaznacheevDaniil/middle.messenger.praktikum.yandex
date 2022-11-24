@@ -40,6 +40,17 @@ const links = [
     content: 'Create profile',
   },
 ];
+function checkLogin() {
+  function onFulfilled() {
+    router.go('/messenger');
+  }
+
+  function onRejected() {
+    router.go('/');
+  }
+  UserInfoAPI.request()
+    .then(onFulfilled, onRejected);
+}
 
 class Login extends Block {
   render() {
@@ -48,18 +59,6 @@ class Login extends Block {
       link: this.props.link,
       events: this.props.events,
     });
-  }
-
-  checkLogin() {
-    function onFulfilled() {
-      router.go('/messenger');
-    }
-
-    function onRejected() {
-      router.go('/');
-    }
-    UserInfoAPI.request()
-      .then(onFulfilled, onRejected);
   }
 }
 

@@ -20,6 +20,7 @@ const ProfileWrapState = connect((state) => ({
   avatar: `https://ya-praktikum.tech/api/v2/resources${state.user?.avatar}`,
 }));
 
+// @ts-ignore
 const ProfileFieldsWrapState = connect((state) => ({
   profileFields: {
     email: {

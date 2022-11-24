@@ -1,7 +1,6 @@
-import Handlebars from 'handlebars';
+import * as Handlebars from 'handlebars/dist/cjs/handlebars';
 import { v4 as makeUUID } from 'uuid';
 import EventBus from './event-bus';
-import { UserController } from './controllers/profile';
 
 class Block {
   static EVENTS = {

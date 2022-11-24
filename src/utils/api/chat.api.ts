@@ -5,7 +5,6 @@ const chatAPIInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2/chat
 
 export class ChatApi extends BaseAPI {
   static create(data) {
-    // Здесь уже не нужно писать полный путь /api/v1/chats/
     return chatAPIInstance.post('', {
       credentials: 'include',
       mode: 'cors',
@@ -17,7 +16,6 @@ export class ChatApi extends BaseAPI {
   }
 
   static request() {
-    // Здесь уже не нужно писать полный путь /api/v1/chats/
     return chatAPIInstance.get('', {
       credentials: 'include',
       mode: 'cors',
@@ -28,7 +26,6 @@ export class ChatApi extends BaseAPI {
   }
 
   static delete(data) {
-    // Здесь уже не нужно писать полный путь /api/v1/chats/
     return chatAPIInstance.delete('', {
       credentials: 'include',
       mode: 'cors',
@@ -40,7 +37,6 @@ export class ChatApi extends BaseAPI {
   }
 
   static deleteUsers(data) {
-    // Здесь уже не нужно писать полный путь /api/v1/chats/
     return chatAPIInstance.delete('/users', {
       credentials: 'include',
       mode: 'cors',
@@ -52,7 +48,6 @@ export class ChatApi extends BaseAPI {
   }
 
   static addUsers(data) {
-    // Здесь уже не нужно писать полный путь /api/v1/chats/
     return chatAPIInstance.put('/users', {
       credentials: 'include',
       mode: 'cors',

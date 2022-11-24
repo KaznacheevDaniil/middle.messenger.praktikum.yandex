@@ -1,3 +1,4 @@
+import * as Handlebars from 'handlebars/dist/cjs/handlebars';
 import Block from '../../utils/block';
 import './style.less';
 import template from './template';
@@ -12,6 +13,8 @@ class ChatLines extends Block {
     });
   }
 }
+
+Handlebars.registerHelper('date', (conditional) => new Date(conditional).toLocaleTimeString());
 
 interface StateChatsModel {
   avatar: string;

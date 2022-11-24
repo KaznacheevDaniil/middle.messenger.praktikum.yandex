@@ -5,6 +5,11 @@ import { getAllSiblings } from '../methods/getSiblings';
 import { trim } from '../methods/trim';
 import { ChatController } from './chat-messages';
 
+interface responseModel {
+  status: number;
+  responseText: string;
+}
+
 export class UserChatController {
   static deleteUserFromChat(data, form, input) {
     const arrayUsersId = [];
@@ -13,7 +18,7 @@ export class UserChatController {
     });
     data.users = arrayUsersId;
 
-    ChatApi.deleteUsers(data).then((response) => {
+    ChatApi.deleteUsers(data).then((response : responseModel) => {
       if (response.status === 200) {
         displayFormLog(form, 'User\'s removed from chat', true);
         input.value = '';
@@ -31,7 +36,7 @@ export class UserChatController {
 
     data.users = arrayUsersId;
 
-    ChatApi.addUsers(data).then((response) => {
+    ChatApi.addUsers(data).then((response : responseModel) => {
       if (response.status === 200) {
         displayFormLog(form, "User's added into chat", true);
         input.value = '';
@@ -42,7 +47,7 @@ export class UserChatController {
   }
 
   static createChat(data, form, input) {
-    ChatApi.create(data).then((response) => {
+    ChatApi.create(data).then((response : responseModel) => {
       if (response.status === 200) {
         displayFormLog(form, 'Chat created', true);
         this.getAllChats();
@@ -54,7 +59,7 @@ export class UserChatController {
   }
 
   static deleteChat(data, form, input) {
-    ChatApi.delete(data).then((response) => {
+    ChatApi.delete(data).then((response : responseModel) => {
       if (response.status === 200) {
         displayFormLog(form, 'Chat removed', true);
         this.getAllChats();
@@ -67,7 +72,7 @@ export class UserChatController {
   }
 
   static getAllChats() {
-    ChatApi.request().then((response) => {
+    ChatApi.request().then((response : responseModel) => {
       store.set('chats', JSON.parse(response.responseText));
     });
   }

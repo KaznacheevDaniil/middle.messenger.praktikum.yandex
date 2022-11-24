@@ -2,9 +2,9 @@ import Block from './block';
 import store, { StoreEvents } from './store';
 import isEqual from './methods/isequal';
 
-type Indexed<T = unknown> = {
-  [key in string]: T;
-};
+interface Indexed {
+  [key: string]: any;
+}
 
 export function connect(mapStateToProps: (state: Indexed) => Indexed) {
   return function (Component: typeof Block) {

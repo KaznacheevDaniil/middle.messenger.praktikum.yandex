@@ -2,7 +2,7 @@ import Block from '../../utils/block';
 import './style.less';
 import template from './template';
 
-export default class ProfileField extends Block {
+export default class Modal extends Block {
   render() {
     return this.compile(template, {
       header: this.props.header,

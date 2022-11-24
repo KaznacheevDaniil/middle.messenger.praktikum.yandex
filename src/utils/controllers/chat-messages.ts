@@ -2,9 +2,14 @@ import { ChatMessagesAPI } from '../api/chat-messages-api';
 import { displayMessage } from '../methods/displayChatMessages';
 import store from '../store';
 
+interface responseModel {
+  status: number;
+  responseText: string;
+}
+
 export class ChatController {
   static createSessionsMessage(chatId, userId) {
-    ChatMessagesAPI.request(chatId).then((response) => {
+    ChatMessagesAPI.request(chatId).then((response : responseModel) => {
       const tokenChat = JSON.parse(response.responseText).token;
       if (tokenChat) {
         const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${userId}/${chatId}/${tokenChat}`);
@@ -30,7 +35,7 @@ export class ChatController {
           }
         });
 
-        socket.addEventListener('error', (event) => {
+        socket.addEventListener('error', (event: any) => {
           console.log('Ошибка', event.message);
         });
 
